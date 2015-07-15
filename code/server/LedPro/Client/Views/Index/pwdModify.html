@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+</head>
+<body>
+    <form id="mispForm" method="post" style="margin-top:10px; margin-left:15px;">
+    	<table cellpadding="5">
+    		<tr>
+    			<td>请输入原密码:</td>
+    			<td>
+    				<input class="easyui-textbox" type="password" name="pwdOld" data-options="required:true,validType:{length:[6,20]}"></input>
+   				</td>
+    		</tr>
+    		<tr>
+    			<td>请输入新密码:</td>
+    			<td><input id="pwdNew" name="pwdNew" class="easyui-textbox" type="password"  data-options="required:true,validType:{length:[6,20]}"></input></td>
+    		</tr>
+    		<tr>
+    			<td>请再次输入新密码:</td>
+    			<td><input id="pwdNewDup" name="pwdNewDup" class="easyui-textbox easyui-validatebox" type="password" required="required" validType="equals['#pwdNew']"></input></td>
+    		</tr>
+    	</table>
+    </form>
+    <div style="text-align:center;padding:5px;margin-top:10px">
+    	<a class="easyui-linkbutton" iconCls="icon-ok" onclick="submitForm()">提交</a>
+    	<a>&nbsp&nbsp&nbsp&nbsp</a>
+    	<a class="easyui-linkbutton" iconCls="icon-cancel" onclick="$('#pwdManage').dialog('close')">关闭</a>
+    </div>
+<script type="text/javascript">
+function submitForm() {
+	misp.dialog.formSubmit({
+		url : "Index|ModifyPassword",
+		callback : function callback(obj) {
+			$.messager.confirm('确认提示', '修改成功，请重新登陆！', function (r) {
+				if(r){
+					window.location.href=misp.util.buildUrl("Index/Login.html");
+				}
+				else{
+					window.location.href=misp.util.buildUrl("Index/Login.html");
+				}
+			});
+        }
+	});
+}
+</script>
+</body>
+</html>

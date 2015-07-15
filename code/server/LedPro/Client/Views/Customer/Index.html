@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>会员管理</title>
+<script type="text/javascript" src="../../Public/Fuego/FuegoJS/misp.res.js"></script>
+</head>
+<body>
+    <!-- misp-class 配置为 misp.table，data-options 配置好action name 对象主键 -->
+<div class="easyui-layout"  misp-class="misp.table" data-options="actionName:'Customer',idField:'user_id',fit:true">
+	<div data-options="region:'north',title:'信息查询'"  style="padding:5px;width:250px;height:75px;" >
+		<form  misp-class="misp.search">
+			<table>
+				<tr>
+					<td style="width:60px;">用户编号:</td>
+					<td style="width:170px;">
+						<input filterType ="equal" name="user_id" class="easyui-textbox"/>
+					</td>
+					<td style="width:60px;">用户账号:</td>
+					<td style="width:170px;">
+						<input filterType ="include" name="user_name" class="easyui-textbox"/>
+					</td>
+					<td style="width:60px;">用户类型:</td>
+					<td style="width:170px;">
+						<input filterType ="equal" name="role_id" misp-class="misp.combobox"  
+   				    	data-options="url:'Role|LoadSearchList',valueField:'role_id',textField:'role_name'"/>
+					</td> 
+					<td >
+					   <a class="easyui-linkbutton" iconCls="icon-search" onclick="misp.table.search()">搜索</a>
+					</td>  
+				</tr>
+			</table>
+		</form>
+	</div>
+	<div data-options="region:'center'," >
+		<div  id="mispToolbar" style="padding:5px;height:auto">
+			<table style="width:100%;">
+	        	<tr>
+	            	<td style="width:200px;">
+						<a class="easyui-linkbutton" iconCls="icon-add" onclick="misp.table.create()">新增</a>
+						<a class="easyui-linkbutton" iconCls="icon-edit" onclick="misp.table.modify()">编辑</a>
+						<a class="easyui-linkbutton" iconCls="icon-remove" onclick="misp.table.remove()">删除</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<table id="mispGrid" misp-class="misp.grid" data-options="fit:true" class="easyui-datagrid">
+			<thead>
+				<tr>
+	                <!-- 这里需要根据表格字段做相应更改 -->
+					<th data-options="field:'ck',checkbox:true">&nbsp;</th>
+					<th hidden="true" data-options="field:'user_id',width:100">User ID</th>
+					<th data-options="field:'nickname',width:120">Nickname</th>
+					<th data-options="field:'real_name',width:160">RealName</th>
+					<th data-options="field:'customer_sex',width:160">Sex</th>
+					<th data-options="field:'birthday',width:160">Birthday</th>
+					<th data-options="field:'cellphone',width:160">Cellphone</th>
+					<th data-options="field:'email',width:160">Email</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+	<div id="mispDialog" misp-class="misp.table.dialog" data-options="title:'Customer Information',width:300,height:200,href:'Customer/Show.html',formID:'#mispForm'"> 
+	</div>
+</div>
+
+<script type="text/javascript">
+//页面初始化
+$(function (){
+	misp.parser.parse();
+});
+function formatRole(val, row){
+	for(var i=0;i<misp.data.role.length;i++)
+	{
+		if(misp.data.role[i].role_id == val)
+		{
+			return misp.data.role[i].role_name;
+		}
+	}
+};
+</script>
+</body>
+</html>

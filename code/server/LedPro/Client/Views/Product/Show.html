@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+</head>
+<body>
+    <form id="mispForm" name="mispForm" misp-class="misp.form" method="post" enctype="multipart/form-data">
+		<table>
+			<tr>
+    			<td style="width:100px;">Product Name:</td>
+    			<td>
+    				<input name="product_name"  class="easyui-textbox" type="text"/>
+				</td>
+				<td style="display:none">
+   					<input id="product_id" name="product_id" class="easyui-textbox" type="text"/>
+   				</td>
+				<td style="width:100px;padding-left:20px;">Manufacture:</td>
+    			<td>
+    				<input name="manufacture"  class="easyui-textbox" type="text"/>
+				</td>
+			</tr>
+			<tr>
+    			<td >Use Location:</td>
+    			<td>
+    				<input name="use_location" class="easyui-textbox" type="text" />
+				</td>
+				<td style="width:100px;padding-left:20px;">Mounting Base:</td>
+    			<td>
+    				<input name="mounting_base" class="easyui-textbox" type="text" />
+				</td>
+			</tr>
+			<tr>
+    			<td >Product Size:</td>
+    			<td >
+    				<input name="product_size" class="easyui-textbox" type="text" />
+				</td>
+				<td style="width:100px;padding-left:20px;">Lumen Output:</td>
+    			<td>
+    				<input name="lumen_output" class="easyui-textbox" type="text" />
+				</td>
+			</tr>
+			<tr>
+    			<td >Input Watt:</td>
+    			<td >
+    				<input name="input_watt" class="easyui-textbox" type="text" />
+				</td>
+				<td style="width:100px;padding-left:20px;">Warranty:</td>
+    			<td>
+    				<input name="warranty" class="easyui-textbox" type="text" />
+				</td>
+			</tr>
+    		
+        </table>
+    	<div style="width:50%;float:left;height:150px;margin-top:10px;">
+    		<div misp-class="misp.img" style="margin-left:80px;">
+				<img id="img0" src="" alt="Product Img" height="100px" width="150px">
+				<div style="display:none">
+					<input id="product_img" name="product_img"  class="easyui-textbox" type="text" />
+				</div>
+			</div>
+			<div style="display:none">
+				<input id="new_img" class="easyui-textbox" type="text" />
+			</div>
+			<input id="up0" name="up0" type="file" style="margin-bottom:18px;margin-left:50px;margin-top:10px;width:160px;">
+    		<input type="button" onclick="upload0()" value="Upload"/>
+    	</div>
+    	<div style="width:50%;float:right;height:150px;margin-top:10px;">
+	    	<div misp-class="misp.img" style="margin-left:70px;">
+				<img id="img1" src="" alt="Product Img" height="100px" width="150px">
+				<div style="display:none">
+					<input id="product_img_sm1" name="product_img_sm1"  class="easyui-textbox" type="text" />
+				</div>
+			</div>
+			<div style="display:none">
+				<input id="new_img1" class="easyui-textbox" type="text" />
+			</div>
+			<input id="up1" name="up1" type="file" style="margin-bottom:18px;margin-left:30px;margin-top:10px;width:160px;">
+    		<input type="button" onclick="upload1()" value="Upload"/>
+    	</div>
+    	<div style="width:50%;float:left;height:150px;margin-top:10px;">
+    		<div misp-class="misp.img" style="margin-left:80px;">
+				<img id="img2" src="" alt="Product Img" height="100px" width="150px">
+				<div style="display:none">
+					<input id="product_img_sm2" name="product_img_sm2"  class="easyui-textbox" type="text" />
+				</div>
+			</div>
+			<div style="display:none">
+				<input id="new_img2" class="easyui-textbox" type="text" />
+			</div>
+			<input id="up2" name="up2" type="file" style="margin-bottom:18px;margin-left:50px;margin-top:10px;width:160px;">
+    		<input type="button" onclick="upload2()" value="Upload"/>
+    	</div>
+    	<div style="width:50%;float:right;height:150px;margin-top:10px;">
+	    	<div misp-class="misp.img" style="margin-left:70px;">
+				<img id="img3" src="" alt="Product Img" height="100px" width="150px">
+				<div style="display:none">
+					<input id="product_img_sm3" name="product_img_sm3"  class="easyui-textbox" type="text" />
+				</div>
+			</div>
+			<div style="display:none">
+				<input id="new_img3" class="easyui-textbox" type="text" />
+			</div>
+			<input id="up3" name="up3" type="file" style="margin-bottom:18px;margin-left:30px;margin-top:10px;width:160px;">
+    		<input type="button" onclick="upload3()" value="Upload"/>
+    	</div>
+		<table>
+			<tr>
+	   			<td style="width:100px;">Product desc:</td>
+	   			<td colspan="3">
+	   				<input name="product_desc" class="easyui-textbox" style="width:430px;height:40px" type="text" data-options="multiline:true"/>
+	   			</td>
+   			</tr>
+		</table>
+    </form>
+    <div style="text-align:center;padding:5px;margin-top:10px">
+    	<a class="easyui-linkbutton" iconCls="icon-ok" style="width:60px;" onclick="misp.table.save()">确定</a>
+    	<a>&nbsp&nbsp&nbsp&nbsp</a>
+    	<a class="easyui-linkbutton" iconCls="icon-cancel" style="width:60px;" onclick="misp.table.cancel()">关闭</a>
+    </div>
+<script type="text/javascript">
+function upload0(){
+	misp.util.fileUpload({
+		fileID : "up0",
+		fileName : "#product_img",
+		fileImg : "#img0",
+		newFile : "#new_img"
+	});
+};
+function upload1(){
+	misp.util.fileUpload({
+		fileID : "up1",
+		fileName : "#product_img_sm1",
+		fileImg : "#img1",
+		newFile : "#new_img1"
+	});
+};
+function upload2(){
+	misp.util.fileUpload({
+		fileID : "up2",
+		fileName : "#product_img_sm2",
+		fileImg : "#img2",
+		newFile : "#new_img2"
+	});
+};
+function upload3(){
+	misp.util.fileUpload({
+		fileID : "up3",
+		fileName : "#product_img_sm3",
+		fileImg : "#img3",
+		newFile : "#new_img3"
+	});
+};
+</script>
+</body>
+</html>

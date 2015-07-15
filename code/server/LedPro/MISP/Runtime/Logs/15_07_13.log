@@ -1,0 +1,1301 @@
+[ 2015-07-13T18:27:43+08:00 ] INFO: the url is /LedPro/
+[ 2015-07-13T18:27:43+08:00 ] INFO: request is 
+[ 2015-07-13T18:27:43+08:00 ] INFO: Session validator...
+[ 2015-07-13T18:27:43+08:00 ] 0.0.0.0 /LedPro/
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.002312s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002391s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Constant THEME_NAME already defined D:\xampps\htdocs\LedPro\ThinkPHP\Lib\Core\View.class.php 第 223 行.
+NOTIC: [8] Constant THEME_PATH already defined D:\xampps\htdocs\LedPro\ThinkPHP\Lib\Core\View.class.php 第 174 行.
+NOTIC: [8] Constant APP_TMPL_PATH already defined D:\xampps\htdocs\LedPro\ThinkPHP\Lib\Core\View.class.php 第 175 行.
+INFO: [ view_parse ] --START--
+INFO: ParseTemplate Behavior ::run [ RunTime:0.044187s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.044266s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.001964s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.001886s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.001854s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.002110s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.007990s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.002496s ]
+INFO: [ view_end ] --END-- [ RunTime:0.002550s ]
+
+[ 2015-07-13T18:27:59+08:00 ] INFO: the url is /LedPro/index.php/Index/Login
+[ 2015-07-13T18:27:59+08:00 ] INFO: request is {"client_type":"WEB","obj":{"user_name":"admin","password":"123456"}}
+[ 2015-07-13T18:27:59+08:00 ] INFO: Session validator...WEB
+[ 2015-07-13T18:27:59+08:00 ] INFO: Session validator login Page
+[ 2015-07-13T18:27:59+08:00 ] INFO: User login, Client type is WEB
+[ 2015-07-13T18:27:59+08:00 ] INFO: Login validate ...
+[ 2015-07-13T18:27:59+08:00 ] INFO: condition is {"user_name":"admin"}
+[ 2015-07-13T18:27:59+08:00 ] INFO: Login validate success.
+[ 2015-07-13T18:27:59+08:00 ] INFO: Get role privilege...
+[ 2015-07-13T18:27:59+08:00 ] INFO: role pri is 1
+[ 2015-07-13T18:27:59+08:00 ] INFO: Role privilege is ["1"]
+[ 2015-07-13T18:27:59+08:00 ] INFO: Get user privilege...
+[ 2015-07-13T18:27:59+08:00 ] INFO: User privilege is null
+[ 2015-07-13T18:27:59+08:00 ] INFO: All user privilege is ["1"]
+[ 2015-07-13T18:27:59+08:00 ] INFO: login privilege is ["1"]
+[ 2015-07-13T18:27:59+08:00 ] INFO: Get user login privilege success. The user have WEB login privilege.
+[ 2015-07-13T18:27:59+08:00 ] INFO: User WEBLogin success, the user name is admin
+[ 2015-07-13T18:27:59+08:00 ] INFO: the url is /LedPro/index.php/Index/Login
+[ 2015-07-13T18:27:59+08:00 ] INFO: response is {"errorCode":0,"errorMsg":"\u64cd\u4f5c\u6210\u529f","obj":null}
+[ 2015-07-13T18:27:59+08:00 ] 0.0.0.0 /LedPro/index.php/Index/Login
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.029838s ]
+INFO: [ route_check ] --END-- [ RunTime:0.029918s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001866s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001917s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+SQL: SHOW COLUMNS FROM `misp_user` [ RunTime:0.002031s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `misp_user` WHERE ( `user_name` = 'admin' ) LIMIT 1   [ RunTime:0.000707s ]
+SQL: SELECT * FROM `misp_user` WHERE ( `user_name` = 'admin' ) LIMIT 1   [ RunTime:0.000337s ]
+SQL: SHOW COLUMNS FROM `misp_privilege` [ RunTime:0.001613s ]
+SQL: SELECT `access_obj_value` FROM `misp_privilege` WHERE ( `master_value` = '1' ) AND ( `master_type` = 'ROLE' ) AND ( `access_obj_type` = 'LOGIN' )  [ RunTime:0.000678s ]
+SQL: SELECT `access_obj_value` FROM `misp_privilege` WHERE ( `master_value` = '1' ) AND ( `master_type` = 'USER' ) AND ( `access_obj_type` = 'LOGIN' )  [ RunTime:0.000393s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\xampps\htdocs\LedPro\MISP\Lib\Service\MispCommonDataService.class.php 第 42 行.
+NOTIC: [8] A session had already been started - ignoring session_start() D:\xampps\htdocs\LedPro\MISP\Lib\Service\MispCommonUserService.class.php 第 142 行.
+NOTIC: [8] Undefined property: MispBaseRspJson::$PrivateErrorMsg D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 278 行.
+
+[ 2015-07-13T18:28:00+08:00 ] INFO: the url is /LedPro/index.php/Index/GetMenuTree
+[ 2015-07-13T18:28:00+08:00 ] INFO: request is 
+[ 2015-07-13T18:28:00+08:00 ] INFO: Session validator...
+[ 2015-07-13T18:28:00+08:00 ] INFO: get menu tree
+[ 2015-07-13T18:28:00+08:00 ] INFO: Get role privilege...
+[ 2015-07-13T18:28:00+08:00 ] INFO: role pri is 2000
+[ 2015-07-13T18:28:00+08:00 ] INFO: role pri is 2010
+[ 2015-07-13T18:28:00+08:00 ] INFO: Role privilege is ["2000","2010"]
+[ 2015-07-13T18:28:00+08:00 ] INFO: Get user privilege...
+[ 2015-07-13T18:28:00+08:00 ] INFO: User privilege is null
+[ 2015-07-13T18:28:00+08:00 ] INFO: All user privilege is ["2000","2010"]
+[ 2015-07-13T18:28:00+08:00 ] INFO: menu tree is [{"menu_id":"2000","menu_name":"BusinessManage","menu_value":"\u4e1a\u52a1\u7ba1\u7406","menu_type":null,"menu_icon":null,"menu_external":null,"menu_url":"#","menu_parent_id":"0"},{"menu_id":"2010","menu_name":"ProductManage","menu_value":"\u4ea7\u54c1\u7ba1\u7406","menu_type":null,"menu_icon":"icon-project","menu_external":null,"menu_url":"Product\/Index.html","menu_parent_id":"2000"}]
+[ 2015-07-13T18:28:00+08:00 ] INFO: the url is /LedPro/index.php/Index/GetMenuTree
+[ 2015-07-13T18:28:00+08:00 ] INFO: response is [{"menu_id":"2000","menu_name":"BusinessManage","menu_value":"\u4e1a\u52a1\u7ba1\u7406","menu_type":null,"menu_icon":null,"menu_external":null,"menu_url":"#","menu_parent_id":"0"},{"menu_id":"2010","menu_name":"ProductManage","menu_value":"\u4ea7\u54c1\u7ba1\u7406","menu_type":null,"menu_icon":"icon-project","menu_external":null,"menu_url":"Product\/Index.html","menu_parent_id":"2000"}]
+[ 2015-07-13T18:28:00+08:00 ] 0.0.0.0 /LedPro/index.php/Index/GetMenuTree
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.002211s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002349s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001934s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001982s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+SQL: SHOW COLUMNS FROM `misp_privilege` [ RunTime:0.001564s ]
+SQL: SELECT `access_obj_value` FROM `misp_privilege` WHERE ( `master_value` = '1' ) AND ( `master_type` = 'ROLE' ) AND ( `access_obj_type` = 'MENU' )  [ RunTime:0.000517s ]
+SQL: SELECT `access_obj_value` FROM `misp_privilege` WHERE ( `master_value` = '1' ) AND ( `master_type` = 'USER' ) AND ( `access_obj_type` = 'MENU' )  [ RunTime:0.000330s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\xampps\htdocs\LedPro\MISP\Lib\Service\MispCommonDataService.class.php 第 42 行.
+SQL: SHOW COLUMNS FROM `misp_menu` [ RunTime:0.001661s ]
+SQL: SELECT * FROM `misp_menu` WHERE ( `menu_id` IN ('2000','2010') )  [ RunTime:0.000352s ]
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+
+[ 2015-07-13T18:28:01+08:00 ] INFO: the url is /LedPro/index.php/Enum/LoadSearchList
+[ 2015-07-13T18:28:01+08:00 ] INFO: request is filter=%5B%7B%22typeStr%22%3A%22equal%22%2C%22firstValue%22%3A%22project_status%22%2C%22attrName%22%3A%22field_name%22%7D%5D
+[ 2015-07-13T18:28:01+08:00 ] INFO: Session validator...
+[ 2015-07-13T18:28:01+08:00 ] INFO: Filter condition is [{"typeStr":"equal","firstValue":"project_status","attrName":"field_name"}]
+[ 2015-07-13T18:28:01+08:00 ] INFO: typeStr is equal
+[ 2015-07-13T18:28:01+08:00 ] INFO: first value is project_status
+[ 2015-07-13T18:28:01+08:00 ] INFO: condition is {"field_name":"project_status"}
+[ 2015-07-13T18:28:01+08:00 ] INFO: misp_enum list is null
+[ 2015-07-13T18:28:01+08:00 ] INFO: the url is /LedPro/index.php/Enum/LoadSearchList
+[ 2015-07-13T18:28:01+08:00 ] INFO: response is {"errorCode":0,"errorMsg":"\u64cd\u4f5c\u6210\u529f","obj":null}
+[ 2015-07-13T18:28:01+08:00 ] 0.0.0.0 /LedPro/index.php/Enum/LoadSearchList
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.002314s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002409s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.002318s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002390s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+SQL: SHOW COLUMNS FROM `misp_enum` [ RunTime:0.002127s ]
+NOTIC: [8] Undefined index:  field_name D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 129 行.
+SQL: SELECT * FROM `misp_enum` WHERE ( `field_name` = 'project_status' )  [ RunTime:0.001440s ]
+NOTIC: [2] array_merge() [<a href='function.array-merge'>function.array-merge</a>]: Argument #2 is not an array D:\xampps\htdocs\LedPro\MISP\Lib\Action\EnumAction.class.php 第 22 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Undefined property: MispBaseRspJson::$PrivateErrorMsg D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 278 行.
+
+[ 2015-07-13T18:28:01+08:00 ] INFO: the url is /LedPro/index.php/Product/Load
+[ 2015-07-13T18:28:01+08:00 ] INFO: request is page=1&rows=10
+[ 2015-07-13T18:28:01+08:00 ] INFO: Session validator...
+[ 2015-07-13T18:28:01+08:00 ] INFO: LoadPageTable,ReqType is 
+[ 2015-07-13T18:28:01+08:00 ] WARN: Filter condition is empty
+[ 2015-07-13T18:28:01+08:00 ] INFO: condition is []
+[ 2015-07-13T18:28:01+08:00 ] INFO: the current page is 0,the page size is 10
+[ 2015-07-13T18:28:01+08:00 ] INFO: query the table  count is 2
+[ 2015-07-13T18:28:01+08:00 ] INFO: the url is /LedPro/index.php/Product/Load
+[ 2015-07-13T18:28:01+08:00 ] INFO: response is {"total":"2","rows":[{"product_id":"3","product_name":"Living Room Leds","product_desc":"Good Leds","product_score":"5.00","product_catg":null,"product_type":null,"use_location":"Living Room","mounting_base":"normal","sub_catg":null,"product_size":"30*30","lumen_output":"2000.00","input_watt":"18.00","warranty":"3.00","manufacture":"SUNSANG","product_img":"55a073a8d2ffa.jpg","product_img_sm1":"55a073ac5d680.jpg","product_img_sm2":"55a073b0e3d89.jpg","product_img_sm3":"55a073b48725b.jpg","shop_id":null,"create_time":null,"create_user_id":null,"related_product_ids":null},{"product_id":"2","product_name":"Dining-hall Leds","product_desc":"No description","product_score":"0.00","product_catg":null,"product_type":null,"use_location":"Dining-hall","mounting_base":"normal","sub_catg":null,"product_size":"20*20","lumen_output":"2000.00","input_watt":"18.00","warranty":"2.00","manufacture":"Apple","product_img":"55a071e3186a2.jpg","product_img_sm1":"55a071e848242.jpg","product_img_sm2":"55a071ee5503d.jpg","product_img_sm3":"55a071f1cf8b8.jpg","shop_id":null,"create_time":null,"create_user_id":null,"related_product_ids":null}]}
+[ 2015-07-13T18:28:01+08:00 ] 0.0.0.0 /LedPro/index.php/Product/Load
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.003243s ]
+INFO: [ route_check ] --END-- [ RunTime:0.003348s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.003182s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003288s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+SQL: SHOW COLUMNS FROM `lp_product` [ RunTime:0.001819s ]
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Undefined index:  filter D:\xampps\htdocs\LedPro\MISP\Lib\Action\EasyUITableAction.class.php 第 28 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `lp_product` LIMIT 1   [ RunTime:0.000210s ]
+SQL: SELECT * FROM `lp_product` ORDER BY `product_id` desc LIMIT 0,10   [ RunTime:0.000396s ]
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+
+[ 2015-07-13T18:28:01+08:00 ] INFO: the url is /LedPro/index.php/Enum/LoadSearchList
+[ 2015-07-13T18:28:01+08:00 ] INFO: request is filter=%5B%7B%22typeStr%22%3A%22equal%22%2C%22firstValue%22%3A%22project_status%22%2C%22attrName%22%3A%22field_name%22%7D%5D
+[ 2015-07-13T18:28:01+08:00 ] INFO: Session validator...
+[ 2015-07-13T18:28:01+08:00 ] INFO: Filter condition is [{"typeStr":"equal","firstValue":"project_status","attrName":"field_name"}]
+[ 2015-07-13T18:28:01+08:00 ] INFO: typeStr is equal
+[ 2015-07-13T18:28:01+08:00 ] INFO: first value is project_status
+[ 2015-07-13T18:28:01+08:00 ] INFO: condition is {"field_name":"project_status"}
+[ 2015-07-13T18:28:01+08:00 ] INFO: misp_enum list is null
+[ 2015-07-13T18:28:01+08:00 ] INFO: the url is /LedPro/index.php/Enum/LoadSearchList
+[ 2015-07-13T18:28:01+08:00 ] INFO: response is {"errorCode":0,"errorMsg":"\u64cd\u4f5c\u6210\u529f","obj":null}
+[ 2015-07-13T18:28:01+08:00 ] 0.0.0.0 /LedPro/index.php/Enum/LoadSearchList
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.002514s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002606s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.002448s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002515s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+SQL: SHOW COLUMNS FROM `misp_enum` [ RunTime:0.001509s ]
+NOTIC: [8] Undefined index:  field_name D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 129 行.
+SQL: SELECT * FROM `misp_enum` WHERE ( `field_name` = 'project_status' )  [ RunTime:0.000190s ]
+NOTIC: [2] array_merge() [<a href='function.array-merge'>function.array-merge</a>]: Argument #2 is not an array D:\xampps\htdocs\LedPro\MISP\Lib\Action\EnumAction.class.php 第 22 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Undefined property: MispBaseRspJson::$PrivateErrorMsg D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 278 行.
+
+[ 2015-07-13T18:28:04+08:00 ] INFO: the url is /LedPro/index.php/Product/Show
+[ 2015-07-13T18:28:04+08:00 ] INFO: request is {"client_type":"WEB","obj":"3"}
+[ 2015-07-13T18:28:04+08:00 ] INFO: Session validator...WEB
+[ 2015-07-13T18:28:04+08:00 ] INFO: show objID is 3
+[ 2015-07-13T18:28:04+08:00 ] INFO: the url is /LedPro/index.php/Product/Show
+[ 2015-07-13T18:28:04+08:00 ] INFO: response is {"errorCode":0,"errorMsg":"\u64cd\u4f5c\u6210\u529f","obj":{"product_id":"3","product_name":"Living Room Leds","product_desc":"Good Leds","product_score":"5.00","product_catg":null,"product_type":null,"use_location":"Living Room","mounting_base":"normal","sub_catg":null,"product_size":"30*30","lumen_output":"2000.00","input_watt":"18.00","warranty":"3.00","manufacture":"SUNSANG","product_img":"55a073a8d2ffa.jpg","product_img_sm1":"55a073ac5d680.jpg","product_img_sm2":"55a073b0e3d89.jpg","product_img_sm3":"55a073b48725b.jpg","shop_id":null,"create_time":null,"create_user_id":null,"related_product_ids":null}}
+[ 2015-07-13T18:28:04+08:00 ] 0.0.0.0 /LedPro/index.php/Product/Show
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.002405s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002491s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.002055s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002117s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+SQL: SHOW COLUMNS FROM `lp_product` [ RunTime:0.001430s ]
+SQL: SELECT * FROM `lp_product` WHERE ( `product_id` = 3 ) LIMIT 1   [ RunTime:0.000306s ]
+NOTIC: [8] Undefined property: MispBaseRspJson::$PrivateErrorMsg D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 278 行.
+
+[ 2015-07-13T19:24:17+08:00 ] INFO: the url is /LedPro/index.php/Product/Load
+[ 2015-07-13T19:24:17+08:00 ] INFO: request is {"app_id":"1","client_type":"ANDROID","client_version":null,"conditionList":null,"obj":null,"page":{"count":0,"currentPage":1,"pageSize":10},"token":null}
+[ 2015-07-13T19:24:17+08:00 ] INFO: LoadPageTable,ReqType is ANDROID
+[ 2015-07-13T19:24:17+08:00 ] INFO: condition list is []
+[ 2015-07-13T19:24:17+08:00 ] INFO: the current page is 0,the page size is 10
+[ 2015-07-13T19:24:17+08:00 ] INFO: query the table  count is 2
+[ 2015-07-13T19:24:17+08:00 ] INFO: the url is /LedPro/index.php/Product/Load
+[ 2015-07-13T19:24:17+08:00 ] INFO: response is {"errorCode":0,"errorMsg":null,"obj":{"total":"2","rows":[{"product_id":"3","product_name":"Living Room Leds","product_desc":"Good Leds","product_score":"5.00","product_catg":null,"product_type":null,"use_location":"Living Room","mounting_base":"normal","sub_catg":null,"product_size":"30*30","lumen_output":"2000.00","input_watt":"18.00","warranty":"3.00","manufacture":"SUNSANG","product_img":"55a073a8d2ffa.jpg","product_img_sm1":"55a073ac5d680.jpg","product_img_sm2":"55a073b0e3d89.jpg","product_img_sm3":"55a073b48725b.jpg","shop_id":null,"create_time":null,"create_user_id":null,"related_product_ids":null},{"product_id":"2","product_name":"Dining-hall Leds","product_desc":"No description","product_score":"0.00","product_catg":null,"product_type":null,"use_location":"Dining-hall","mounting_base":"normal","sub_catg":null,"product_size":"20*20","lumen_output":"2000.00","input_watt":"18.00","warranty":"2.00","manufacture":"Apple","product_img":"55a071e3186a2.jpg","product_img_sm1":"55a071e848242.jpg","product_img_sm2":"55a071ee5503d.jpg","product_img_sm3":"55a071f1cf8b8.jpg","shop_id":null,"create_time":null,"create_user_id":null,"related_product_ids":null}]}}
+[ 2015-07-13T19:24:17+08:00 ] 192.168.1.107 /LedPro/index.php/Product/Load
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.002249s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002326s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001971s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002026s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+SQL: SHOW COLUMNS FROM `lp_product` [ RunTime:0.002278s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 105 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `lp_product` LIMIT 1   [ RunTime:0.000869s ]
+SQL: SELECT * FROM `lp_product` ORDER BY `product_id` desc LIMIT 0,10   [ RunTime:0.000600s ]
+NOTIC: [2048] Creating default object from empty value D:\xampps\htdocs\LedPro\MISP\Lib\Action\EasyUITableAction.class.php 第 100 行.
+
+[ 2015-07-13T19:27:20+08:00 ] INFO: the url is /LedPro/index.php/Product/Load
+[ 2015-07-13T19:27:20+08:00 ] INFO: request is {"app_id":"1","client_type":"ANDROID","client_version":null,"conditionList":null,"obj":null,"page":{"count":0,"currentPage":1,"pageSize":10},"token":null}
+[ 2015-07-13T19:27:20+08:00 ] INFO: LoadPageTable,ReqType is ANDROID
+[ 2015-07-13T19:27:20+08:00 ] INFO: condition list is []
+[ 2015-07-13T19:27:20+08:00 ] INFO: the current page is 0,the page size is 10
+[ 2015-07-13T19:27:20+08:00 ] INFO: query the table  count is 2
+[ 2015-07-13T19:27:20+08:00 ] INFO: the url is /LedPro/index.php/Product/Load
+[ 2015-07-13T19:27:20+08:00 ] INFO: response is {"errorCode":0,"errorMsg":null,"obj":{"total":"2","rows":[{"product_id":"3","product_name":"Living Room Leds","product_desc":"Good Leds","product_score":"5.00","product_catg":null,"product_type":null,"use_location":"Living Room","mounting_base":"normal","sub_catg":null,"product_size":"30*30","lumen_output":"2000.00","input_watt":"18.00","warranty":"3.00","manufacture":"SUNSANG","product_img":"55a073a8d2ffa.jpg","product_img_sm1":"55a073ac5d680.jpg","product_img_sm2":"55a073b0e3d89.jpg","product_img_sm3":"55a073b48725b.jpg","shop_id":null,"create_time":null,"create_user_id":null,"related_product_ids":null},{"product_id":"2","product_name":"Dining-hall Leds","product_desc":"No description","product_score":"0.00","product_catg":null,"product_type":null,"use_location":"Dining-hall","mounting_base":"normal","sub_catg":null,"product_size":"20*20","lumen_output":"2000.00","input_watt":"18.00","warranty":"2.00","manufacture":"Apple","product_img":"55a071e3186a2.jpg","product_img_sm1":"55a071e848242.jpg","product_img_sm2":"55a071ee5503d.jpg","product_img_sm3":"55a071f1cf8b8.jpg","shop_id":null,"create_time":null,"create_user_id":null,"related_product_ids":null}]}}
+[ 2015-07-13T19:27:20+08:00 ] 192.168.1.107 /LedPro/index.php/Product/Load
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.002131s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002237s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001907s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001961s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+SQL: SHOW COLUMNS FROM `lp_product` [ RunTime:0.001955s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 105 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `lp_product` LIMIT 1   [ RunTime:0.000379s ]
+SQL: SELECT * FROM `lp_product` ORDER BY `product_id` desc LIMIT 0,10   [ RunTime:0.000262s ]
+NOTIC: [2048] Creating default object from empty value D:\xampps\htdocs\LedPro\MISP\Lib\Action\EasyUITableAction.class.php 第 100 行.
+
+[ 2015-07-13T19:32:38+08:00 ] INFO: the url is /LedPro/index.php/Product/Load
+[ 2015-07-13T19:32:38+08:00 ] INFO: request is {"app_id":"1","client_type":"ANDROID","client_version":null,"conditionList":null,"obj":null,"page":{"count":0,"currentPage":1,"pageSize":10},"token":null}
+[ 2015-07-13T19:32:38+08:00 ] INFO: LoadPageTable,ReqType is ANDROID
+[ 2015-07-13T19:32:38+08:00 ] INFO: condition list is []
+[ 2015-07-13T19:32:38+08:00 ] INFO: the current page is 0,the page size is 10
+[ 2015-07-13T19:32:38+08:00 ] INFO: query the table  count is 2
+[ 2015-07-13T19:32:38+08:00 ] INFO: the url is /LedPro/index.php/Product/Load
+[ 2015-07-13T19:32:38+08:00 ] INFO: response is {"errorCode":0,"errorMsg":null,"obj":{"total":"2","rows":[{"product_id":"3","product_name":"Living Room Leds","product_desc":"Good Leds","product_score":"5.00","product_catg":null,"product_type":null,"use_location":"Living Room","mounting_base":"normal","sub_catg":null,"product_size":"30*30","lumen_output":"2000.00","input_watt":"18.00","warranty":"3.00","manufacture":"SUNSANG","product_img":"55a073a8d2ffa.jpg","product_img_sm1":"55a073ac5d680.jpg","product_img_sm2":"55a073b0e3d89.jpg","product_img_sm3":"55a073b48725b.jpg","shop_id":null,"create_time":null,"create_user_id":null,"related_product_ids":null},{"product_id":"2","product_name":"Dining-hall Leds","product_desc":"No description","product_score":"0.00","product_catg":null,"product_type":null,"use_location":"Dining-hall","mounting_base":"normal","sub_catg":null,"product_size":"20*20","lumen_output":"2000.00","input_watt":"18.00","warranty":"2.00","manufacture":"Apple","product_img":"55a071e3186a2.jpg","product_img_sm1":"55a071e848242.jpg","product_img_sm2":"55a071ee5503d.jpg","product_img_sm3":"55a071f1cf8b8.jpg","shop_id":null,"create_time":null,"create_user_id":null,"related_product_ids":null}]}}
+[ 2015-07-13T19:32:38+08:00 ] 192.168.1.107 /LedPro/index.php/Product/Load
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.002288s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002364s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001863s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001916s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+SQL: SHOW COLUMNS FROM `lp_product` [ RunTime:0.001771s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 105 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `lp_product` LIMIT 1   [ RunTime:0.000458s ]
+SQL: SELECT * FROM `lp_product` ORDER BY `product_id` desc LIMIT 0,10   [ RunTime:0.000664s ]
+NOTIC: [2048] Creating default object from empty value D:\xampps\htdocs\LedPro\MISP\Lib\Action\EasyUITableAction.class.php 第 100 行.
+
+[ 2015-07-13T19:44:14+08:00 ] INFO: the url is /LedPro/index.php/Product/Load
+[ 2015-07-13T19:44:14+08:00 ] INFO: request is {"app_id":"1","client_type":"ANDROID","client_version":null,"conditionList":null,"obj":null,"page":{"count":0,"currentPage":1,"pageSize":10},"token":null}
+[ 2015-07-13T19:44:14+08:00 ] INFO: LoadPageTable,ReqType is ANDROID
+[ 2015-07-13T19:44:14+08:00 ] INFO: condition list is []
+[ 2015-07-13T19:44:14+08:00 ] INFO: the current page is 0,the page size is 10
+[ 2015-07-13T19:44:14+08:00 ] INFO: query the table  count is 2
+[ 2015-07-13T19:44:14+08:00 ] INFO: the url is /LedPro/index.php/Product/Load
+[ 2015-07-13T19:44:14+08:00 ] INFO: response is {"errorCode":0,"errorMsg":null,"obj":{"total":"2","rows":[{"product_id":"3","product_name":"Living Room Leds","product_desc":"Good Leds","product_score":"5.00","product_catg":null,"product_type":null,"use_location":"Living Room","mounting_base":"normal","sub_catg":null,"product_size":"30*30","lumen_output":"2000.00","input_watt":"18.00","warranty":"3.00","manufacture":"SUNSANG","product_img":"55a073a8d2ffa.jpg","product_img_sm1":"55a073ac5d680.jpg","product_img_sm2":"55a073b0e3d89.jpg","product_img_sm3":"55a073b48725b.jpg","shop_id":null,"create_time":null,"create_user_id":null,"related_product_ids":null},{"product_id":"2","product_name":"Dining-hall Leds","product_desc":"No description","product_score":"0.00","product_catg":null,"product_type":null,"use_location":"Dining-hall","mounting_base":"normal","sub_catg":null,"product_size":"20*20","lumen_output":"2000.00","input_watt":"18.00","warranty":"2.00","manufacture":"Apple","product_img":"55a071e3186a2.jpg","product_img_sm1":"55a071e848242.jpg","product_img_sm2":"55a071ee5503d.jpg","product_img_sm3":"55a071f1cf8b8.jpg","shop_id":null,"create_time":null,"create_user_id":null,"related_product_ids":null}]}}
+[ 2015-07-13T19:44:14+08:00 ] 192.168.1.107 /LedPro/index.php/Product/Load
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.002049s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002118s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001827s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001879s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+SQL: SHOW COLUMNS FROM `lp_product` [ RunTime:0.001697s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 105 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `lp_product` LIMIT 1   [ RunTime:0.000231s ]
+SQL: SELECT * FROM `lp_product` ORDER BY `product_id` desc LIMIT 0,10   [ RunTime:0.000350s ]
+NOTIC: [2048] Creating default object from empty value D:\xampps\htdocs\LedPro\MISP\Lib\Action\EasyUITableAction.class.php 第 100 行.
+
+[ 2015-07-13T19:53:31+08:00 ] INFO: the url is /LedPro/index.php/Product/Load
+[ 2015-07-13T19:53:31+08:00 ] INFO: request is {"app_id":"1","client_type":"ANDROID","client_version":null,"conditionList":null,"obj":null,"page":{"count":0,"currentPage":1,"pageSize":10},"token":null}
+[ 2015-07-13T19:53:31+08:00 ] INFO: LoadPageTable,ReqType is ANDROID
+[ 2015-07-13T19:53:31+08:00 ] INFO: condition list is []
+[ 2015-07-13T19:53:31+08:00 ] INFO: the current page is 0,the page size is 10
+[ 2015-07-13T19:53:31+08:00 ] INFO: query the table  count is 2
+[ 2015-07-13T19:53:31+08:00 ] INFO: the url is /LedPro/index.php/Product/Load
+[ 2015-07-13T19:53:31+08:00 ] INFO: response is {"errorCode":0,"errorMsg":null,"obj":{"total":"2","rows":[{"product_id":"3","product_name":"Living Room Leds","product_desc":"Good Leds","product_score":"5.00","product_catg":null,"product_type":null,"use_location":"Living Room","mounting_base":"normal","sub_catg":null,"product_size":"30*30","lumen_output":"2000.00","input_watt":"18.00","warranty":"3.00","manufacture":"SUNSANG","product_img":"55a073a8d2ffa.jpg","product_img_sm1":"55a073ac5d680.jpg","product_img_sm2":"55a073b0e3d89.jpg","product_img_sm3":"55a073b48725b.jpg","shop_id":null,"create_time":null,"create_user_id":null,"related_product_ids":null},{"product_id":"2","product_name":"Dining-hall Leds","product_desc":"No description","product_score":"0.00","product_catg":null,"product_type":null,"use_location":"Dining-hall","mounting_base":"normal","sub_catg":null,"product_size":"20*20","lumen_output":"2000.00","input_watt":"18.00","warranty":"2.00","manufacture":"Apple","product_img":"55a071e3186a2.jpg","product_img_sm1":"55a071e848242.jpg","product_img_sm2":"55a071ee5503d.jpg","product_img_sm3":"55a071f1cf8b8.jpg","shop_id":null,"create_time":null,"create_user_id":null,"related_product_ids":null}]}}
+[ 2015-07-13T19:53:31+08:00 ] 192.168.1.107 /LedPro/index.php/Product/Load
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.003352s ]
+INFO: [ route_check ] --END-- [ RunTime:0.003462s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.002995s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003079s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+SQL: SHOW COLUMNS FROM `lp_product` [ RunTime:0.001668s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 105 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `lp_product` LIMIT 1   [ RunTime:0.000394s ]
+SQL: SELECT * FROM `lp_product` ORDER BY `product_id` desc LIMIT 0,10   [ RunTime:0.000383s ]
+NOTIC: [2048] Creating default object from empty value D:\xampps\htdocs\LedPro\MISP\Lib\Action\EasyUITableAction.class.php 第 100 行.
+
+[ 2015-07-13T19:59:06+08:00 ] INFO: the url is /LedPro/index.php/Product/Load
+[ 2015-07-13T19:59:06+08:00 ] INFO: request is {"app_id":"1","client_type":"ANDROID","client_version":null,"conditionList":null,"obj":null,"page":{"count":0,"currentPage":1,"pageSize":10},"token":null}
+[ 2015-07-13T19:59:06+08:00 ] INFO: LoadPageTable,ReqType is ANDROID
+[ 2015-07-13T19:59:06+08:00 ] INFO: condition list is []
+[ 2015-07-13T19:59:06+08:00 ] INFO: the current page is 0,the page size is 10
+[ 2015-07-13T19:59:06+08:00 ] INFO: query the table  count is 2
+[ 2015-07-13T19:59:06+08:00 ] INFO: the url is /LedPro/index.php/Product/Load
+[ 2015-07-13T19:59:06+08:00 ] INFO: response is {"errorCode":0,"errorMsg":null,"obj":{"total":"2","rows":[{"product_id":"3","product_name":"Living Room Leds","product_desc":"Good Leds","product_score":"5.00","product_catg":null,"product_type":null,"use_location":"Living Room","mounting_base":"normal","sub_catg":null,"product_size":"30*30","lumen_output":"2000.00","input_watt":"18.00","warranty":"3.00","manufacture":"SUNSANG","product_img":"55a073a8d2ffa.jpg","product_img_sm1":"55a073ac5d680.jpg","product_img_sm2":"55a073b0e3d89.jpg","product_img_sm3":"55a073b48725b.jpg","shop_id":null,"create_time":null,"create_user_id":null,"related_product_ids":null},{"product_id":"2","product_name":"Dining-hall Leds","product_desc":"No description","product_score":"0.00","product_catg":null,"product_type":null,"use_location":"Dining-hall","mounting_base":"normal","sub_catg":null,"product_size":"20*20","lumen_output":"2000.00","input_watt":"18.00","warranty":"2.00","manufacture":"Apple","product_img":"55a071e3186a2.jpg","product_img_sm1":"55a071e848242.jpg","product_img_sm2":"55a071ee5503d.jpg","product_img_sm3":"55a071f1cf8b8.jpg","shop_id":null,"create_time":null,"create_user_id":null,"related_product_ids":null}]}}
+[ 2015-07-13T19:59:06+08:00 ] 192.168.1.107 /LedPro/index.php/Product/Load
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.002228s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002310s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001898s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001952s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+SQL: SHOW COLUMNS FROM `lp_product` [ RunTime:0.001692s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 105 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `lp_product` LIMIT 1   [ RunTime:0.000222s ]
+SQL: SELECT * FROM `lp_product` ORDER BY `product_id` desc LIMIT 0,10   [ RunTime:0.000708s ]
+NOTIC: [2048] Creating default object from empty value D:\xampps\htdocs\LedPro\MISP\Lib\Action\EasyUITableAction.class.php 第 100 行.
+
+[ 2015-07-13T20:00:13+08:00 ] INFO: the url is /LedPro/index.php/Product/Load
+[ 2015-07-13T20:00:13+08:00 ] INFO: request is {"app_id":"1","client_type":"ANDROID","client_version":null,"conditionList":null,"obj":null,"page":{"count":0,"currentPage":1,"pageSize":10},"token":null}
+[ 2015-07-13T20:00:13+08:00 ] INFO: LoadPageTable,ReqType is ANDROID
+[ 2015-07-13T20:00:13+08:00 ] INFO: condition list is []
+[ 2015-07-13T20:00:13+08:00 ] INFO: the current page is 0,the page size is 10
+[ 2015-07-13T20:00:13+08:00 ] INFO: query the table  count is 2
+[ 2015-07-13T20:00:13+08:00 ] INFO: the url is /LedPro/index.php/Product/Load
+[ 2015-07-13T20:00:13+08:00 ] INFO: response is {"errorCode":0,"errorMsg":null,"obj":{"total":"2","rows":[{"product_id":"3","product_name":"Living Room Leds","product_desc":"Good Leds","product_score":"5.00","product_catg":null,"product_type":null,"use_location":"Living Room","mounting_base":"normal","sub_catg":null,"product_size":"30*30","lumen_output":"2000.00","input_watt":"18.00","warranty":"3.00","manufacture":"SUNSANG","product_img":"55a073a8d2ffa.jpg","product_img_sm1":"55a073ac5d680.jpg","product_img_sm2":"55a073b0e3d89.jpg","product_img_sm3":"55a073b48725b.jpg","shop_id":null,"create_time":null,"create_user_id":null,"related_product_ids":null},{"product_id":"2","product_name":"Dining-hall Leds","product_desc":"No description","product_score":"0.00","product_catg":null,"product_type":null,"use_location":"Dining-hall","mounting_base":"normal","sub_catg":null,"product_size":"20*20","lumen_output":"2000.00","input_watt":"18.00","warranty":"2.00","manufacture":"Apple","product_img":"55a071e3186a2.jpg","product_img_sm1":"55a071e848242.jpg","product_img_sm2":"55a071ee5503d.jpg","product_img_sm3":"55a071f1cf8b8.jpg","shop_id":null,"create_time":null,"create_user_id":null,"related_product_ids":null}]}}
+[ 2015-07-13T20:00:13+08:00 ] 192.168.1.107 /LedPro/index.php/Product/Load
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.002158s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002227s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001887s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001967s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+SQL: SHOW COLUMNS FROM `lp_product` [ RunTime:0.001918s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 105 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `lp_product` LIMIT 1   [ RunTime:0.000479s ]
+SQL: SELECT * FROM `lp_product` ORDER BY `product_id` desc LIMIT 0,10   [ RunTime:0.000577s ]
+NOTIC: [2048] Creating default object from empty value D:\xampps\htdocs\LedPro\MISP\Lib\Action\EasyUITableAction.class.php 第 100 行.
+
+[ 2015-07-13T20:01:25+08:00 ] INFO: the url is /LedPro/index.php/Product/Load
+[ 2015-07-13T20:01:25+08:00 ] INFO: request is {"app_id":"1","client_type":"ANDROID","client_version":null,"conditionList":null,"obj":null,"page":{"count":0,"currentPage":1,"pageSize":10},"token":null}
+[ 2015-07-13T20:01:25+08:00 ] INFO: LoadPageTable,ReqType is ANDROID
+[ 2015-07-13T20:01:25+08:00 ] INFO: condition list is []
+[ 2015-07-13T20:01:25+08:00 ] INFO: the current page is 0,the page size is 10
+[ 2015-07-13T20:01:25+08:00 ] INFO: query the table  count is 2
+[ 2015-07-13T20:01:25+08:00 ] INFO: the url is /LedPro/index.php/Product/Load
+[ 2015-07-13T20:01:25+08:00 ] INFO: response is {"errorCode":0,"errorMsg":null,"obj":{"total":"2","rows":[{"product_id":"3","product_name":"Living Room Leds","product_desc":"Good Leds","product_score":"5.00","product_catg":null,"product_type":null,"use_location":"Living Room","mounting_base":"normal","sub_catg":null,"product_size":"30*30","lumen_output":"2000.00","input_watt":"18.00","warranty":"3.00","manufacture":"SUNSANG","product_img":"55a073a8d2ffa.jpg","product_img_sm1":"55a073ac5d680.jpg","product_img_sm2":"55a073b0e3d89.jpg","product_img_sm3":"55a073b48725b.jpg","shop_id":null,"create_time":null,"create_user_id":null,"related_product_ids":null},{"product_id":"2","product_name":"Dining-hall Leds","product_desc":"No description","product_score":"0.00","product_catg":null,"product_type":null,"use_location":"Dining-hall","mounting_base":"normal","sub_catg":null,"product_size":"20*20","lumen_output":"2000.00","input_watt":"18.00","warranty":"2.00","manufacture":"Apple","product_img":"55a071e3186a2.jpg","product_img_sm1":"55a071e848242.jpg","product_img_sm2":"55a071ee5503d.jpg","product_img_sm3":"55a071f1cf8b8.jpg","shop_id":null,"create_time":null,"create_user_id":null,"related_product_ids":null}]}}
+[ 2015-07-13T20:01:25+08:00 ] 192.168.1.107 /LedPro/index.php/Product/Load
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.002303s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002399s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.002012s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002070s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+SQL: SHOW COLUMNS FROM `lp_product` [ RunTime:0.003252s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 105 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `lp_product` LIMIT 1   [ RunTime:0.001128s ]
+SQL: SELECT * FROM `lp_product` ORDER BY `product_id` desc LIMIT 0,10   [ RunTime:0.001419s ]
+NOTIC: [2048] Creating default object from empty value D:\xampps\htdocs\LedPro\MISP\Lib\Action\EasyUITableAction.class.php 第 100 行.
+
+[ 2015-07-13T20:02:52+08:00 ] INFO: the url is /LedPro/index.php/Product/Show
+[ 2015-07-13T20:02:52+08:00 ] INFO: request is {"client_type":"WEB","obj":"3"}
+[ 2015-07-13T20:02:52+08:00 ] INFO: Session validator...WEB
+[ 2015-07-13T20:02:52+08:00 ] INFO: Session is out ...,Jump to login page
+[ 2015-07-13T20:02:52+08:00 ] INFO: show objID is 3
+[ 2015-07-13T20:02:52+08:00 ] INFO: the url is /LedPro/index.php/Product/Show
+[ 2015-07-13T20:02:52+08:00 ] INFO: response is {"errorCode":0,"errorMsg":"\u64cd\u4f5c\u6210\u529f","obj":{"product_id":"3","product_name":"Living Room Leds","product_desc":"Good Leds","product_score":"5.00","product_catg":null,"product_type":null,"use_location":"Living Room","mounting_base":"normal","sub_catg":null,"product_size":"30*30","lumen_output":"2000.00","input_watt":"18.00","warranty":"3.00","manufacture":"SUNSANG","product_img":"55a073a8d2ffa.jpg","product_img_sm1":"55a073ac5d680.jpg","product_img_sm2":"55a073b0e3d89.jpg","product_img_sm3":"55a073b48725b.jpg","shop_id":null,"create_time":null,"create_user_id":null,"related_product_ids":null}}
+[ 2015-07-13T20:02:52+08:00 ] 0.0.0.0 /LedPro/index.php/Product/Show
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.002309s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002396s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001983s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002047s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+NOTIC: [8] Undefined index:  user D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 56 行.
+SQL: SHOW COLUMNS FROM `lp_product` [ RunTime:0.001774s ]
+SQL: SELECT * FROM `lp_product` WHERE ( `product_id` = 3 ) LIMIT 1   [ RunTime:0.000570s ]
+NOTIC: [8] Undefined property: MispBaseRspJson::$PrivateErrorMsg D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 278 行.
+
+[ 2015-07-13T20:02:52+08:00 ] INFO: the url is /LedPro/index.php/Index/redirectPage.html
+[ 2015-07-13T20:02:52+08:00 ] INFO: request is 
+[ 2015-07-13T20:02:52+08:00 ] INFO: Session validator...
+[ 2015-07-13T20:02:52+08:00 ] INFO: Session validator login Page
+[ 2015-07-13T20:02:52+08:00 ] 0.0.0.0 /LedPro/index.php/Index/redirectPage.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.002329s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002416s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.002044s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002100s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Constant THEME_NAME already defined D:\xampps\htdocs\LedPro\ThinkPHP\Lib\Core\View.class.php 第 223 行.
+NOTIC: [8] Constant THEME_PATH already defined D:\xampps\htdocs\LedPro\ThinkPHP\Lib\Core\View.class.php 第 174 行.
+NOTIC: [8] Constant APP_TMPL_PATH already defined D:\xampps\htdocs\LedPro\ThinkPHP\Lib\Core\View.class.php 第 175 行.
+INFO: [ view_parse ] --START--
+INFO: ParseTemplate Behavior ::run [ RunTime:0.014355s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014412s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.001700s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.001715s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.001635s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.001774s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.006945s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001907s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001949s ]
+
+[ 2015-07-13T20:02:55+08:00 ] INFO: the url is /LedPro/index.php/Product/Show
+[ 2015-07-13T20:02:55+08:00 ] INFO: request is {"client_type":"WEB","obj":"2"}
+[ 2015-07-13T20:02:55+08:00 ] INFO: Session validator...WEB
+[ 2015-07-13T20:02:55+08:00 ] INFO: Session is out ...,Jump to login page
+[ 2015-07-13T20:02:55+08:00 ] INFO: show objID is 2
+[ 2015-07-13T20:02:55+08:00 ] INFO: the url is /LedPro/index.php/Product/Show
+[ 2015-07-13T20:02:55+08:00 ] INFO: response is {"errorCode":0,"errorMsg":"\u64cd\u4f5c\u6210\u529f","obj":{"product_id":"2","product_name":"Dining-hall Leds","product_desc":"No description","product_score":"0.00","product_catg":null,"product_type":null,"use_location":"Dining-hall","mounting_base":"normal","sub_catg":null,"product_size":"20*20","lumen_output":"2000.00","input_watt":"18.00","warranty":"2.00","manufacture":"Apple","product_img":"55a071e3186a2.jpg","product_img_sm1":"55a071e848242.jpg","product_img_sm2":"55a071ee5503d.jpg","product_img_sm3":"55a071f1cf8b8.jpg","shop_id":null,"create_time":null,"create_user_id":null,"related_product_ids":null}}
+[ 2015-07-13T20:02:55+08:00 ] 0.0.0.0 /LedPro/index.php/Product/Show
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.002251s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002333s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001879s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001931s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+NOTIC: [8] Undefined index:  user D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 56 行.
+SQL: SHOW COLUMNS FROM `lp_product` [ RunTime:0.002249s ]
+SQL: SELECT * FROM `lp_product` WHERE ( `product_id` = 2 ) LIMIT 1   [ RunTime:0.000941s ]
+NOTIC: [8] Undefined property: MispBaseRspJson::$PrivateErrorMsg D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 278 行.
+
+[ 2015-07-13T20:02:55+08:00 ] INFO: the url is /LedPro/index.php/Index/redirectPage.html
+[ 2015-07-13T20:02:55+08:00 ] INFO: request is 
+[ 2015-07-13T20:02:55+08:00 ] INFO: Session validator...
+[ 2015-07-13T20:02:55+08:00 ] INFO: Session validator login Page
+[ 2015-07-13T20:02:55+08:00 ] 0.0.0.0 /LedPro/index.php/Index/redirectPage.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.002254s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002329s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001988s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002039s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Constant THEME_NAME already defined D:\xampps\htdocs\LedPro\ThinkPHP\Lib\Core\View.class.php 第 223 行.
+NOTIC: [8] Constant THEME_PATH already defined D:\xampps\htdocs\LedPro\ThinkPHP\Lib\Core\View.class.php 第 174 行.
+NOTIC: [8] Constant APP_TMPL_PATH already defined D:\xampps\htdocs\LedPro\ThinkPHP\Lib\Core\View.class.php 第 175 行.
+INFO: [ view_parse ] --START--
+INFO: ParseTemplate Behavior ::run [ RunTime:0.014068s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014126s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.001739s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.001760s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.001682s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.001948s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.007255s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001949s ]
+INFO: [ view_end ] --END-- [ RunTime:0.001993s ]
+
+[ 2015-07-13T20:02:58+08:00 ] INFO: the url is /LedPro/index.php/Index/GetMenuTree
+[ 2015-07-13T20:02:58+08:00 ] INFO: request is 
+[ 2015-07-13T20:02:58+08:00 ] INFO: Session validator...
+[ 2015-07-13T20:02:58+08:00 ] INFO: Session is out ...,Jump to login page
+[ 2015-07-13T20:02:58+08:00 ] INFO: get menu tree
+[ 2015-07-13T20:02:58+08:00 ] INFO: Get role privilege...
+[ 2015-07-13T20:02:58+08:00 ] INFO: Role privilege is null
+[ 2015-07-13T20:02:58+08:00 ] INFO: Get user privilege...
+[ 2015-07-13T20:02:58+08:00 ] INFO: User privilege is null
+[ 2015-07-13T20:02:58+08:00 ] INFO: All user privilege is []
+[ 2015-07-13T20:02:58+08:00 ] INFO: menu tree is false
+[ 2015-07-13T20:02:58+08:00 ] INFO: the url is /LedPro/index.php/Index/GetMenuTree
+[ 2015-07-13T20:02:58+08:00 ] INFO: response is {"errorCode":0,"errorMsg":"\u64cd\u4f5c\u6210\u529f","obj":null}
+[ 2015-07-13T20:02:58+08:00 ] 0.0.0.0 /LedPro/index.php/Index/GetMenuTree
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.002158s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002234s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001882s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001931s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Undefined index:  user D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 56 行.
+NOTIC: [8] Undefined index:  user D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 246 行.
+SQL: SHOW COLUMNS FROM `misp_privilege` [ RunTime:0.002191s ]
+SQL: SELECT `access_obj_value` FROM `misp_privilege` WHERE ( `master_value` = null ) AND ( `master_type` = 'ROLE' ) AND ( `access_obj_type` = 'MENU' )  [ RunTime:0.000988s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\xampps\htdocs\LedPro\MISP\Lib\Service\MispCommonDataService.class.php 第 29 行.
+SQL: SELECT `access_obj_value` FROM `misp_privilege` WHERE ( `master_value` = null ) AND ( `master_type` = 'USER' ) AND ( `access_obj_type` = 'MENU' )  [ RunTime:0.000444s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\xampps\htdocs\LedPro\MISP\Lib\Service\MispCommonDataService.class.php 第 42 行.
+SQL: SHOW COLUMNS FROM `misp_menu` [ RunTime:0.001505s ]
+SQL: SELECT * FROM `misp_menu` WHERE ( `menu_id` IN () )  [ RunTime:0.001919s ]
+ERR: 1064:You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') )' at line 1
+ [ SQL语句 ] : SELECT * FROM `misp_menu` WHERE ( `menu_id` IN () ) 
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Undefined property: MispBaseRspJson::$PrivateErrorMsg D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 278 行.
+
+[ 2015-07-13T20:02:59+08:00 ] INFO: the url is /LedPro/index.php/Index/redirectPage.html
+[ 2015-07-13T20:02:59+08:00 ] INFO: request is 
+[ 2015-07-13T20:02:59+08:00 ] INFO: Session validator...
+[ 2015-07-13T20:02:59+08:00 ] INFO: Session validator login Page
+[ 2015-07-13T20:02:59+08:00 ] 0.0.0.0 /LedPro/index.php/Index/redirectPage.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.002055s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002118s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.002128s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002213s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Constant THEME_NAME already defined D:\xampps\htdocs\LedPro\ThinkPHP\Lib\Core\View.class.php 第 223 行.
+NOTIC: [8] Constant THEME_PATH already defined D:\xampps\htdocs\LedPro\ThinkPHP\Lib\Core\View.class.php 第 174 行.
+NOTIC: [8] Constant APP_TMPL_PATH already defined D:\xampps\htdocs\LedPro\ThinkPHP\Lib\Core\View.class.php 第 175 行.
+INFO: [ view_parse ] --START--
+INFO: ParseTemplate Behavior ::run [ RunTime:0.013592s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.013657s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.002482s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.001883s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.001773s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.001858s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.008127s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.001962s ]
+INFO: [ view_end ] --END-- [ RunTime:0.002006s ]
+
+[ 2015-07-13T20:03:00+08:00 ] INFO: the url is /LedPro/index.php/Index/Logout
+[ 2015-07-13T20:03:00+08:00 ] INFO: request is {"client_type":"WEB"}
+[ 2015-07-13T20:03:00+08:00 ] INFO: Session validator...WEB
+[ 2015-07-13T20:03:00+08:00 ] INFO: Session validator login Page
+[ 2015-07-13T20:03:00+08:00 ] INFO: User Logout, Client type is WEB
+[ 2015-07-13T20:03:00+08:00 ] INFO: WEB logout...
+[ 2015-07-13T20:03:00+08:00 ] INFO: User logout success.
+[ 2015-07-13T20:03:00+08:00 ] INFO: the url is /LedPro/index.php/Index/Logout
+[ 2015-07-13T20:03:00+08:00 ] INFO: response is {"errorCode":0,"errorMsg":"\u64cd\u4f5c\u6210\u529f","obj":null}
+[ 2015-07-13T20:03:00+08:00 ] 0.0.0.0 /LedPro/index.php/Index/Logout
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.003032s ]
+INFO: [ route_check ] --END-- [ RunTime:0.003120s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.002616s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002684s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+NOTIC: [8] Undefined property: MispBaseRspJson::$PrivateErrorMsg D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 278 行.
+
+[ 2015-07-13T20:03:01+08:00 ] INFO: the url is /LedPro/index.php/Index/Login
+[ 2015-07-13T20:03:01+08:00 ] INFO: request is {"client_type":"WEB","obj":{"user_name":"admin","password":"123456"}}
+[ 2015-07-13T20:03:01+08:00 ] INFO: Session validator...WEB
+[ 2015-07-13T20:03:01+08:00 ] INFO: Session validator login Page
+[ 2015-07-13T20:03:01+08:00 ] INFO: User login, Client type is WEB
+[ 2015-07-13T20:03:01+08:00 ] INFO: Login validate ...
+[ 2015-07-13T20:03:01+08:00 ] INFO: condition is {"user_name":"admin"}
+[ 2015-07-13T20:03:01+08:00 ] INFO: Login validate success.
+[ 2015-07-13T20:03:01+08:00 ] INFO: Get role privilege...
+[ 2015-07-13T20:03:01+08:00 ] INFO: role pri is 1
+[ 2015-07-13T20:03:01+08:00 ] INFO: Role privilege is ["1"]
+[ 2015-07-13T20:03:01+08:00 ] INFO: Get user privilege...
+[ 2015-07-13T20:03:01+08:00 ] INFO: User privilege is null
+[ 2015-07-13T20:03:01+08:00 ] INFO: All user privilege is ["1"]
+[ 2015-07-13T20:03:01+08:00 ] INFO: login privilege is ["1"]
+[ 2015-07-13T20:03:01+08:00 ] INFO: Get user login privilege success. The user have WEB login privilege.
+[ 2015-07-13T20:03:01+08:00 ] INFO: User WEBLogin success, the user name is admin
+[ 2015-07-13T20:03:01+08:00 ] INFO: the url is /LedPro/index.php/Index/Login
+[ 2015-07-13T20:03:01+08:00 ] INFO: response is {"errorCode":0,"errorMsg":"\u64cd\u4f5c\u6210\u529f","obj":null}
+[ 2015-07-13T20:03:01+08:00 ] 0.0.0.0 /LedPro/index.php/Index/Login
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.002957s ]
+INFO: [ route_check ] --END-- [ RunTime:0.003042s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.002626s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002694s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+SQL: SHOW COLUMNS FROM `misp_user` [ RunTime:0.001653s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `misp_user` WHERE ( `user_name` = 'admin' ) LIMIT 1   [ RunTime:0.000538s ]
+SQL: SELECT * FROM `misp_user` WHERE ( `user_name` = 'admin' ) LIMIT 1   [ RunTime:0.000287s ]
+SQL: SHOW COLUMNS FROM `misp_privilege` [ RunTime:0.001159s ]
+SQL: SELECT `access_obj_value` FROM `misp_privilege` WHERE ( `master_value` = '1' ) AND ( `master_type` = 'ROLE' ) AND ( `access_obj_type` = 'LOGIN' )  [ RunTime:0.000571s ]
+SQL: SELECT `access_obj_value` FROM `misp_privilege` WHERE ( `master_value` = '1' ) AND ( `master_type` = 'USER' ) AND ( `access_obj_type` = 'LOGIN' )  [ RunTime:0.000130s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\xampps\htdocs\LedPro\MISP\Lib\Service\MispCommonDataService.class.php 第 42 行.
+NOTIC: [8] A session had already been started - ignoring session_start() D:\xampps\htdocs\LedPro\MISP\Lib\Service\MispCommonUserService.class.php 第 142 行.
+NOTIC: [8] Undefined property: MispBaseRspJson::$PrivateErrorMsg D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 278 行.
+
+[ 2015-07-13T20:03:01+08:00 ] INFO: the url is /LedPro/index.php/Index/GetMenuTree
+[ 2015-07-13T20:03:01+08:00 ] INFO: request is 
+[ 2015-07-13T20:03:01+08:00 ] INFO: Session validator...
+[ 2015-07-13T20:03:01+08:00 ] INFO: get menu tree
+[ 2015-07-13T20:03:01+08:00 ] INFO: Get role privilege...
+[ 2015-07-13T20:03:01+08:00 ] INFO: role pri is 2000
+[ 2015-07-13T20:03:01+08:00 ] INFO: role pri is 2010
+[ 2015-07-13T20:03:01+08:00 ] INFO: Role privilege is ["2000","2010"]
+[ 2015-07-13T20:03:01+08:00 ] INFO: Get user privilege...
+[ 2015-07-13T20:03:01+08:00 ] INFO: User privilege is null
+[ 2015-07-13T20:03:01+08:00 ] INFO: All user privilege is ["2000","2010"]
+[ 2015-07-13T20:03:01+08:00 ] INFO: menu tree is [{"menu_id":"2000","menu_name":"BusinessManage","menu_value":"\u4e1a\u52a1\u7ba1\u7406","menu_type":null,"menu_icon":null,"menu_external":null,"menu_url":"#","menu_parent_id":"0"},{"menu_id":"2010","menu_name":"ProductManage","menu_value":"\u4ea7\u54c1\u7ba1\u7406","menu_type":null,"menu_icon":"icon-project","menu_external":null,"menu_url":"Product\/Index.html","menu_parent_id":"2000"}]
+[ 2015-07-13T20:03:01+08:00 ] INFO: the url is /LedPro/index.php/Index/GetMenuTree
+[ 2015-07-13T20:03:01+08:00 ] INFO: response is [{"menu_id":"2000","menu_name":"BusinessManage","menu_value":"\u4e1a\u52a1\u7ba1\u7406","menu_type":null,"menu_icon":null,"menu_external":null,"menu_url":"#","menu_parent_id":"0"},{"menu_id":"2010","menu_name":"ProductManage","menu_value":"\u4ea7\u54c1\u7ba1\u7406","menu_type":null,"menu_icon":"icon-project","menu_external":null,"menu_url":"Product\/Index.html","menu_parent_id":"2000"}]
+[ 2015-07-13T20:03:01+08:00 ] 0.0.0.0 /LedPro/index.php/Index/GetMenuTree
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.002268s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002352s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.002010s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002063s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+SQL: SHOW COLUMNS FROM `misp_privilege` [ RunTime:0.001542s ]
+SQL: SELECT `access_obj_value` FROM `misp_privilege` WHERE ( `master_value` = '1' ) AND ( `master_type` = 'ROLE' ) AND ( `access_obj_type` = 'MENU' )  [ RunTime:0.000341s ]
+SQL: SELECT `access_obj_value` FROM `misp_privilege` WHERE ( `master_value` = '1' ) AND ( `master_type` = 'USER' ) AND ( `access_obj_type` = 'MENU' )  [ RunTime:0.000255s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\xampps\htdocs\LedPro\MISP\Lib\Service\MispCommonDataService.class.php 第 42 行.
+SQL: SHOW COLUMNS FROM `misp_menu` [ RunTime:0.001455s ]
+SQL: SELECT * FROM `misp_menu` WHERE ( `menu_id` IN ('2000','2010') )  [ RunTime:0.000323s ]
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+
+[ 2015-07-13T20:03:02+08:00 ] INFO: the url is /LedPro/index.php/Enum/LoadSearchList
+[ 2015-07-13T20:03:02+08:00 ] INFO: request is filter=%5B%7B%22typeStr%22%3A%22equal%22%2C%22firstValue%22%3A%22project_status%22%2C%22attrName%22%3A%22field_name%22%7D%5D
+[ 2015-07-13T20:03:02+08:00 ] INFO: Session validator...
+[ 2015-07-13T20:03:02+08:00 ] INFO: Filter condition is [{"typeStr":"equal","firstValue":"project_status","attrName":"field_name"}]
+[ 2015-07-13T20:03:02+08:00 ] INFO: typeStr is equal
+[ 2015-07-13T20:03:02+08:00 ] INFO: first value is project_status
+[ 2015-07-13T20:03:02+08:00 ] INFO: condition is {"field_name":"project_status"}
+[ 2015-07-13T20:03:02+08:00 ] INFO: misp_enum list is null
+[ 2015-07-13T20:03:02+08:00 ] INFO: the url is /LedPro/index.php/Enum/LoadSearchList
+[ 2015-07-13T20:03:02+08:00 ] INFO: response is {"errorCode":0,"errorMsg":"\u64cd\u4f5c\u6210\u529f","obj":null}
+[ 2015-07-13T20:03:02+08:00 ] 0.0.0.0 /LedPro/index.php/Enum/LoadSearchList
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.002232s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002315s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001991s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002060s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+SQL: SHOW COLUMNS FROM `misp_enum` [ RunTime:0.002071s ]
+NOTIC: [8] Undefined index:  field_name D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 129 行.
+SQL: SELECT * FROM `misp_enum` WHERE ( `field_name` = 'project_status' )  [ RunTime:0.000671s ]
+NOTIC: [2] array_merge() [<a href='function.array-merge'>function.array-merge</a>]: Argument #2 is not an array D:\xampps\htdocs\LedPro\MISP\Lib\Action\EnumAction.class.php 第 22 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Undefined property: MispBaseRspJson::$PrivateErrorMsg D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 278 行.
+
+[ 2015-07-13T20:03:02+08:00 ] INFO: the url is /LedPro/index.php/Product/Load
+[ 2015-07-13T20:03:02+08:00 ] INFO: request is page=1&rows=10
+[ 2015-07-13T20:03:02+08:00 ] INFO: Session validator...
+[ 2015-07-13T20:03:02+08:00 ] INFO: LoadPageTable,ReqType is 
+[ 2015-07-13T20:03:02+08:00 ] WARN: Filter condition is empty
+[ 2015-07-13T20:03:02+08:00 ] INFO: condition is []
+[ 2015-07-13T20:03:02+08:00 ] INFO: the current page is 0,the page size is 10
+[ 2015-07-13T20:03:02+08:00 ] INFO: query the table  count is 2
+[ 2015-07-13T20:03:02+08:00 ] INFO: the url is /LedPro/index.php/Product/Load
+[ 2015-07-13T20:03:02+08:00 ] INFO: response is {"total":"2","rows":[{"product_id":"3","product_name":"Living Room Leds","product_desc":"Good Leds","product_score":"5.00","product_catg":null,"product_type":null,"use_location":"Living Room","mounting_base":"normal","sub_catg":null,"product_size":"30*30","lumen_output":"2000.00","input_watt":"18.00","warranty":"3.00","manufacture":"SUNSANG","product_img":"55a073a8d2ffa.jpg","product_img_sm1":"55a073ac5d680.jpg","product_img_sm2":"55a073b0e3d89.jpg","product_img_sm3":"55a073b48725b.jpg","shop_id":null,"create_time":null,"create_user_id":null,"related_product_ids":null},{"product_id":"2","product_name":"Dining-hall Leds","product_desc":"No description","product_score":"0.00","product_catg":null,"product_type":null,"use_location":"Dining-hall","mounting_base":"normal","sub_catg":null,"product_size":"20*20","lumen_output":"2000.00","input_watt":"18.00","warranty":"2.00","manufacture":"Apple","product_img":"55a071e3186a2.jpg","product_img_sm1":"55a071e848242.jpg","product_img_sm2":"55a071ee5503d.jpg","product_img_sm3":"55a071f1cf8b8.jpg","shop_id":null,"create_time":null,"create_user_id":null,"related_product_ids":null}]}
+[ 2015-07-13T20:03:02+08:00 ] 0.0.0.0 /LedPro/index.php/Product/Load
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.003325s ]
+INFO: [ route_check ] --END-- [ RunTime:0.003439s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.002561s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002642s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+SQL: SHOW COLUMNS FROM `lp_product` [ RunTime:0.001581s ]
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Undefined index:  filter D:\xampps\htdocs\LedPro\MISP\Lib\Action\EasyUITableAction.class.php 第 28 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `lp_product` LIMIT 1   [ RunTime:0.000408s ]
+SQL: SELECT * FROM `lp_product` ORDER BY `product_id` desc LIMIT 0,10   [ RunTime:0.000376s ]
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+
+[ 2015-07-13T20:03:02+08:00 ] INFO: the url is /LedPro/index.php/Enum/LoadSearchList
+[ 2015-07-13T20:03:02+08:00 ] INFO: request is filter=%5B%7B%22typeStr%22%3A%22equal%22%2C%22firstValue%22%3A%22project_status%22%2C%22attrName%22%3A%22field_name%22%7D%5D
+[ 2015-07-13T20:03:02+08:00 ] INFO: Session validator...
+[ 2015-07-13T20:03:02+08:00 ] INFO: Filter condition is [{"typeStr":"equal","firstValue":"project_status","attrName":"field_name"}]
+[ 2015-07-13T20:03:02+08:00 ] INFO: typeStr is equal
+[ 2015-07-13T20:03:02+08:00 ] INFO: first value is project_status
+[ 2015-07-13T20:03:02+08:00 ] INFO: condition is {"field_name":"project_status"}
+[ 2015-07-13T20:03:02+08:00 ] INFO: misp_enum list is null
+[ 2015-07-13T20:03:02+08:00 ] INFO: the url is /LedPro/index.php/Enum/LoadSearchList
+[ 2015-07-13T20:03:02+08:00 ] INFO: response is {"errorCode":0,"errorMsg":"\u64cd\u4f5c\u6210\u529f","obj":null}
+[ 2015-07-13T20:03:02+08:00 ] 0.0.0.0 /LedPro/index.php/Enum/LoadSearchList
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.002951s ]
+INFO: [ route_check ] --END-- [ RunTime:0.003042s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.002251s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002313s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+SQL: SHOW COLUMNS FROM `misp_enum` [ RunTime:0.001469s ]
+NOTIC: [8] Undefined index:  field_name D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 129 行.
+SQL: SELECT * FROM `misp_enum` WHERE ( `field_name` = 'project_status' )  [ RunTime:0.000290s ]
+NOTIC: [2] array_merge() [<a href='function.array-merge'>function.array-merge</a>]: Argument #2 is not an array D:\xampps\htdocs\LedPro\MISP\Lib\Action\EnumAction.class.php 第 22 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Undefined property: MispBaseRspJson::$PrivateErrorMsg D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 278 行.
+
+[ 2015-07-13T20:03:04+08:00 ] INFO: the url is /LedPro/index.php/Product/Show
+[ 2015-07-13T20:03:04+08:00 ] INFO: request is {"client_type":"WEB","obj":"2"}
+[ 2015-07-13T20:03:04+08:00 ] INFO: Session validator...WEB
+[ 2015-07-13T20:03:04+08:00 ] INFO: show objID is 2
+[ 2015-07-13T20:03:04+08:00 ] INFO: the url is /LedPro/index.php/Product/Show
+[ 2015-07-13T20:03:04+08:00 ] INFO: response is {"errorCode":0,"errorMsg":"\u64cd\u4f5c\u6210\u529f","obj":{"product_id":"2","product_name":"Dining-hall Leds","product_desc":"No description","product_score":"0.00","product_catg":null,"product_type":null,"use_location":"Dining-hall","mounting_base":"normal","sub_catg":null,"product_size":"20*20","lumen_output":"2000.00","input_watt":"18.00","warranty":"2.00","manufacture":"Apple","product_img":"55a071e3186a2.jpg","product_img_sm1":"55a071e848242.jpg","product_img_sm2":"55a071ee5503d.jpg","product_img_sm3":"55a071f1cf8b8.jpg","shop_id":null,"create_time":null,"create_user_id":null,"related_product_ids":null}}
+[ 2015-07-13T20:03:04+08:00 ] 0.0.0.0 /LedPro/index.php/Product/Show
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.002257s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002338s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.002046s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002103s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+SQL: SHOW COLUMNS FROM `lp_product` [ RunTime:0.001624s ]
+SQL: SELECT * FROM `lp_product` WHERE ( `product_id` = 2 ) LIMIT 1   [ RunTime:0.000332s ]
+NOTIC: [8] Undefined property: MispBaseRspJson::$PrivateErrorMsg D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 278 行.
+
+[ 2015-07-13T20:03:08+08:00 ] INFO: the url is /LedPro/index.php/Index/ImgUpload?fileName=
+[ 2015-07-13T20:03:08+08:00 ] INFO: request is 
+[ 2015-07-13T20:03:08+08:00 ] INFO: Session validator...
+[ 2015-07-13T20:03:08+08:00 ] INFO: Upload image...
+[ 2015-07-13T20:03:08+08:00 ] INFO: Upload image success.
+[ 2015-07-13T20:03:08+08:00 ] 0.0.0.0 /LedPro/index.php/Index/ImgUpload?fileName=
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.002360s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002466s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.002009s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002102s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+
+[ 2015-07-13T20:03:12+08:00 ] INFO: the url is /LedPro/index.php/Index/ImgUpload?fileName=
+[ 2015-07-13T20:03:12+08:00 ] INFO: request is 
+[ 2015-07-13T20:03:12+08:00 ] INFO: Session validator...
+[ 2015-07-13T20:03:12+08:00 ] INFO: Upload image...
+[ 2015-07-13T20:03:12+08:00 ] INFO: Upload image success.
+[ 2015-07-13T20:03:12+08:00 ] 0.0.0.0 /LedPro/index.php/Index/ImgUpload?fileName=
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.002308s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002375s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.002287s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002383s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+
+[ 2015-07-13T20:03:14+08:00 ] INFO: the url is /LedPro/index.php/Product/Modify
+[ 2015-07-13T20:03:14+08:00 ] INFO: request is {"client_type":"WEB","obj":{"product_name":"Dining-hall Leds","product_id":"2","manufacture":"Apple","use_location":"Dining-hall","mounting_base":"normal","product_size":"20*20","lumen_output":"2000.00","input_watt":"18.00","warranty":"2.00","product_img":"55a3a8fcb2ab2.jpg","product_img_sm1":"55a3a900c96a9.png","product_img_sm2":"55a071ee5503d.jpg","product_img_sm3":"55a071f1cf8b8.jpg","product_desc":"No description"}}
+[ 2015-07-13T20:03:14+08:00 ] INFO: Session validator...WEB
+[ 2015-07-13T20:03:14+08:00 ] INFO: modify
+[ 2015-07-13T20:03:14+08:00 ] WARN: the validator is empty 
+[ 2015-07-13T20:03:14+08:00 ] INFO: Object is to modify, obj is {"product_name":"Dining-hall Leds","product_id":"2","manufacture":"Apple","use_location":"Dining-hall","mounting_base":"normal","product_size":"20*20","lumen_output":"2000.00","input_watt":"18.00","warranty":"2.00","product_img":"55a3a8fcb2ab2.jpg","product_img_sm1":"55a3a900c96a9.png","product_img_sm2":"55a071ee5503d.jpg","product_img_sm3":"55a071f1cf8b8.jpg","product_desc":"No description"}
+[ 2015-07-13T20:03:14+08:00 ] INFO: the url is /LedPro/index.php/Product/Modify
+[ 2015-07-13T20:03:14+08:00 ] INFO: response is {"errorCode":0,"errorMsg":"\u64cd\u4f5c\u6210\u529f","obj":{"product_name":"Dining-hall Leds","product_id":"2","manufacture":"Apple","use_location":"Dining-hall","mounting_base":"normal","product_size":"20*20","lumen_output":"2000.00","input_watt":"18.00","warranty":"2.00","product_img":"55a3a8fcb2ab2.jpg","product_img_sm1":"55a3a900c96a9.png","product_img_sm2":"55a071ee5503d.jpg","product_img_sm3":"55a071f1cf8b8.jpg","product_desc":"No description"}}
+[ 2015-07-13T20:03:14+08:00 ] 0.0.0.0 /LedPro/index.php/Product/Modify
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.002548s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002611s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001842s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001890s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+SQL: SHOW COLUMNS FROM `lp_product` [ RunTime:0.002278s ]
+SQL: SELECT * FROM `lp_product` WHERE ( `product_id` = 2 ) LIMIT 1   [ RunTime:0.000801s ]
+NOTIC: [8] Undefined index:  product_img_1 D:\xampps\htdocs\LedPro\MISP\Lib\Action\ProductAction.class.php 第 40 行.
+NOTIC: [8] Undefined property: stdClass::$product_img_1 D:\xampps\htdocs\LedPro\MISP\Lib\Action\ProductAction.class.php 第 40 行.
+NOTIC: [8] Use of undefined constant SUCCESS - assumed 'SUCCESS' D:\xampps\htdocs\LedPro\MISP\Lib\Action\EasyUITableAction.class.php 第 11 行.
+NOTIC: [8] Use of undefined constant SUCCESS - assumed 'SUCCESS' D:\xampps\htdocs\LedPro\MISP\Lib\Action\EasyUITableAction.class.php 第 309 行.
+SQL: UPDATE `lp_product` SET `product_name`='Dining-hall Leds',`manufacture`='Apple',`use_location`='Dining-hall',`mounting_base`='normal',`product_size`='20*20',`lumen_output`=2000,`input_watt`=18,`warranty`=2,`product_img`='55a3a8fcb2ab2.jpg',`product_img_sm1`='55a3a900c96a9.png',`product_img_sm2`='55a071ee5503d.jpg',`product_img_sm3`='55a071f1cf8b8.jpg',`product_desc`='No description' WHERE ( `product_id` = 2 ) [ RunTime:0.002194s ]
+NOTIC: [8] Undefined property: MispBaseRspJson::$PrivateErrorMsg D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 278 行.
+
+[ 2015-07-13T20:03:14+08:00 ] INFO: the url is /LedPro/index.php/Product/Load
+[ 2015-07-13T20:03:14+08:00 ] INFO: request is page=1&rows=10
+[ 2015-07-13T20:03:14+08:00 ] INFO: Session validator...
+[ 2015-07-13T20:03:14+08:00 ] INFO: LoadPageTable,ReqType is 
+[ 2015-07-13T20:03:14+08:00 ] WARN: Filter condition is empty
+[ 2015-07-13T20:03:14+08:00 ] INFO: condition is []
+[ 2015-07-13T20:03:14+08:00 ] INFO: the current page is 0,the page size is 10
+[ 2015-07-13T20:03:14+08:00 ] INFO: query the table  count is 2
+[ 2015-07-13T20:03:14+08:00 ] INFO: the url is /LedPro/index.php/Product/Load
+[ 2015-07-13T20:03:14+08:00 ] INFO: response is {"total":"2","rows":[{"product_id":"3","product_name":"Living Room Leds","product_desc":"Good Leds","product_score":"5.00","product_catg":null,"product_type":null,"use_location":"Living Room","mounting_base":"normal","sub_catg":null,"product_size":"30*30","lumen_output":"2000.00","input_watt":"18.00","warranty":"3.00","manufacture":"SUNSANG","product_img":"55a073a8d2ffa.jpg","product_img_sm1":"55a073ac5d680.jpg","product_img_sm2":"55a073b0e3d89.jpg","product_img_sm3":"55a073b48725b.jpg","shop_id":null,"create_time":null,"create_user_id":null,"related_product_ids":null},{"product_id":"2","product_name":"Dining-hall Leds","product_desc":"No description","product_score":"0.00","product_catg":null,"product_type":null,"use_location":"Dining-hall","mounting_base":"normal","sub_catg":null,"product_size":"20*20","lumen_output":"2000.00","input_watt":"18.00","warranty":"2.00","manufacture":"Apple","product_img":"55a3a8fcb2ab2.jpg","product_img_sm1":"55a3a900c96a9.png","product_img_sm2":"55a071ee5503d.jpg","product_img_sm3":"55a071f1cf8b8.jpg","shop_id":null,"create_time":null,"create_user_id":null,"related_product_ids":null}]}
+[ 2015-07-13T20:03:14+08:00 ] 0.0.0.0 /LedPro/index.php/Product/Load
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.002411s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002560s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.002350s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002402s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+SQL: SHOW COLUMNS FROM `lp_product` [ RunTime:0.001694s ]
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Undefined index:  filter D:\xampps\htdocs\LedPro\MISP\Lib\Action\EasyUITableAction.class.php 第 28 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `lp_product` LIMIT 1   [ RunTime:0.000264s ]
+SQL: SELECT * FROM `lp_product` ORDER BY `product_id` desc LIMIT 0,10   [ RunTime:0.000968s ]
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+
+[ 2015-07-13T20:03:24+08:00 ] INFO: the url is /LedPro/index.php/Product/Load
+[ 2015-07-13T20:03:24+08:00 ] INFO: request is {"app_id":"1","client_type":"ANDROID","client_version":null,"conditionList":null,"obj":null,"page":{"count":0,"currentPage":1,"pageSize":10},"token":null}
+[ 2015-07-13T20:03:24+08:00 ] INFO: LoadPageTable,ReqType is ANDROID
+[ 2015-07-13T20:03:24+08:00 ] INFO: condition list is []
+[ 2015-07-13T20:03:24+08:00 ] INFO: the current page is 0,the page size is 10
+[ 2015-07-13T20:03:24+08:00 ] INFO: query the table  count is 2
+[ 2015-07-13T20:03:24+08:00 ] INFO: the url is /LedPro/index.php/Product/Load
+[ 2015-07-13T20:03:24+08:00 ] INFO: response is {"errorCode":0,"errorMsg":null,"obj":{"total":"2","rows":[{"product_id":"3","product_name":"Living Room Leds","product_desc":"Good Leds","product_score":"5.00","product_catg":null,"product_type":null,"use_location":"Living Room","mounting_base":"normal","sub_catg":null,"product_size":"30*30","lumen_output":"2000.00","input_watt":"18.00","warranty":"3.00","manufacture":"SUNSANG","product_img":"55a073a8d2ffa.jpg","product_img_sm1":"55a073ac5d680.jpg","product_img_sm2":"55a073b0e3d89.jpg","product_img_sm3":"55a073b48725b.jpg","shop_id":null,"create_time":null,"create_user_id":null,"related_product_ids":null},{"product_id":"2","product_name":"Dining-hall Leds","product_desc":"No description","product_score":"0.00","product_catg":null,"product_type":null,"use_location":"Dining-hall","mounting_base":"normal","sub_catg":null,"product_size":"20*20","lumen_output":"2000.00","input_watt":"18.00","warranty":"2.00","manufacture":"Apple","product_img":"55a3a8fcb2ab2.jpg","product_img_sm1":"55a3a900c96a9.png","product_img_sm2":"55a071ee5503d.jpg","product_img_sm3":"55a071f1cf8b8.jpg","shop_id":null,"create_time":null,"create_user_id":null,"related_product_ids":null}]}}
+[ 2015-07-13T20:03:24+08:00 ] 192.168.1.107 /LedPro/index.php/Product/Load
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.002338s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002435s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.002048s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002105s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+SQL: SHOW COLUMNS FROM `lp_product` [ RunTime:0.001778s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 105 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `lp_product` LIMIT 1   [ RunTime:0.000795s ]
+SQL: SELECT * FROM `lp_product` ORDER BY `product_id` desc LIMIT 0,10   [ RunTime:0.001545s ]
+NOTIC: [2048] Creating default object from empty value D:\xampps\htdocs\LedPro\MISP\Lib\Action\EasyUITableAction.class.php 第 100 行.
+
+[ 2015-07-13T20:08:00+08:00 ] INFO: the url is /LedPro/index.php/Index/GetMenuTree
+[ 2015-07-13T20:08:00+08:00 ] INFO: request is 
+[ 2015-07-13T20:08:00+08:00 ] INFO: Session validator...
+[ 2015-07-13T20:08:00+08:00 ] INFO: get menu tree
+[ 2015-07-13T20:08:00+08:00 ] INFO: Get role privilege...
+[ 2015-07-13T20:08:00+08:00 ] INFO: role pri is 2000
+[ 2015-07-13T20:08:00+08:00 ] INFO: role pri is 2010
+[ 2015-07-13T20:08:00+08:00 ] INFO: Role privilege is ["2000","2010"]
+[ 2015-07-13T20:08:00+08:00 ] INFO: Get user privilege...
+[ 2015-07-13T20:08:00+08:00 ] INFO: User privilege is null
+[ 2015-07-13T20:08:00+08:00 ] INFO: All user privilege is ["2000","2010"]
+[ 2015-07-13T20:08:00+08:00 ] INFO: menu tree is [{"menu_id":"2000","menu_name":"BusinessManage","menu_value":"\u4e1a\u52a1\u7ba1\u7406","menu_type":null,"menu_icon":null,"menu_external":null,"menu_url":"#","menu_parent_id":"0"},{"menu_id":"2010","menu_name":"ProductManage","menu_value":"\u4ea7\u54c1\u7ba1\u7406","menu_type":null,"menu_icon":"icon-project","menu_external":null,"menu_url":"Product\/Index.html","menu_parent_id":"2000"}]
+[ 2015-07-13T20:08:00+08:00 ] INFO: the url is /LedPro/index.php/Index/GetMenuTree
+[ 2015-07-13T20:08:00+08:00 ] INFO: response is [{"menu_id":"2000","menu_name":"BusinessManage","menu_value":"\u4e1a\u52a1\u7ba1\u7406","menu_type":null,"menu_icon":null,"menu_external":null,"menu_url":"#","menu_parent_id":"0"},{"menu_id":"2010","menu_name":"ProductManage","menu_value":"\u4ea7\u54c1\u7ba1\u7406","menu_type":null,"menu_icon":"icon-project","menu_external":null,"menu_url":"Product\/Index.html","menu_parent_id":"2000"}]
+[ 2015-07-13T20:08:00+08:00 ] 0.0.0.0 /LedPro/index.php/Index/GetMenuTree
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.002368s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002457s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.002029s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002084s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+SQL: SHOW COLUMNS FROM `misp_privilege` [ RunTime:0.002261s ]
+SQL: SELECT `access_obj_value` FROM `misp_privilege` WHERE ( `master_value` = '1' ) AND ( `master_type` = 'ROLE' ) AND ( `access_obj_type` = 'MENU' )  [ RunTime:0.001082s ]
+SQL: SELECT `access_obj_value` FROM `misp_privilege` WHERE ( `master_value` = '1' ) AND ( `master_type` = 'USER' ) AND ( `access_obj_type` = 'MENU' )  [ RunTime:0.000509s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\xampps\htdocs\LedPro\MISP\Lib\Service\MispCommonDataService.class.php 第 42 行.
+SQL: SHOW COLUMNS FROM `misp_menu` [ RunTime:0.001453s ]
+SQL: SELECT * FROM `misp_menu` WHERE ( `menu_id` IN ('2000','2010') )  [ RunTime:0.000972s ]
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+
+[ 2015-07-13T20:08:02+08:00 ] INFO: the url is /LedPro/index.php/Enum/LoadSearchList
+[ 2015-07-13T20:08:02+08:00 ] INFO: request is filter=%5B%7B%22typeStr%22%3A%22equal%22%2C%22firstValue%22%3A%22project_status%22%2C%22attrName%22%3A%22field_name%22%7D%5D
+[ 2015-07-13T20:08:02+08:00 ] INFO: Session validator...
+[ 2015-07-13T20:08:02+08:00 ] INFO: Filter condition is [{"typeStr":"equal","firstValue":"project_status","attrName":"field_name"}]
+[ 2015-07-13T20:08:02+08:00 ] INFO: typeStr is equal
+[ 2015-07-13T20:08:02+08:00 ] INFO: first value is project_status
+[ 2015-07-13T20:08:02+08:00 ] INFO: condition is {"field_name":"project_status"}
+[ 2015-07-13T20:08:02+08:00 ] INFO: misp_enum list is null
+[ 2015-07-13T20:08:02+08:00 ] INFO: the url is /LedPro/index.php/Enum/LoadSearchList
+[ 2015-07-13T20:08:02+08:00 ] INFO: response is {"errorCode":0,"errorMsg":"\u64cd\u4f5c\u6210\u529f","obj":null}
+[ 2015-07-13T20:08:02+08:00 ] 0.0.0.0 /LedPro/index.php/Enum/LoadSearchList
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.002475s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002589s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.003401s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003489s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+SQL: SHOW COLUMNS FROM `misp_enum` [ RunTime:0.002180s ]
+NOTIC: [8] Undefined index:  field_name D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 129 行.
+SQL: SELECT * FROM `misp_enum` WHERE ( `field_name` = 'project_status' )  [ RunTime:0.000907s ]
+NOTIC: [2] array_merge() [<a href='function.array-merge'>function.array-merge</a>]: Argument #2 is not an array D:\xampps\htdocs\LedPro\MISP\Lib\Action\EnumAction.class.php 第 22 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Undefined property: MispBaseRspJson::$PrivateErrorMsg D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 278 行.
+
+[ 2015-07-13T20:08:02+08:00 ] INFO: the url is /LedPro/index.php/Product/Load
+[ 2015-07-13T20:08:02+08:00 ] INFO: request is page=1&rows=10
+[ 2015-07-13T20:08:02+08:00 ] INFO: Session validator...
+[ 2015-07-13T20:08:02+08:00 ] INFO: LoadPageTable,ReqType is 
+[ 2015-07-13T20:08:02+08:00 ] WARN: Filter condition is empty
+[ 2015-07-13T20:08:02+08:00 ] INFO: condition is []
+[ 2015-07-13T20:08:02+08:00 ] INFO: the current page is 0,the page size is 10
+[ 2015-07-13T20:08:02+08:00 ] INFO: query the table  count is 2
+[ 2015-07-13T20:08:02+08:00 ] INFO: the url is /LedPro/index.php/Product/Load
+[ 2015-07-13T20:08:02+08:00 ] INFO: response is {"total":"2","rows":[{"product_id":"3","product_name":"Living Room Leds","product_desc":"Good Leds","product_score":"5.00","product_catg":null,"product_type":null,"use_location":"Living Room","mounting_base":"normal","sub_catg":null,"product_size":"30*30","lumen_output":"2000.00","input_watt":"18.00","warranty":"3.00","manufacture":"SUNSANG","product_img":"55a073a8d2ffa.jpg","product_img_sm1":"55a073ac5d680.jpg","product_img_sm2":"55a073b0e3d89.jpg","product_img_sm3":"55a073b48725b.jpg","shop_id":null,"create_time":null,"create_user_id":null,"related_product_ids":null},{"product_id":"2","product_name":"Dining-hall Leds","product_desc":"No description","product_score":"0.00","product_catg":null,"product_type":null,"use_location":"Dining-hall","mounting_base":"normal","sub_catg":null,"product_size":"20*20","lumen_output":"2000.00","input_watt":"18.00","warranty":"2.00","manufacture":"Apple","product_img":"55a3a8fcb2ab2.jpg","product_img_sm1":"55a3a900c96a9.png","product_img_sm2":"55a071ee5503d.jpg","product_img_sm3":"55a071f1cf8b8.jpg","shop_id":null,"create_time":null,"create_user_id":null,"related_product_ids":null}]}
+[ 2015-07-13T20:08:02+08:00 ] 0.0.0.0 /LedPro/index.php/Product/Load
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.002797s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002890s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.002568s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002639s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+SQL: SHOW COLUMNS FROM `lp_product` [ RunTime:0.001834s ]
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Undefined index:  filter D:\xampps\htdocs\LedPro\MISP\Lib\Action\EasyUITableAction.class.php 第 28 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `lp_product` LIMIT 1   [ RunTime:0.000174s ]
+SQL: SELECT * FROM `lp_product` ORDER BY `product_id` desc LIMIT 0,10   [ RunTime:0.000729s ]
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+
+[ 2015-07-13T20:08:02+08:00 ] INFO: the url is /LedPro/index.php/Enum/LoadSearchList
+[ 2015-07-13T20:08:02+08:00 ] INFO: request is filter=%5B%7B%22typeStr%22%3A%22equal%22%2C%22firstValue%22%3A%22project_status%22%2C%22attrName%22%3A%22field_name%22%7D%5D
+[ 2015-07-13T20:08:02+08:00 ] INFO: Session validator...
+[ 2015-07-13T20:08:02+08:00 ] INFO: Filter condition is [{"typeStr":"equal","firstValue":"project_status","attrName":"field_name"}]
+[ 2015-07-13T20:08:02+08:00 ] INFO: typeStr is equal
+[ 2015-07-13T20:08:02+08:00 ] INFO: first value is project_status
+[ 2015-07-13T20:08:02+08:00 ] INFO: condition is {"field_name":"project_status"}
+[ 2015-07-13T20:08:02+08:00 ] INFO: misp_enum list is null
+[ 2015-07-13T20:08:02+08:00 ] INFO: the url is /LedPro/index.php/Enum/LoadSearchList
+[ 2015-07-13T20:08:02+08:00 ] INFO: response is {"errorCode":0,"errorMsg":"\u64cd\u4f5c\u6210\u529f","obj":null}
+[ 2015-07-13T20:08:02+08:00 ] 0.0.0.0 /LedPro/index.php/Enum/LoadSearchList
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.002470s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002561s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.002476s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002611s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+SQL: SHOW COLUMNS FROM `misp_enum` [ RunTime:0.001481s ]
+NOTIC: [8] Undefined index:  field_name D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 129 行.
+SQL: SELECT * FROM `misp_enum` WHERE ( `field_name` = 'project_status' )  [ RunTime:0.000376s ]
+NOTIC: [2] array_merge() [<a href='function.array-merge'>function.array-merge</a>]: Argument #2 is not an array D:\xampps\htdocs\LedPro\MISP\Lib\Action\EnumAction.class.php 第 22 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Undefined property: MispBaseRspJson::$PrivateErrorMsg D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 278 行.
+
+[ 2015-07-13T20:22:00+08:00 ] INFO: the url is /LedPro/index.php/Product/Load
+[ 2015-07-13T20:22:00+08:00 ] INFO: request is {"app_id":"1","client_type":"ANDROID","client_version":null,"conditionList":null,"obj":null,"page":{"count":0,"currentPage":1,"pageSize":10},"token":null}
+[ 2015-07-13T20:22:00+08:00 ] INFO: LoadPageTable,ReqType is ANDROID
+[ 2015-07-13T20:22:00+08:00 ] INFO: condition list is []
+[ 2015-07-13T20:22:00+08:00 ] INFO: the current page is 0,the page size is 10
+[ 2015-07-13T20:22:00+08:00 ] INFO: query the table  count is 2
+[ 2015-07-13T20:22:00+08:00 ] INFO: the url is /LedPro/index.php/Product/Load
+[ 2015-07-13T20:22:00+08:00 ] INFO: response is {"errorCode":0,"errorMsg":null,"obj":{"total":"2","rows":[{"product_id":"3","product_name":"Living Room Leds","product_desc":"Good Leds","product_score":"5.00","product_catg":null,"product_type":null,"use_location":"Living Room","mounting_base":"normal","sub_catg":null,"product_size":"30*30","lumen_output":"2000.00","input_watt":"18.00","warranty":"3.00","manufacture":"SUNSANG","product_img":"55a073a8d2ffa.jpg","product_img_sm1":"55a073ac5d680.jpg","product_img_sm2":"55a073b0e3d89.jpg","product_img_sm3":"55a073b48725b.jpg","shop_id":null,"create_time":null,"create_user_id":null,"related_product_ids":null},{"product_id":"2","product_name":"Dining-hall Leds","product_desc":"No description","product_score":"0.00","product_catg":null,"product_type":null,"use_location":"Dining-hall","mounting_base":"normal","sub_catg":null,"product_size":"20*20","lumen_output":"2000.00","input_watt":"18.00","warranty":"2.00","manufacture":"Apple","product_img":"55a3a8fcb2ab2.jpg","product_img_sm1":"55a3a900c96a9.png","product_img_sm2":"55a071ee5503d.jpg","product_img_sm3":"55a071f1cf8b8.jpg","shop_id":null,"create_time":null,"create_user_id":null,"related_product_ids":null}]}}
+[ 2015-07-13T20:22:00+08:00 ] 192.168.1.107 /LedPro/index.php/Product/Load
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.002242s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002323s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001998s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002056s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+SQL: SHOW COLUMNS FROM `lp_product` [ RunTime:0.002377s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 105 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `lp_product` LIMIT 1   [ RunTime:0.000791s ]
+SQL: SELECT * FROM `lp_product` ORDER BY `product_id` desc LIMIT 0,10   [ RunTime:0.000588s ]
+NOTIC: [2048] Creating default object from empty value D:\xampps\htdocs\LedPro\MISP\Lib\Action\EasyUITableAction.class.php 第 100 行.
+
+[ 2015-07-13T20:38:44+08:00 ] INFO: the url is /LedPro/index.php/Index/GetMenuTree
+[ 2015-07-13T20:38:44+08:00 ] INFO: request is 
+[ 2015-07-13T20:38:44+08:00 ] INFO: Session validator...
+[ 2015-07-13T20:38:44+08:00 ] INFO: Session is out ...,Jump to login page
+[ 2015-07-13T20:38:44+08:00 ] INFO: get menu tree
+[ 2015-07-13T20:38:44+08:00 ] INFO: Get role privilege...
+[ 2015-07-13T20:38:44+08:00 ] INFO: Role privilege is null
+[ 2015-07-13T20:38:44+08:00 ] INFO: Get user privilege...
+[ 2015-07-13T20:38:44+08:00 ] INFO: User privilege is null
+[ 2015-07-13T20:38:44+08:00 ] INFO: All user privilege is []
+[ 2015-07-13T20:38:44+08:00 ] INFO: menu tree is false
+[ 2015-07-13T20:38:44+08:00 ] INFO: the url is /LedPro/index.php/Index/GetMenuTree
+[ 2015-07-13T20:38:44+08:00 ] INFO: response is {"errorCode":0,"errorMsg":"\u64cd\u4f5c\u6210\u529f","obj":null}
+[ 2015-07-13T20:38:44+08:00 ] 0.0.0.0 /LedPro/index.php/Index/GetMenuTree
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.002114s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002189s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001874s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001922s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Undefined index:  user D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 56 行.
+NOTIC: [8] Undefined index:  user D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 246 行.
+SQL: SHOW COLUMNS FROM `misp_privilege` [ RunTime:0.001791s ]
+SQL: SELECT `access_obj_value` FROM `misp_privilege` WHERE ( `master_value` = null ) AND ( `master_type` = 'ROLE' ) AND ( `access_obj_type` = 'MENU' )  [ RunTime:0.000686s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\xampps\htdocs\LedPro\MISP\Lib\Service\MispCommonDataService.class.php 第 29 行.
+SQL: SELECT `access_obj_value` FROM `misp_privilege` WHERE ( `master_value` = null ) AND ( `master_type` = 'USER' ) AND ( `access_obj_type` = 'MENU' )  [ RunTime:0.000527s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\xampps\htdocs\LedPro\MISP\Lib\Service\MispCommonDataService.class.php 第 42 行.
+SQL: SHOW COLUMNS FROM `misp_menu` [ RunTime:0.001605s ]
+SQL: SELECT * FROM `misp_menu` WHERE ( `menu_id` IN () )  [ RunTime:0.000801s ]
+ERR: 1064:You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') )' at line 1
+ [ SQL语句 ] : SELECT * FROM `misp_menu` WHERE ( `menu_id` IN () ) 
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Undefined property: MispBaseRspJson::$PrivateErrorMsg D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 278 行.
+
+[ 2015-07-13T20:38:44+08:00 ] INFO: the url is /LedPro/index.php/Index/redirectPage.html
+[ 2015-07-13T20:38:44+08:00 ] INFO: request is 
+[ 2015-07-13T20:38:44+08:00 ] INFO: Session validator...
+[ 2015-07-13T20:38:44+08:00 ] INFO: Session validator login Page
+[ 2015-07-13T20:38:44+08:00 ] 0.0.0.0 /LedPro/index.php/Index/redirectPage.html
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.002131s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002198s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001996s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002048s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Constant THEME_NAME already defined D:\xampps\htdocs\LedPro\ThinkPHP\Lib\Core\View.class.php 第 223 行.
+NOTIC: [8] Constant THEME_PATH already defined D:\xampps\htdocs\LedPro\ThinkPHP\Lib\Core\View.class.php 第 174 行.
+NOTIC: [8] Constant APP_TMPL_PATH already defined D:\xampps\htdocs\LedPro\ThinkPHP\Lib\Core\View.class.php 第 175 行.
+INFO: [ view_parse ] --START--
+INFO: ParseTemplate Behavior ::run [ RunTime:0.013272s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.013331s ]
+INFO: [ view_filter ] --START--
+INFO: ContentReplace Behavior ::run [ RunTime:0.001688s ]
+INFO: TokenBuild Behavior ::run [ RunTime:0.001695s ]
+INFO: WriteHtmlCache Behavior ::run [ RunTime:0.002563s ]
+INFO: ShowRuntime Behavior ::run [ RunTime:0.002030s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.008110s ]
+INFO: [ view_end ] --START--
+INFO: ShowPageTrace Behavior ::run [ RunTime:0.002043s ]
+INFO: [ view_end ] --END-- [ RunTime:0.002088s ]
+
+[ 2015-07-13T20:38:45+08:00 ] INFO: the url is /LedPro/index.php/Index/Logout
+[ 2015-07-13T20:38:45+08:00 ] INFO: request is {"client_type":"WEB"}
+[ 2015-07-13T20:38:45+08:00 ] INFO: Session validator...WEB
+[ 2015-07-13T20:38:45+08:00 ] INFO: Session validator login Page
+[ 2015-07-13T20:38:45+08:00 ] INFO: User Logout, Client type is WEB
+[ 2015-07-13T20:38:45+08:00 ] INFO: WEB logout...
+[ 2015-07-13T20:38:45+08:00 ] INFO: User logout success.
+[ 2015-07-13T20:38:45+08:00 ] INFO: the url is /LedPro/index.php/Index/Logout
+[ 2015-07-13T20:38:45+08:00 ] INFO: response is {"errorCode":0,"errorMsg":"\u64cd\u4f5c\u6210\u529f","obj":null}
+[ 2015-07-13T20:38:45+08:00 ] 0.0.0.0 /LedPro/index.php/Index/Logout
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.002090s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002160s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001875s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001923s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+NOTIC: [8] Undefined property: MispBaseRspJson::$PrivateErrorMsg D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 278 行.
+
+[ 2015-07-13T20:38:46+08:00 ] INFO: the url is /LedPro/index.php/Index/Login
+[ 2015-07-13T20:38:46+08:00 ] INFO: request is {"client_type":"WEB","obj":{"user_name":"admin","password":"123456"}}
+[ 2015-07-13T20:38:46+08:00 ] INFO: Session validator...WEB
+[ 2015-07-13T20:38:46+08:00 ] INFO: Session validator login Page
+[ 2015-07-13T20:38:46+08:00 ] INFO: User login, Client type is WEB
+[ 2015-07-13T20:38:46+08:00 ] INFO: Login validate ...
+[ 2015-07-13T20:38:46+08:00 ] INFO: condition is {"user_name":"admin"}
+[ 2015-07-13T20:38:46+08:00 ] INFO: Login validate success.
+[ 2015-07-13T20:38:46+08:00 ] INFO: Get role privilege...
+[ 2015-07-13T20:38:46+08:00 ] INFO: role pri is 1
+[ 2015-07-13T20:38:46+08:00 ] INFO: Role privilege is ["1"]
+[ 2015-07-13T20:38:46+08:00 ] INFO: Get user privilege...
+[ 2015-07-13T20:38:46+08:00 ] INFO: User privilege is null
+[ 2015-07-13T20:38:46+08:00 ] INFO: All user privilege is ["1"]
+[ 2015-07-13T20:38:46+08:00 ] INFO: login privilege is ["1"]
+[ 2015-07-13T20:38:46+08:00 ] INFO: Get user login privilege success. The user have WEB login privilege.
+[ 2015-07-13T20:38:46+08:00 ] INFO: User WEBLogin success, the user name is admin
+[ 2015-07-13T20:38:46+08:00 ] INFO: the url is /LedPro/index.php/Index/Login
+[ 2015-07-13T20:38:46+08:00 ] INFO: response is {"errorCode":0,"errorMsg":"\u64cd\u4f5c\u6210\u529f","obj":null}
+[ 2015-07-13T20:38:46+08:00 ] 0.0.0.0 /LedPro/index.php/Index/Login
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.002782s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002959s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001832s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001878s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+SQL: SHOW COLUMNS FROM `misp_user` [ RunTime:0.001689s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `misp_user` WHERE ( `user_name` = 'admin' ) LIMIT 1   [ RunTime:0.000673s ]
+SQL: SELECT * FROM `misp_user` WHERE ( `user_name` = 'admin' ) LIMIT 1   [ RunTime:0.000399s ]
+SQL: SHOW COLUMNS FROM `misp_privilege` [ RunTime:0.001173s ]
+SQL: SELECT `access_obj_value` FROM `misp_privilege` WHERE ( `master_value` = '1' ) AND ( `master_type` = 'ROLE' ) AND ( `access_obj_type` = 'LOGIN' )  [ RunTime:0.000728s ]
+SQL: SELECT `access_obj_value` FROM `misp_privilege` WHERE ( `master_value` = '1' ) AND ( `master_type` = 'USER' ) AND ( `access_obj_type` = 'LOGIN' )  [ RunTime:0.000215s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\xampps\htdocs\LedPro\MISP\Lib\Service\MispCommonDataService.class.php 第 42 行.
+NOTIC: [8] A session had already been started - ignoring session_start() D:\xampps\htdocs\LedPro\MISP\Lib\Service\MispCommonUserService.class.php 第 142 行.
+NOTIC: [8] Undefined property: MispBaseRspJson::$PrivateErrorMsg D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 278 行.
+
+[ 2015-07-13T20:38:47+08:00 ] INFO: the url is /LedPro/index.php/Index/GetMenuTree
+[ 2015-07-13T20:38:47+08:00 ] INFO: request is 
+[ 2015-07-13T20:38:47+08:00 ] INFO: Session validator...
+[ 2015-07-13T20:38:47+08:00 ] INFO: get menu tree
+[ 2015-07-13T20:38:47+08:00 ] INFO: Get role privilege...
+[ 2015-07-13T20:38:47+08:00 ] INFO: role pri is 2000
+[ 2015-07-13T20:38:47+08:00 ] INFO: role pri is 2010
+[ 2015-07-13T20:38:47+08:00 ] INFO: Role privilege is ["2000","2010"]
+[ 2015-07-13T20:38:47+08:00 ] INFO: Get user privilege...
+[ 2015-07-13T20:38:47+08:00 ] INFO: User privilege is null
+[ 2015-07-13T20:38:47+08:00 ] INFO: All user privilege is ["2000","2010"]
+[ 2015-07-13T20:38:47+08:00 ] INFO: menu tree is [{"menu_id":"2000","menu_name":"BusinessManage","menu_value":"\u4e1a\u52a1\u7ba1\u7406","menu_type":null,"menu_icon":null,"menu_external":null,"menu_url":"#","menu_parent_id":"0"},{"menu_id":"2010","menu_name":"ProductManage","menu_value":"\u4ea7\u54c1\u7ba1\u7406","menu_type":null,"menu_icon":"icon-project","menu_external":null,"menu_url":"Product\/Index.html","menu_parent_id":"2000"}]
+[ 2015-07-13T20:38:47+08:00 ] INFO: the url is /LedPro/index.php/Index/GetMenuTree
+[ 2015-07-13T20:38:47+08:00 ] INFO: response is [{"menu_id":"2000","menu_name":"BusinessManage","menu_value":"\u4e1a\u52a1\u7ba1\u7406","menu_type":null,"menu_icon":null,"menu_external":null,"menu_url":"#","menu_parent_id":"0"},{"menu_id":"2010","menu_name":"ProductManage","menu_value":"\u4ea7\u54c1\u7ba1\u7406","menu_type":null,"menu_icon":"icon-project","menu_external":null,"menu_url":"Product\/Index.html","menu_parent_id":"2000"}]
+[ 2015-07-13T20:38:47+08:00 ] 0.0.0.0 /LedPro/index.php/Index/GetMenuTree
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.002245s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002323s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001998s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002050s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+SQL: SHOW COLUMNS FROM `misp_privilege` [ RunTime:0.002026s ]
+SQL: SELECT `access_obj_value` FROM `misp_privilege` WHERE ( `master_value` = '1' ) AND ( `master_type` = 'ROLE' ) AND ( `access_obj_type` = 'MENU' )  [ RunTime:0.000653s ]
+SQL: SELECT `access_obj_value` FROM `misp_privilege` WHERE ( `master_value` = '1' ) AND ( `master_type` = 'USER' ) AND ( `access_obj_type` = 'MENU' )  [ RunTime:0.000410s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\xampps\htdocs\LedPro\MISP\Lib\Service\MispCommonDataService.class.php 第 42 行.
+SQL: SHOW COLUMNS FROM `misp_menu` [ RunTime:0.001634s ]
+SQL: SELECT * FROM `misp_menu` WHERE ( `menu_id` IN ('2000','2010') )  [ RunTime:0.000659s ]
+NOTIC: [8] Trying to get property of non-object D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 93 行.
+
+[ 2015-07-13T20:41:06+08:00 ] INFO: the url is /LedPro/index.php/Product/Load
+[ 2015-07-13T20:41:06+08:00 ] INFO: request is {"app_id":"1","client_type":"ANDROID","client_version":null,"conditionList":null,"obj":null,"page":{"count":0,"currentPage":1,"pageSize":10},"token":null}
+[ 2015-07-13T20:41:06+08:00 ] INFO: LoadPageTable,ReqType is ANDROID
+[ 2015-07-13T20:41:06+08:00 ] INFO: condition list is []
+[ 2015-07-13T20:41:06+08:00 ] INFO: the current page is 0,the page size is 10
+[ 2015-07-13T20:41:06+08:00 ] INFO: query the table  count is 2
+[ 2015-07-13T20:41:06+08:00 ] INFO: the url is /LedPro/index.php/Product/Load
+[ 2015-07-13T20:41:06+08:00 ] INFO: response is {"errorCode":0,"errorMsg":null,"obj":{"total":"2","rows":[{"product_id":"3","product_name":"Living Room Leds","product_desc":"Good Leds","product_score":"5.00","product_catg":null,"product_type":null,"use_location":"Living Room","mounting_base":"normal","sub_catg":null,"product_size":"30*30","lumen_output":"2000.00","input_watt":"18.00","warranty":"3.00","manufacture":"SUNSANG","product_img":"55a073a8d2ffa.jpg","product_img_sm1":"55a073ac5d680.jpg","product_img_sm2":"55a073b0e3d89.jpg","product_img_sm3":"55a073b48725b.jpg","shop_id":null,"create_time":null,"create_user_id":null,"related_product_ids":null},{"product_id":"2","product_name":"Dining-hall Leds","product_desc":"No description","product_score":"0.00","product_catg":null,"product_type":null,"use_location":"Dining-hall","mounting_base":"normal","sub_catg":null,"product_size":"20*20","lumen_output":"2000.00","input_watt":"18.00","warranty":"2.00","manufacture":"Apple","product_img":"55a3a8fcb2ab2.jpg","product_img_sm1":"55a3a900c96a9.png","product_img_sm2":"55a071ee5503d.jpg","product_img_sm3":"55a071f1cf8b8.jpg","shop_id":null,"create_time":null,"create_user_id":null,"related_product_ids":null}]}}
+[ 2015-07-13T20:41:06+08:00 ] 192.168.1.107 /LedPro/index.php/Product/Load
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.002194s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002267s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001946s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002029s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+SQL: SHOW COLUMNS FROM `lp_product` [ RunTime:0.001816s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 105 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `lp_product` LIMIT 1   [ RunTime:0.000377s ]
+SQL: SELECT * FROM `lp_product` ORDER BY `product_id` desc LIMIT 0,10   [ RunTime:0.000226s ]
+NOTIC: [2048] Creating default object from empty value D:\xampps\htdocs\LedPro\MISP\Lib\Action\EasyUITableAction.class.php 第 100 行.
+
+[ 2015-07-13T21:00:38+08:00 ] INFO: the url is /LedPro/index.php/Product/Load
+[ 2015-07-13T21:00:38+08:00 ] INFO: request is {"app_id":"1","client_type":"ANDROID","client_version":null,"conditionList":null,"obj":null,"page":{"count":0,"currentPage":1,"pageSize":10},"token":null}
+[ 2015-07-13T21:00:38+08:00 ] INFO: LoadPageTable,ReqType is ANDROID
+[ 2015-07-13T21:00:38+08:00 ] INFO: condition list is []
+[ 2015-07-13T21:00:38+08:00 ] INFO: the current page is 0,the page size is 10
+[ 2015-07-13T21:00:38+08:00 ] INFO: query the table  count is 2
+[ 2015-07-13T21:00:38+08:00 ] INFO: the url is /LedPro/index.php/Product/Load
+[ 2015-07-13T21:00:38+08:00 ] INFO: response is {"errorCode":0,"errorMsg":null,"obj":{"total":"2","rows":[{"product_id":"3","product_name":"Living Room Leds","product_desc":"Good Leds","product_score":"5.00","product_catg":null,"product_type":null,"use_location":"Living Room","mounting_base":"normal","sub_catg":null,"product_size":"30*30","lumen_output":"2000.00","input_watt":"18.00","warranty":"3.00","manufacture":"SUNSANG","product_img":"55a073a8d2ffa.jpg","product_img_sm1":"55a073ac5d680.jpg","product_img_sm2":"55a073b0e3d89.jpg","product_img_sm3":"55a073b48725b.jpg","shop_id":null,"create_time":null,"create_user_id":null,"related_product_ids":null},{"product_id":"2","product_name":"Dining-hall Leds","product_desc":"No description","product_score":"0.00","product_catg":null,"product_type":null,"use_location":"Dining-hall","mounting_base":"normal","sub_catg":null,"product_size":"20*20","lumen_output":"2000.00","input_watt":"18.00","warranty":"2.00","manufacture":"Apple","product_img":"55a3a8fcb2ab2.jpg","product_img_sm1":"55a3a900c96a9.png","product_img_sm2":"55a071ee5503d.jpg","product_img_sm3":"55a071f1cf8b8.jpg","shop_id":null,"create_time":null,"create_user_id":null,"related_product_ids":null}]}}
+[ 2015-07-13T21:00:38+08:00 ] 192.168.1.107 /LedPro/index.php/Product/Load
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.002385s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002467s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001959s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002014s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+SQL: SHOW COLUMNS FROM `lp_product` [ RunTime:0.001767s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 105 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `lp_product` LIMIT 1   [ RunTime:0.000496s ]
+SQL: SELECT * FROM `lp_product` ORDER BY `product_id` desc LIMIT 0,10   [ RunTime:0.000471s ]
+NOTIC: [2048] Creating default object from empty value D:\xampps\htdocs\LedPro\MISP\Lib\Action\EasyUITableAction.class.php 第 100 行.
+
+[ 2015-07-13T21:11:30+08:00 ] INFO: the url is /LedPro/index.php/Product/Load
+[ 2015-07-13T21:11:30+08:00 ] INFO: request is {"app_id":"1","client_type":"ANDROID","client_version":null,"conditionList":null,"obj":null,"page":{"count":0,"currentPage":1,"pageSize":10},"token":null}
+[ 2015-07-13T21:11:30+08:00 ] INFO: LoadPageTable,ReqType is ANDROID
+[ 2015-07-13T21:11:30+08:00 ] INFO: condition list is []
+[ 2015-07-13T21:11:30+08:00 ] INFO: the current page is 0,the page size is 10
+[ 2015-07-13T21:11:30+08:00 ] INFO: query the table  count is 2
+[ 2015-07-13T21:11:30+08:00 ] INFO: the url is /LedPro/index.php/Product/Load
+[ 2015-07-13T21:11:30+08:00 ] INFO: response is {"errorCode":0,"errorMsg":null,"obj":{"total":"2","rows":[{"product_id":"3","product_name":"Living Room Leds","product_desc":"Good Leds","product_score":"5.00","product_catg":null,"product_type":null,"use_location":"Living Room","mounting_base":"normal","sub_catg":null,"product_size":"30*30","lumen_output":"2000.00","input_watt":"18.00","warranty":"3.00","manufacture":"SUNSANG","product_img":"55a073a8d2ffa.jpg","product_img_sm1":"55a073ac5d680.jpg","product_img_sm2":"55a073b0e3d89.jpg","product_img_sm3":"55a073b48725b.jpg","shop_id":null,"create_time":null,"create_user_id":null,"related_product_ids":null},{"product_id":"2","product_name":"Dining-hall Leds","product_desc":"No description","product_score":"0.00","product_catg":null,"product_type":null,"use_location":"Dining-hall","mounting_base":"normal","sub_catg":null,"product_size":"20*20","lumen_output":"2000.00","input_watt":"18.00","warranty":"2.00","manufacture":"Apple","product_img":"55a3a8fcb2ab2.jpg","product_img_sm1":"55a3a900c96a9.png","product_img_sm2":"55a071ee5503d.jpg","product_img_sm3":"55a071f1cf8b8.jpg","shop_id":null,"create_time":null,"create_user_id":null,"related_product_ids":null}]}}
+[ 2015-07-13T21:11:30+08:00 ] 192.168.1.107 /LedPro/index.php/Product/Load
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.002113s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002189s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001890s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001942s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+SQL: SHOW COLUMNS FROM `lp_product` [ RunTime:0.001691s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 105 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `lp_product` LIMIT 1   [ RunTime:0.000294s ]
+SQL: SELECT * FROM `lp_product` ORDER BY `product_id` desc LIMIT 0,10   [ RunTime:0.000541s ]
+NOTIC: [2048] Creating default object from empty value D:\xampps\htdocs\LedPro\MISP\Lib\Action\EasyUITableAction.class.php 第 100 行.
+
+[ 2015-07-13T21:11:38+08:00 ] INFO: the url is /LedPro/index.php/Product/Load
+[ 2015-07-13T21:11:38+08:00 ] INFO: request is {"app_id":"1","client_type":"ANDROID","client_version":null,"conditionList":null,"obj":null,"page":{"count":0,"currentPage":1,"pageSize":10},"token":null}
+[ 2015-07-13T21:11:38+08:00 ] INFO: LoadPageTable,ReqType is ANDROID
+[ 2015-07-13T21:11:38+08:00 ] INFO: condition list is []
+[ 2015-07-13T21:11:38+08:00 ] INFO: the current page is 0,the page size is 10
+[ 2015-07-13T21:11:38+08:00 ] INFO: query the table  count is 2
+[ 2015-07-13T21:11:38+08:00 ] INFO: the url is /LedPro/index.php/Product/Load
+[ 2015-07-13T21:11:38+08:00 ] INFO: response is {"errorCode":0,"errorMsg":null,"obj":{"total":"2","rows":[{"product_id":"3","product_name":"Living Room Leds","product_desc":"Good Leds","product_score":"5.00","product_catg":null,"product_type":null,"use_location":"Living Room","mounting_base":"normal","sub_catg":null,"product_size":"30*30","lumen_output":"2000.00","input_watt":"18.00","warranty":"3.00","manufacture":"SUNSANG","product_img":"55a073a8d2ffa.jpg","product_img_sm1":"55a073ac5d680.jpg","product_img_sm2":"55a073b0e3d89.jpg","product_img_sm3":"55a073b48725b.jpg","shop_id":null,"create_time":null,"create_user_id":null,"related_product_ids":null},{"product_id":"2","product_name":"Dining-hall Leds","product_desc":"No description","product_score":"0.00","product_catg":null,"product_type":null,"use_location":"Dining-hall","mounting_base":"normal","sub_catg":null,"product_size":"20*20","lumen_output":"2000.00","input_watt":"18.00","warranty":"2.00","manufacture":"Apple","product_img":"55a3a8fcb2ab2.jpg","product_img_sm1":"55a3a900c96a9.png","product_img_sm2":"55a071ee5503d.jpg","product_img_sm3":"55a071f1cf8b8.jpg","shop_id":null,"create_time":null,"create_user_id":null,"related_product_ids":null}]}}
+[ 2015-07-13T21:11:38+08:00 ] 192.168.1.107 /LedPro/index.php/Product/Load
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.002250s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002328s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.002034s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.002091s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+SQL: SHOW COLUMNS FROM `lp_product` [ RunTime:0.002174s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 105 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `lp_product` LIMIT 1   [ RunTime:0.000612s ]
+SQL: SELECT * FROM `lp_product` ORDER BY `product_id` desc LIMIT 0,10   [ RunTime:0.000791s ]
+NOTIC: [2048] Creating default object from empty value D:\xampps\htdocs\LedPro\MISP\Lib\Action\EasyUITableAction.class.php 第 100 行.
+
+[ 2015-07-13T21:36:30+08:00 ] INFO: the url is /LedPro/index.php/Product/Load
+[ 2015-07-13T21:36:30+08:00 ] INFO: request is {"app_id":"1","client_type":"ANDROID","client_version":null,"conditionList":null,"obj":null,"page":{"count":0,"currentPage":1,"pageSize":10},"token":null}
+[ 2015-07-13T21:36:30+08:00 ] INFO: LoadPageTable,ReqType is ANDROID
+[ 2015-07-13T21:36:30+08:00 ] INFO: condition list is []
+[ 2015-07-13T21:36:30+08:00 ] INFO: the current page is 0,the page size is 10
+[ 2015-07-13T21:36:30+08:00 ] INFO: query the table  count is 2
+[ 2015-07-13T21:36:30+08:00 ] INFO: the url is /LedPro/index.php/Product/Load
+[ 2015-07-13T21:36:30+08:00 ] INFO: response is {"errorCode":0,"errorMsg":null,"obj":{"total":"2","rows":[{"product_id":"3","product_name":"Living Room Leds","product_desc":"Good Leds","product_score":"5.00","product_catg":null,"product_type":null,"use_location":"Living Room","mounting_base":"normal","sub_catg":null,"product_size":"30*30","lumen_output":"2000.00","input_watt":"18.00","warranty":"3.00","manufacture":"SUNSANG","product_img":"55a073a8d2ffa.jpg","product_img_sm1":"55a073ac5d680.jpg","product_img_sm2":"55a073b0e3d89.jpg","product_img_sm3":"55a073b48725b.jpg","shop_id":null,"create_time":null,"create_user_id":null,"related_product_ids":null},{"product_id":"2","product_name":"Dining-hall Leds","product_desc":"No description","product_score":"0.00","product_catg":null,"product_type":null,"use_location":"Dining-hall","mounting_base":"normal","sub_catg":null,"product_size":"20*20","lumen_output":"2000.00","input_watt":"18.00","warranty":"2.00","manufacture":"Apple","product_img":"55a3a8fcb2ab2.jpg","product_img_sm1":"55a3a900c96a9.png","product_img_sm2":"55a071ee5503d.jpg","product_img_sm3":"55a071f1cf8b8.jpg","shop_id":null,"create_time":null,"create_user_id":null,"related_product_ids":null}]}}
+[ 2015-07-13T21:36:30+08:00 ] 192.168.1.107 /LedPro/index.php/Product/Load
+INFO: [ route_check ] --START--
+INFO: CheckRoute Behavior ::run [ RunTime:0.002283s ]
+INFO: [ route_check ] --END-- [ RunTime:0.002356s ]
+INFO: [ app_begin ] --START--
+INFO: ReadHtmlCache Behavior ::run [ RunTime:0.001905s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001958s ]
+NOTIC: [2] Missing argument 1 for MispBaseRspJson::__construct(), called in D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php on line 40 and defined D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 9 行.
+NOTIC: [8] Undefined variable: errorCode D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 12 行.
+SQL: SHOW COLUMNS FROM `lp_product` [ RunTime:0.002125s ]
+NOTIC: [2] Invalid argument supplied for foreach() D:\xampps\htdocs\LedPro\MISP\Lib\Action\BaseAction.class.php 第 105 行.
+SQL: SELECT COUNT(*) AS tp_count FROM `lp_product` LIMIT 1   [ RunTime:0.000237s ]
+SQL: SELECT * FROM `lp_product` ORDER BY `product_id` desc LIMIT 0,10   [ RunTime:0.000822s ]
+NOTIC: [2048] Creating default object from empty value D:\xampps\htdocs\LedPro\MISP\Lib\Action\EasyUITableAction.class.php 第 100 行.
+

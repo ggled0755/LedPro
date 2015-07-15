@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+</head>
+<body>
+    <form id="mispForm" misp-class="misp.form" method="post">
+    	<table style="margin-bottom:10px;">
+    		<tr>
+    			<td style="width:70px;">用户名:</td>
+    			<td>
+    				<input name="user_name" class="easyui-textbox" type="text"/>
+   				</td>
+				<td style="display:none">
+   					<input name="user_id" class="easyui-textbox" type="text"/>
+   				</td>
+    		</tr>
+    		<tr>
+    			<td>密码:</td>
+    			<td>
+    				<input name="password" class="easyui-textbox" type="password"/>
+    			</td>
+    		</tr>
+    		<tr>
+				<td>用户类型:</td>
+				<td>
+					<input name="role_id" misp-class="misp.combobox"  
+   				    data-options="url:'Role|LoadList',valueField:'role_id', textField:'role_name'"/>
+				</td>
+			</tr>
+    	</table>
+    </form>
+    <div style="text-align:center;padding:5px;margin-top:10px">
+    	<a class="easyui-linkbutton" iconCls="icon-ok" style="width:60px;" onclick="misp.table.save()">提交</a>
+    	<a>&nbsp&nbsp&nbsp&nbsp</a>
+    	<a class="easyui-linkbutton" iconCls="icon-cancel" style="width:60px;" onclick="misp.table.cancel()">关闭</a>
+    </div>
+<script type="text/javascript">
+</script>
+</body>
+</html>

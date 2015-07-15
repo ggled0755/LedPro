@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Product Manage</title>
+<script type="text/javascript" src="../../Public/Fuego/FuegoJS/misp.res.js"></script>
+</head>
+<body>
+    <!-- misp-class 配置为 misp.table，data-options 配置好action name 对象主键 -->
+<div class="easyui-layout"  misp-class="misp.table" data-options="actionName:'Product',idField:'product_id',fit:true">
+	<div data-options="region:'north',title:'Search Information'"  style="padding:5px;width:250px;height:75px;" >
+		<form  misp-class="misp.search">
+			<table>
+				<tr>
+					<td style="width:100px;">Product Name:</td>
+					<td style="width:170px;">
+						<input filterType ="include" name="product_name" class="easyui-textbox"/>
+					</td> 
+					<td >
+					   <a class="easyui-linkbutton" iconCls="icon-search" onclick="misp.table.search()">Search</a>
+					</td>  
+				</tr>
+			</table>
+		</form>
+	</div>
+	<div data-options="region:'center'," >
+		<div  id="mispToolbar" style="padding:5px;height:auto">
+			<table style="width:100%;">
+	        	<tr>
+	            	<td style="width:200px;">
+						<a class="easyui-linkbutton" iconCls="icon-add" onclick="misp.table.create()">Create</a>
+						<a class="easyui-linkbutton" iconCls="icon-edit" onclick="misp.table.modify()">Modify</a>
+						<a class="easyui-linkbutton" iconCls="icon-remove" onclick="misp.table.remove()">Delete</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<table id="mispGrid" misp-class="misp.grid" data-options="fit:true" class="easyui-datagrid">
+			<thead>
+				<tr>
+	                <!-- 这里需要根据表格字段做相应更改 -->
+					<th data-options="field:'ck',checkbox:true">&nbsp;</th>
+					<th hidden="true" data-options="field:'product_id',width:100">ProductID</th>
+					<th data-options="field:'product_name',width:160">Product Name</th>
+					<th data-options="field:'product_score',width:100">Product Score</th>
+					<th data-options="field:'use_location',width:120">Use Location</th>
+					<th data-options="field:'mounting_base',width:120">Mounting Base</th>
+					<th data-options="field:'product_size',width:120">Product Size</th>
+					<th data-options="field:'lumen_output',width:100">Lumen Output</th>
+					<th data-options="field:'input_watt',width:100">Input Watt</th>
+					<th data-options="field:'warranty',width:100">Warranty</th>
+					<th data-options="field:'manufacture',width:160">Manufacture</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
+	<div id="mispDialog" misp-class="misp.table.dialog" data-options="title:'Product Infomastion',width:620,height:570,href:'Product/Show.html',formID:'#mispForm'" style="padding-left:20px;padding-top:10px;" > 
+	</div>
+</div>
+
+<script type="text/javascript">
+//页面初始化
+$(function (){
+	misp.parser.parse();
+});
+</script>
+</body>
+</html>
