@@ -270,29 +270,6 @@ misp.util.buildReqObj = function(obj1,obj2){
 	}
 	misp.req.obj = object1;
 };
-misp.util.fileUpload = function(filePara){
-	var fileName = $(filePara.newFile).textbox('getValue');
-	var url = misp.util.buildUrl("Index|ImgUpload") + "?fileName=" + fileName;
-    $.ajaxFileUpload({
-        url:url,//处理图片脚本
-        secureuri :false,
-        fileElementId : filePara.fileID,//file控件id
-        dataType : 'json',
-        success : function (data, status){
-        	if(misp.util.isSuccess(data)){
-        		$(filePara.fileName).textbox('setValue',data.obj);
-        		$(filePara.newFile).textbox('setValue',data.obj);
-        		$(filePara.fileImg).attr('src', misp.util.getImgUrl() + data.obj);
-        	}
-        	else{
-        		misp.util.alert(data.errorMsg);
-        	}
-        },
-        error: function(data, status, e){
-        	misp.util.alert(e);
-        }
-	})
-};
 misp.util.buildFilterJson = function(filterPara){
 	var searchFilterList = [];
     searchFilterList.push(filterPara);

@@ -1,6 +1,5 @@
 <?php
 // 本类由系统自动生成，仅供测试用途
-import("MISP.Action.BaseAction");
 abstract class EasyUITableAction extends BaseAction 
 {
     abstract protected function GetModel();
@@ -22,23 +21,7 @@ abstract class EasyUITableAction extends BaseAction
     	$obj = $Req->obj;
     	return $this->objectToArray($obj);
     }
-    public function GetTableCondition()
-    {
-    	$searchFilter = array();
-    	if(null == $_POST['filter'])
-    	{
-    		$this->LogWarn("Filter condition is empty");
-    	}
-    	else
-    	{
-    		$PostStr = stripslashes($_POST['filter']);
-    		$this->LogInfo("Filter condition is ".$PostStr);
-    		$filterList = json_decode($PostStr);
-    		$searchFilter = $this->ConvertToCondition($filterList);
-    	}
-    	return $searchFilter;
-    }
-    public function GetPage()
+    public function GetWebPage()
     {
         if(null == $_POST['page'])
         {
@@ -61,37 +44,55 @@ abstract class EasyUITableAction extends BaseAction
         $this->LogInfo("the current page is ".$page['currentPage'].",the page size is ".$page['pageSize']);
         return $page;
     }
+    //获取后台Load查询条件
+    public function LoadCondition()
+    {
+    	return $this->GetCondition();
+    }
+    //获取APP Load查询条件
+    Public function APPLoadCondition()
+    {
+    	return $this->GetCondition();
+    }
     //加载datagrid数据
     public function Load()
     {
-    	$order = array(); 
         $db =  $this->GetModel();
-        $field = $db->getDbFields();
-        if("id" != $db->getPk()){
-        	$order[$db->getPk()] = 'desc';
-        }
-        else{
-        	$order[$field[0]] = 'desc';
-        	$this->LogInfo("Loading view.. no pk is found.");
-        }
-        $this->LoadPageTable($db,$order);
+        $this->LoadPageTable($db);
     }
-    public function LoadPageTable($model,$order)
+    public function LoadPageTable($model)
     {
-    	$condition =  array();
+    	//$condition =  array();
     	$ReqType = $this->GetReqType();
     	$this->LogInfo("LoadPageTable,ReqType is ".$ReqType);
     	if(($ReqType == ClientTypeEnum::IOS)||($ReqType == ClientTypeEnum::ANDROID))
     	{
     		//客户端查询条件
-    		$condition = $this->GetCondition();
+    		$condition = $this->APPLoadCondition();
     		$this->LogInfo("condition list is ".json_encode($condition));
+    		if(null == $condition['order'])
+    		{
+    			//加入默认排序条件
+    			$order = array();
+    			$field = $model->getDbFields();
+    			if("id" != $model->getPk()){
+    				$order[$model->getPk()] = 'desc';
+    			}
+    			else{
+    				$order[$field[0]] = 'desc';
+    				$this->LogInfo("Loading view.. no pk is found.");
+    			}
+    			$condition['order'] = $order;
+    		}
     		//获取分页信息
-    		$page = $this->GetPageData();
-    		$index = $page['currentPage']*$page['pageSize'];
+    		$page = $this->GetAppPage();
+    		$condition['limit']['index'] = $page['currentPage']*$page['pageSize'];
+    		$condition['limit']['pageSize'] = $page['pageSize'];
+    		$this->LogInfo("condition list is ".json_encode($condition));
+    		
     		//获取数据
-    		$count = $model->where($condition)->count();
-    		$rows = $model->where($condition)->order($order)->limit($index,$page['pageSize'])->select();
+    		$count = $model->where($condition['condition'])->count();
+    		$rows = MispCommonService::GetPageData($model, $condition);
     		if(0 == $count)
     		{
     			$rows = array();
@@ -104,14 +105,30 @@ abstract class EasyUITableAction extends BaseAction
     	else
     	{
     		//后台查询条件
-    		$condition = $this->GetTableCondition();
-    		$this->LogInfo("condition is ".json_encode($condition));
+    		$condition = $this->LoadCondition();
+    		if(null == $condition['order'])
+    		{
+    			//加入默认排序条件
+    			$order = array();
+    			$field = $model->getDbFields();
+    			if("id" != $model->getPk()){
+    				$order[$model->getPk()] = 'desc';
+    			}
+    			else{
+    				$order[$field[0]] = 'desc';
+    				$this->LogInfo("Loading view.. no pk is found.");
+    			}
+    			$condition['order'] = $order;
+    		}
     		//获取分页信息
-    		$page = $this->GetPage();
-    		$index = $page['currentPage']*$page['pageSize'];
+    		$page = $this->GetWebPage();
+    		$condition['limit']['index'] = $page['currentPage']*$page['pageSize'];
+    		$condition['limit']['pageSize'] = $page['pageSize'];
+    		$this->LogInfo("condition is ".json_encode($condition));
+    		
     		//获取数据
-    		$count = $model->where($condition)->count();
-    		$rows = $model->where($condition)->order($order)->limit($index,$page['pageSize'])->select();
+    		$count = $model->where($condition['condition'])->count();
+    		$rows = MispCommonService::GetPageData($model, $condition);
     		if(0 == $count)
     		{
     			$rows = array();
@@ -123,21 +140,15 @@ abstract class EasyUITableAction extends BaseAction
     	}
     	
     }
-    public function GetListCondition()
+    //获取后台LoadList查询条件
+    public function LoadListCondition()
     {
-    	$searchFilter = array();
-    	if(null == $_POST['filter'])
-    	{
-    		$this->LogWarn("Filter condition is empty");
-    	}
-    	else
-    	{
-    		$PostStr = stripslashes($_POST['filter']);
-    		$this->LogInfo("Filter condition is ".$PostStr);
-    		$filterList = json_decode($PostStr);
-    		$searchFilter = $this->ConvertToCondition($filterList);
-    	}
-    	return $searchFilter;
+    	return $this->GetCondition();
+    }
+    //获取APP LoadList查询条件
+    Public function APPLoadListCondition()
+    {
+    	return $this->GetCondition();
     }
     //加载对象list，tree commbox
     public function LoadList()
@@ -154,7 +165,7 @@ abstract class EasyUITableAction extends BaseAction
     	if(($ReqType == ClientTypeEnum::IOS)||($ReqType == ClientTypeEnum::ANDROID))
     	{
     		//客户端查询条件
-    		$condition = $this->GetCondition();
+    		$condition = $this->APPLoadListCondition();
     		$this->LogInfo("condition list is ".json_encode($condition));
     		$objectList = MispCommonService::GetAll($model,$condition);
     		$this->LogInfo($model->getTableName()." list is ".json_encode($objectList));
@@ -164,7 +175,7 @@ abstract class EasyUITableAction extends BaseAction
     	else
     	{
     		//后台查询条件
-    		$condition = $this->GetListCondition();
+    		$condition = $this->LoadListCondition();
     		$this->LogInfo("condition is ".json_encode($condition));
     		$objectList = MispCommonService::GetAll($model,$condition);
     		$this->LogInfo($model->getTableName()." list is ".json_encode($objectList));
@@ -176,15 +187,30 @@ abstract class EasyUITableAction extends BaseAction
     	$db = $this->GetModel();
     	$this->LoadAllModel($db);
     }
-    public function GetAllCondition()
+    //获取后台LoadAll查询条件
+    public function LoadAllCondition()
     {
-    	$condition = array();
-    	return $condition;
+    	return $this->GetCondition();
+    }
+    //获取APP LoadAll查询条件
+    Public function APPLoadAllCondition()
+    {
+    	return $this->GetCondition();
     }
     public function LoadAllModel($model)
     {
+    	$condition =  array();
+    	$ReqType = $this->GetReqType();
+    	$this->LogInfo("LoadAll,ReqType is ".$ReqType);
     	$this->LogInfo("Load all ".$model->getTableName()."...");
-    	$condition = $this->GetAllCondition();
+    	if(($ReqType == ClientTypeEnum::IOS)||($ReqType == ClientTypeEnum::ANDROID))
+    	{
+    		$condition = $this->APPLoadAllCondition();
+    	}
+    	else 
+    	{
+    		$condition = $this->LoadAllCondition();
+    	}
     	$this->LogInfo("Condition is ".json_encode($condition));
         try
         {
@@ -368,94 +394,6 @@ abstract class EasyUITableAction extends BaseAction
     	}
     	$this->rsp->errorCode = MispErrorCode::SUCCESS;
     	$this->ReturnJson();
-    }
-    //上传图片
-    public function ImgUpload($fileName=null)
-    {
-    	$this->LogInfo("Upload image...");
-    	//导入图片上传类
-    	import("ORG.Net.UploadFile");
-    	//实例化上传类
-    	$upload = new UploadFile();
-    	$upload->maxSize = 4145728;		//138px*152px
-    	//设置文件上传类型
-    	$upload->allowExts = array('jpg','gif','png','jpeg');
-    	//设置文件上传位置
-    	$upload->savePath = "./Client/Public/Fuego/Uploads/";	//根目录下的Public文件夹
-    	//设置文件上传名(按照时间)
-    	//$upload->saveRule = "time";
-    	if (!$upload->upload()){
-    		//上传图片错误
-    		$this->LogWarn("Upload image failed.".$upload->getErrorMsg());
-    		$this->rsp->errorCode =MispErrorCode::UPLOAD_IMG_FAILED;
-    		$this->rsp->errorMsg = $upload->getErrorMsg();
-    		echo json_encode($this->rsp);
-    		return;
-    	}else{
-    		//上传成功，获取上传信息
-    		$this->LogInfo("Upload image success.");
-    		$info = $upload->getUploadFileInfo();
-    		//删除原有图片
-    		if(null != $fileName)
-    		{
-    			$this->LogInfo("Delete old file, old file name is ".$fileName);
-    			$img = './Client/Public/Fuego/Uploads/'.$fileName;
-    			if (file_exists ( $img )&& is_writable($img)) {
-    				unlink ( $img );
-    			}
-    		}
-    	}
-    	$this->rsp->errorCode = MispErrorCode::SUCCESS;
-    	$this->rsp->obj = $info[0]['savename'];
-    	echo json_encode($this->rsp);
-    	exit;
-    }
-    //删除图片
-    public function ImgDelete()
-    {
-    	$req = $this->GetCommonData();
-    	$this->LogInfo("Delete img ..., img name is ".$req);
-		//更新图片后删除原有的图片
-		$img = './Client/Public/Fuego/Uploads/'.$req;
-		if (file_exists ( $img )&& is_writable($img)) {
-			unlink ( $img );
-			$this->LogInfo("Delete img success.");
-		}
-		$this->rsp->obj = $req;
-		$this->ReturnJson();
-    }
-    //上传音频
-    public function VoiceUpload()
-    {
-    	$this->LogInfo("Upload voice...");
-    	//导入图片上传类
-    	import("ORG.Net.UploadFile");
-    	//实例化上传类
-    	$upload = new UploadFile();
-    	//$upload->maxSize = 4145728;		//138px*152px
-    	//设置文件上传类型
-    	$upload->allowExts = array('mp3','MP3');
-    	ini_set('post_max_size', '100M');
-    	//设置文件上传位置
-    	$upload->savePath = "./Client/Public/Fuego/Uploads/";	//根目录下的Public文件夹
-    	//设置文件上传名(按照时间)
-    	//$upload->saveRule = "time";
-    	if (!$upload->upload()){
-    		//上传图片错误
-    		$this->LogWarn("Upload voice failed.".$upload->getErrorMsg());
-    		$this->rsp->errorCode =MispErrorCode::UPLOAD_IMG_FAILED;
-    		$this->rsp->errorMsg = $upload->getErrorMsg();
-    		echo json_encode($this->rsp);
-    		return;
-    	}else{
-    		//上传成功，获取上传信息
-    		$this->LogInfo("Upload voice success.");
-    		$info = $upload->getUploadFileInfo();
-    	}
-    	$this->rsp->errorCode = MispErrorCode::SUCCESS;
-    	$this->rsp->obj = $info[0]['savename'];
-    	echo json_encode($this->rsp);
-    	exit;
     }
     
 }

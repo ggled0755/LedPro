@@ -13,6 +13,7 @@ document.write("<script type='text/javascript' src='../../Public/ThirdParty/Othe
 document.write("<script type='text/javascript' src='../../Public/ThirdParty/Others/jquery.md5.js'></script>");
 document.write("<script type='text/javascript' src='../../Public/ThirdParty/Others/ajaxfileupload.js'></script>");
 //引入misp JS
+document.write("<script type='text/javascript' src='../../Public/Fuego/FuegoJS/misp.radio.js'></script>");
 document.write("<script type='text/javascript' src='../../Public/Fuego/FuegoJS/misp.util.js'></script>");
 document.write("<script type='text/javascript' src='../../Public/Fuego/FuegoJS/misp.data.js'></script>");
 document.write("<script type='text/javascript' src='../../Public/Fuego/FuegoJS/misp.com.js'></script>");

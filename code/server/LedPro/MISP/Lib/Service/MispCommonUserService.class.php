@@ -7,34 +7,6 @@ import("MISP.Service.MispCommonService");
 import("MISP.Service.PrivilegeService");
 class MispCommonUserService
 {
-	static function Create($user)
-	{
-		$errorCode = MispErrorCode::SUCCESS;
-		FuegoLog::getLog()->LogInfo("Create user...");
-		//获取用户类型
-		$roleDao = MispDaoContext::SystemRole();
-		$roleCondition['role_id'] = $user['role_id'];
-		$userType = $roleDao->where($roleCondition)->getField('user_type_id');
-		//用户信息查重条件
-		$condition['user_name'] = $user['user_name'];
-		if(UserTypeEnum::CUSTOMER == $userType)		//customer 需要增加Company_id条件
-		{
-			$condition['company_id'] = $user['company_id'];
-		}
-		$systemUserDao = MispDaoContext::SystemUser();
-		$userID = $systemUserDao->where($condition)->getField('user_id');
-		if($userID!=''){
-			//用户已存在
-			FuegoLog::getLog()->LogWarn("Create user failed, user_name has exist.".json_encode($condition));
-			$errorCode = MispErrorCode::USER_EXISTED;
-			throw new FuegoException(null,$errorCode);
-		}
-		FuegoLog::getLog()->LogInfo("User info is ".json_encode($user));
-		$result = MispCommonService::Create($systemUserDao, $user);
-		FuegoLog::getLog()->LogInfo("Create user success.");
-		return $result;
-		
-	}
 	/* (non-PHPdoc)
 	 * @see MispUserService::Register()
 	 */
@@ -172,37 +144,6 @@ class MispCommonUserService
 		}
 		return $errorCode;
 	
-	}
-	static function Modify($user)
-	{
-		$errorCode = MispErrorCode::SUCCESS;
-		FuegoLog::getLog()->LogInfo("modify user...");
-		$systemUserDao = MispDaoContext::SystemUser();
-		try
-		{
-			$result = MispCommonService::Modify($systemUserDao, $user);
-		}
-		catch(FuegoException $e)
-		{
-			$errorCode = $e->getCode();
-		}
-		return $errorCode;
-	}
-	static function Delete($userID)
-	{
-		$errorCode = MispErrorCode::SUCCESS;
-		FuegoLog::getLog()->LogInfo("delete user...");
-		$systemUserDao = MispDaoContext::SystemUser();
-		$condition['user_id'] = $userID;
-		try
-		{
-			$result = MispCommonService::Delete($systemUserDao, $condition);
-		}
-		catch(FuegoException $e)
-		{
-			$errorCode = $e->getCode();
-		}
-		return $errorCode;
 	}	
 }
 

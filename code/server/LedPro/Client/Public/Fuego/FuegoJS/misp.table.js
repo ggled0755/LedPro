@@ -1,6 +1,7 @@
 ﻿var misp = misp || {};
 misp.table= {};
 misp.table.callback = misp.table.callback || {};
+misp.table.callforward = misp.table.callforward || {};
 misp.table.log  = function (message,obj)
 {
 	var logged = false;
@@ -350,6 +351,7 @@ misp.table.remove = function(data)
     });
 	   
 };
+//取消
 misp.table.cancel = function()
 {
 	misp.table.log("misp table cancel");
@@ -360,4 +362,168 @@ misp.table.cancel = function()
 	}	
 	domObj.dialog('close');
 };
-
+//绑定对象前调函数
+misp.table.callforward.bind = function(rows){
+	
+};
+//绑定对象回调函数
+misp.table.callback.bind = function(obj){
+	
+};
+//绑定对象
+misp.table.bind = function(dataGridPara)
+{
+	misp.table.log("bind data");
+	var tableObj = misp.com.getElementByType("misp.table");
+	var tableData = misp.com.getOptions(tableObj);
+	if(null == dataGridPara)
+	{
+		dataGridPara = new Object();
+	}
+	dataGridPara.gridObj = dataGridPara.gridObj || misp.com.getElementByType("misp.grid",tableObj);
+	dataGridPara.actionName = dataGridPara.actionName || tableData.actionName;
+	dataGridPara.idField = dataGridPara.idField || tableData.idField;
+	dataGridPara.methodName = dataGridPara.methodName || "Bind";
+	if(null == dataGridPara.callback)
+	{
+		dataGridPara.callback = misp.table.callback.bind;
+	}
+	if(null == dataGridPara.callforward)
+	{
+		dataGridPara.callforward = misp.table.callforward.bind;
+	}
+	var rows = dataGridPara.gridObj.datagrid('getChecked');
+    if (1 != rows.length)
+    {
+        misp.util.alert("请选择一条记录");
+        return;
+    }
+    if(false == dataGridPara.callforward(rows))
+	{
+    	return;
+	}
+    var id = rows[0][dataGridPara.idField];
+	if(rows.length>0)
+	{
+		dataGridPara.gridObj.datagrid('uncheckAll');
+	}
+	misp.util.submit({
+		data:id,
+		url:dataGridPara.actionName + "|" + dataGridPara.methodName,
+		success:function(obj){
+			dataGridPara.gridObj.datagrid('loadData', { total: 0, rows: [] });
+			//重新加载datagrid数据
+			dataGridPara.gridObj.datagrid('reload');
+			dataGridPara.callback(obj);
+	  }
+  });
+};
+//解除绑定对象前调函数
+misp.table.callforward.unbind = function(rows){
+	
+};
+//解除绑定对象回调函数
+misp.table.callback.unbind = function(obj){
+	
+};
+//绑定对象
+misp.table.unbind = function(dataGridPara)
+{
+	misp.table.log("bind data");
+	var tableObj = misp.com.getElementByType("misp.table");
+	var tableData = misp.com.getOptions(tableObj);
+	if(null == dataGridPara)
+	{
+		dataGridPara = new Object();
+	}
+	dataGridPara.gridObj = dataGridPara.gridObj || misp.com.getElementByType("misp.grid",tableObj);
+	dataGridPara.actionName = dataGridPara.actionName || tableData.actionName;
+	dataGridPara.idField = dataGridPara.idField || tableData.idField;
+	dataGridPara.methodName = dataGridPara.methodName || "UnBind";
+	if(null == dataGridPara.callback)
+	{
+		dataGridPara.callback = misp.table.callback.unbind;
+	}
+	if(null == dataGridPara.callforward)
+	{
+		dataGridPara.callforward = misp.table.callforward.unbind;
+	}
+	var rows = dataGridPara.gridObj.datagrid('getChecked');
+    if (1 != rows.length)
+    {
+        misp.util.alert("请选择一条记录");
+        return;
+    }
+    if(false == dataGridPara.callforward(rows))
+	{
+    	return;
+	}
+    var id = rows[0][dataGridPara.idField];
+	if(rows.length>0)
+	{
+		dataGridPara.gridObj.datagrid('uncheckAll');
+	}
+	misp.util.submit({
+		data:id,
+		url:dataGridPara.actionName + "|" + dataGridPara.methodName,
+		success:function(obj){
+			dataGridPara.gridObj.datagrid('loadData', { total: 0, rows: [] });
+			//重新加载datagrid数据
+			dataGridPara.gridObj.datagrid('reload');
+			dataGridPara.callback(obj);
+	  }
+  });
+};
+//弹出详情Tab页
+misp.table.addTab = function(tabPara)
+{
+	misp.table.log("add tab");
+	var tableObj = misp.com.getElementByType("misp.table");
+	var tableData = misp.com.getOptions(tableObj);
+	if(null == tabPara)
+	{
+		tabPara = new Object();
+	}
+	tabPara.gridObj = tabPara.gridObj || misp.com.getElementByType("misp.grid",tableObj);
+	tabPara.idField = tabPara.idField || tableData.idField;
+	tabPara.detailUrl = tabPara.detailUrl || tableData.detailUrl;
+	tabPara.detailTitle = tabPara.detailTitle || tableData.detailTitle;
+	
+	var rows = tabPara.gridObj.datagrid('getChecked');
+    if (1 != rows.length)
+    {
+        misp.util.alert("请选择一条记录");
+        return;
+    }
+    var tabID = rows[0][tabPara.idField];
+    //var tabName = rows[0]['vote_name'];
+	if(rows.length>0)
+	{
+		tabPara.gridObj.datagrid('uncheckAll');
+	}
+	var homeTabObj = top.$("#pageContent");
+	var tabContent = '<iframe scrolling="auto" frameborder="0"  src="' + misp.util.buildPageUrl(tabPara.detailUrl) + '" style="width:100%;height:99%;"></iframe>';
+	if (homeTabObj.tabs('exists', tabPara.detailTitle))
+	{       												//如果已经打开过这个页面    
+		homeTabObj.tabs('select', tabPara.detailTitle);        	//选中该tab页面  													
+	    var tab = homeTabObj.tabs('getSelected');    		// 获取选择的面板
+	    homeTabObj.tabs('update', {							// 更新选择的面板内容
+	        tab: tab,
+	        options: {
+	            id: tabID,
+	            title: tabPara.detailTitle,
+	            content: tabContent,
+	            closable:true 
+	        }
+	    });
+    } 
+    else 
+    {
+    	homeTabObj.tabs('add', {
+    	    id: tabID,
+    	    title: tabPara.detailTitle,
+    	    content: tabContent,
+    	    closable:true    
+        });  
+    }
+};

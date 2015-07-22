@@ -4,7 +4,8 @@
 	<meta charset="UTF-8">
 </head>
 <body>
-    <form id="mispForm" name="mispForm" misp-class="misp.form" method="post" enctype="multipart/form-data">
+<div style="margin-left:20px;margin-top:10px;">
+    <form id="mispForm" misp-class="misp.form">
 		<table>
 			<tr>
     			<td style="width:100px;">Product Name:</td>
@@ -52,56 +53,56 @@
     		
         </table>
     	<div style="width:50%;float:left;height:150px;margin-top:10px;">
-    		<div misp-class="misp.img" style="margin-left:80px;">
-				<img id="img0" src="" alt="Product Img" height="100px" width="150px">
+    		<div misp-class="misp.img" data-options="type:'img'" style="margin-left:30px;">
+				<img misp-class="misp.imgDisp" src="" alt="Product Img" height="100px" width="150px" style="margin-left:20px;">
+				<div>
+					<input id="up0" name="up0" misp-class="misp.imgID" type="file" style="margin-bottom:18px;margin-top:10px;width:160px;">
+					<input type="button" onclick="misp.file.uploadImg(this)" value="Upload"/>
+				</div>
 				<div style="display:none">
-					<input id="product_img" name="product_img"  class="easyui-textbox" type="text" />
+					<input misp-class="misp.imgName" name="product_img"  class="easyui-textbox" type="text"/>
+					<input misp-class="misp.imgNewName" class="easyui-textbox" type="text"/>
 				</div>
 			</div>
-			<div style="display:none">
-				<input id="new_img" class="easyui-textbox" type="text" />
-			</div>
-			<input id="up0" name="up0" type="file" style="margin-bottom:18px;margin-left:50px;margin-top:10px;width:160px;">
-    		<input type="button" onclick="upload0()" value="Upload"/>
     	</div>
     	<div style="width:50%;float:right;height:150px;margin-top:10px;">
-	    	<div misp-class="misp.img" style="margin-left:70px;">
-				<img id="img1" src="" alt="Product Img" height="100px" width="150px">
+    		<div misp-class="misp.img" data-options="type:'img'" style="margin-left:30px;">
+				<img misp-class="misp.imgDisp" src="" alt="Product Img" height="100px" width="150px" style="margin-left:20px;">
+				<div>
+					<input id="up1" name="up1" misp-class="misp.imgID" type="file" style="margin-bottom:18px;margin-top:10px;width:160px;">
+					<input type="button" onclick="misp.file.uploadImg(this)" value="Upload"/>
+				</div>
 				<div style="display:none">
-					<input id="product_img_sm1" name="product_img_sm1"  class="easyui-textbox" type="text" />
+					<input misp-class="misp.imgName" name="product_img_sm1"  class="easyui-textbox" type="text"/>
+					<input misp-class="misp.imgNewName" class="easyui-textbox" type="text"/>
 				</div>
 			</div>
-			<div style="display:none">
-				<input id="new_img1" class="easyui-textbox" type="text" />
-			</div>
-			<input id="up1" name="up1" type="file" style="margin-bottom:18px;margin-left:30px;margin-top:10px;width:160px;">
-    		<input type="button" onclick="upload1()" value="Upload"/>
     	</div>
     	<div style="width:50%;float:left;height:150px;margin-top:10px;">
-    		<div misp-class="misp.img" style="margin-left:80px;">
-				<img id="img2" src="" alt="Product Img" height="100px" width="150px">
+    		<div misp-class="misp.img" data-options="type:'img'" style="margin-left:30px;">
+				<img misp-class="misp.imgDisp" src="" alt="Product Img" height="100px" width="150px" style="margin-left:20px;">
+				<div>
+					<input id="up2" name="up2" misp-class="misp.imgID" type="file" style="margin-bottom:18px;margin-top:10px;width:160px;">
+					<input type="button" onclick="misp.file.uploadImg(this)" value="Upload"/>
+				</div>
 				<div style="display:none">
-					<input id="product_img_sm2" name="product_img_sm2"  class="easyui-textbox" type="text" />
+					<input misp-class="misp.imgName" name="product_img_sm2"  class="easyui-textbox" type="text"/>
+					<input misp-class="misp.imgNewName" class="easyui-textbox" type="text"/>
 				</div>
 			</div>
-			<div style="display:none">
-				<input id="new_img2" class="easyui-textbox" type="text" />
-			</div>
-			<input id="up2" name="up2" type="file" style="margin-bottom:18px;margin-left:50px;margin-top:10px;width:160px;">
-    		<input type="button" onclick="upload2()" value="Upload"/>
     	</div>
     	<div style="width:50%;float:right;height:150px;margin-top:10px;">
-	    	<div misp-class="misp.img" style="margin-left:70px;">
-				<img id="img3" src="" alt="Product Img" height="100px" width="150px">
+    		<div misp-class="misp.img" data-options="type:'img'" style="margin-left:30px;">
+				<img misp-class="misp.imgDisp" src="" alt="Product Img" height="100px" width="150px" style="margin-left:20px;">
+				<div>
+					<input id="up3" name="up3" misp-class="misp.imgID" type="file" style="margin-bottom:18px;margin-top:10px;width:160px;">
+					<input type="button" onclick="misp.file.uploadImg(this)" value="Upload"/>
+				</div>
 				<div style="display:none">
-					<input id="product_img_sm3" name="product_img_sm3"  class="easyui-textbox" type="text" />
+					<input misp-class="misp.imgName" name="product_img_sm3"  class="easyui-textbox" type="text"/>
+					<input misp-class="misp.imgNewName" class="easyui-textbox" type="text"/>
 				</div>
 			</div>
-			<div style="display:none">
-				<input id="new_img3" class="easyui-textbox" type="text" />
-			</div>
-			<input id="up3" name="up3" type="file" style="margin-bottom:18px;margin-left:30px;margin-top:10px;width:160px;">
-    		<input type="button" onclick="upload3()" value="Upload"/>
     	</div>
 		<table>
 			<tr>
@@ -117,6 +118,7 @@
     	<a>&nbsp&nbsp&nbsp&nbsp</a>
     	<a class="easyui-linkbutton" iconCls="icon-cancel" style="width:60px;" onclick="misp.table.cancel()">关闭</a>
     </div>
+</div>
 <script type="text/javascript">
 function upload0(){
 	misp.util.fileUpload({

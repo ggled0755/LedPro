@@ -8,6 +8,8 @@ class MispFilterEnum
 	const FILTER_LOWER = "lower";
 	const FILTER_IN = "in";
 	const FILTER_NOT_EQUAL = "not_equal";
+	const FILTER_ASC = "asc";
+	const FILTER_DESC = "desc";
 }
 
 ?>

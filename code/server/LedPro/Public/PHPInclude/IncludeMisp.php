@@ -9,6 +9,7 @@ import("MISP.Constant.RoleEnum");
 import("MISP.Constant.SysErrorEnum");
 import("MISP.Constant.SysStatusEnum");
 import("MISP.Constant.SysTypeEnum");
+import("MISP.Constant.SysStringEnum");
 import("MISP.Constant.TokenTypeEnum");
 import("MISP.Constant.UserTypeEnum");
 import("MISP.Constant.VersionStatusEnum");

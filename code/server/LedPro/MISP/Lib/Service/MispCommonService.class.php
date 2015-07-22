@@ -89,6 +89,18 @@ class MispCommonService
 		}
 		return $result;
 	}
+	static function GetPageData($model,$condition)
+	{
+		$errorCode = MispErrorCode::SUCCESS;
+		$result = $model->where($condition['condition'])->order($condition['order'])->limit($condition['limit']['index'],$condition['limit']['pageSize'])->select();
+		if(false === $result)
+		{
+			FuegoLog::getLog()->LogErr("get page data failed.the table is ".$model->getTableName());
+			$errorCode = MispErrorCode::DB_GET_ERROR;
+			throw new FuegoException(null,$errorCode);
+		}
+		return $result;
+	}
 	static function GetUniRecord($model,$condition)
 	{
 		$errorCode = MispErrorCode::SUCCESS;

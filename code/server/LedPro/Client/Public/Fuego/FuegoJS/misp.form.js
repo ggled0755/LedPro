@@ -39,11 +39,16 @@ misp.form.form.load = function(element,data)
 				 misp.form.log("match the misp class ",mispClass);
 				 misp.form.combobox.load($(this));
 			 }
+			 else if(mispClass == "misp.radio")
+			 {
+				 misp.form.log("match the misp class ",mispClass);
+				 misp.form.radio.load($(this),data);
+			 }
 			 else if(mispClass == "misp.img")
 			 {
-				 var imgObj = $(this).find("img");
-				 var inputObj = $(this).find("input");
-				 imgObj.attr('src', misp.util.getImgUrl() + inputObj.val());
+				 var imgDispElement = misp.com.getElementByType("misp.imgDisp",$(this));
+				 var imgNameElement = misp.com.getElementByType("misp.imgName",$(this));
+				 imgDispElement.attr('src', misp.util.getImgUrl() + imgNameElement.val());
 			 }
 			 else if(mispClass == "misp.imglist")
 			 {
@@ -54,58 +59,7 @@ misp.form.form.load = function(element,data)
 		   }  
 		);
 };
-misp.form.imglist = {};
-misp.form.imglist.load = function(element,data)
-{
-	var domObj = misp.com.getDomObj(element);
-	misp.form.log(data);
-	if(null == data)
-	{
-		data = misp.com.getOptions(domObj);
-	}
-	var imgNameElement = misp.com.getElementByType("misp.imgName",domObj);
-	var imgUlElement = misp.com.getElementByType("misp.imgUl",domObj);
-	var imgNameString = imgNameElement.textbox('getValue');
-	var imgNameList = imgNameString.split("|");
-	for(var i=0;i<imgNameList.length;i++){
-		if("" != imgNameList[i])
-		{
-			var src = misp.util.getImgUrl() + imgNameList[i];
-			if(data['editable'] == false)
-			{
-				var newElement = "<li><img class='content'  src='" + src + "' style=\"width:100px;height:100px;\"></li>";
-				imgUlElement.append(newElement);
-			}
-			else
-			{
-				var newElement = "<li><img class='content'  src='" + src + "' style=\"width:100px;height:100px;\"><img class='button' src='"+swfUploadPath+"/images/fancy_close.png"+"'></li>";
-				imgUlElement.append(newElement);
-			    $("img.button").last().bind("click", function(){
-			    	var src = $(this).siblings('img').attr('src');
-			    	var img = src.replace(misp.util.getImgUrl(),'');
-			    	var imgName = imgNameElement.textbox('getValue');
-			    	misp.util.submit({
-			    	  data : img,
-			    	  url : "Index|ImgDelete",
-			    	  success:function(obj){
-			    		  var lastImgName;
-						if(imgName.indexOf("|")>0)
-						{
-							lastImgName = imgName.replace("|"+obj,'');
-						}
-						else
-						{
-							lastImgName = imgName.replace(obj,'');
-						}
-						imgNameElement.textbox('setValue',lastImgName);
-			    	  }
-			    	});
-			    	$(this).parent().remove();
-			    });
-			}
-		}
-	}
-};
+//加载form中的combobox
 misp.form.combobox= {};
 misp.form.combobox.load = function(element,data)
 {     
@@ -159,6 +113,91 @@ misp.form.combobox.load = function(element,data)
 	  
 	  domObj.combobox(data);
 };
+//加载form中的radio
+misp.form.radio = {};
+misp.form.radio.load = function(element,data)
+{
+	var radioElement = misp.com.getDomObj(element);
+	var inputs = radioElement.find("input");
+	var inputName = "";
+	inputs.each(function () {
+		inputName = $(this).attr("name");
+    });
+	radioElement.radio('check',data[inputName]);
+};
+//加载form中的imglist
+misp.form.imglist = {};
+misp.form.imglist.load = function(element,data)
+{
+	var imgListElement = misp.com.getDomObj(element);
+	misp.form.log(data);
+	if(null == data)
+	{
+		data = misp.com.getOptions(imgListElement);
+	}
+	var imgNameElement = misp.com.getElementByType("misp.imgName",imgListElement);
+	var imgUlElement = misp.com.getElementByType("misp.imgUl",imgListElement);
+	var imgNameJson = imgNameElement.textbox('getValue');
+	var imgNameList = [];
+	if("" != imgNameJson)
+	{
+		imgNameList = misp.util.jsonToObj(imgNameJson);
+	}
+	for(var i=0;i<imgNameList.length;i++){
+		if("" != imgNameList[i])
+		{
+			var src = misp.util.getImgUrl() + imgNameList[i];
+			if(data['editable'] == false)
+			{
+				var newElement = "<li style=\"height:110px;\"><img class='content'  src='" + src + "' style=\"width:100px;height:100px;\"></li>";
+				imgUlElement.append(newElement);
+			}
+			else
+			{
+				var newElement = "<li style=\"height:110px;\"><img class='content'  src='" + src + "' style=\"width:100px;height:100px;\"><img class='button' src='"+swfUploadPath+"/images/fancy_close.png"+"'></li>";
+			    imgUlElement.append(newElement);
+			    //缩略图处理
+			    var imgThumbElement = misp.com.getElementByType("misp.imgThumbName",imgListElement);
+				$("img.button").last().bind("click", function(){
+			    	var src = $(this).siblings('img').attr('src');
+			    	var img = src.replace(misp.util.getImgUrl(),'');
+			    	var imgNameJson = imgNameElement.textbox('getValue');
+			    	var imgNameList = [];
+			    	if("" != imgNameJson)
+			    	{
+			    		imgNameList = misp.util.jsonToObj(imgNameJson);
+			    	}
+			    	misp.util.submit({
+			    	  data : img,
+			    	  url : "MispFile|ImgDelete",
+			    	  success:function(obj){
+			    		  imgNameList.remove(obj);
+			    		  imgNameJson = misp.util.objToJson(imgNameList);
+			    		  imgNameElement.textbox('setValue',imgNameJson);
+			    		  //缩略图处理
+			    		  if(null != imgThumbElement)
+			    		  {
+			    			  var imgThumbJson = imgThumbElement.textbox('getValue');
+			    			  var imgThumbList = [];
+			    			  if("" != imgThumbJson)
+			    			  {
+			    				  imgThumbList = misp.util.jsonToObj(imgThumbJson);
+			    			  }
+			    			  var imgNames = obj.split(".");
+			    			  var thumbObj = imgNames[0] + "_small." + imgNames[1];
+			    			  imgThumbList.remove(thumbObj);
+			    			  imgThumbJson = misp.util.objToJson(imgThumbList);
+			    			  imgThumbElement.textbox('setValue',imgThumbJson);
+			    		  }
+			    	  }
+			    	});
+			    	$(this).parent().remove();
+			    });
+			}
+		}
+	}
+};
+
 //扩展comboTree LoadFilter方法 ，参数说明参考tree扩展loadFilter方法
 $.fn.combotree.defaults.loadFilter = function (data, parent) {
   var opt = $(this).data().tree.options;

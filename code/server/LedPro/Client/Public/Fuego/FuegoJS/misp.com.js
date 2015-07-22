@@ -69,8 +69,12 @@ misp.com.getFilterJson = function(element,searchObj)
 	        }
 	        if (attrName == $(this).attr("name")) {
 	            searchFilter.firstValue = $(this).val();
-	            searchFilterList.push(searchFilter);
-	            searchFilter = new Object;
+	            if(searchFilter.firstValue !="")
+	            {
+	            	searchFilterList.push(searchFilter);
+		            searchFilter = new Object;
+	            }	
+	            
 	        }
 	    });
 	    if(null != searchObj)

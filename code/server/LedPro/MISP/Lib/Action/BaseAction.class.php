@@ -100,7 +100,8 @@ class BaseAction extends Action
 	 }
 	 public function ConvertToCondition($filterList)
 	 {
-	 	$searchFilter= array();
+	 	$searchFilter = array();
+	 	$orderFilter = array();
 	 	$conditiontype = array();
 	 	foreach($filterList as $filter)
 	 	{
@@ -141,12 +142,12 @@ class BaseAction extends Action
 	 				case MispFilterEnum::FILTER_BIGGER :
 	 					if(null==$conditiontype[$filter->attrName])
 	 					{
-	 						$searchFilter[$filter->attrName] = array('EGT',$filter->firstValue);
+	 						$searchFilter[$filter->attrName] = array('GT',$filter->firstValue);
 	 						$conditiontype[$filter->attrName] = "1";
 	 					}
 	 					else
 	 					{
-	 						$condition[$filter->attrName] = array('EGT',$filter->firstValue);
+	 						$condition[$filter->attrName] = array('GT',$filter->firstValue);
 	 						$condition['_logic'] = "AND";
 	 						$searchFilter['_complex'] = $condition;
 	 					}
@@ -154,12 +155,12 @@ class BaseAction extends Action
 	 				case MispFilterEnum::FILTER_LOWER :
 	 					if(null==$conditiontype[$filter->attrName])
 	 					{
-	 						$searchFilter[$filter->attrName] = array('ELT',$filter->firstValue);
+	 						$searchFilter[$filter->attrName] = array('LT',$filter->firstValue);
 	 						$conditiontype[$filter->attrName] = "1";
 	 					}
 	 					else
 	 					{
-	 						$condition[$filter->attrName] = array('ELT',$filter->firstValue);
+	 						$condition[$filter->attrName] = array('LT',$filter->firstValue);
 	 						$condition['_logic'] = "AND";
 	 						$searchFilter['_complex'] = $condition;
 	 					}
@@ -189,18 +190,46 @@ class BaseAction extends Action
 							$condition['_logic'] = "AND";
 							$searchFilter['_complex'] = $condition;
 						}
-						break;			
+						break;
+					case MispFilterEnum::FILTER_ASC:
+						$orderFilter[$filter->attrName] = MispFilterEnum::FILTER_ASC;
+						break;
+					case MispFilterEnum::FILTER_DESC :
+						$orderFilter[$filter->attrName] = MispFilterEnum::FILTER_DESC;
+						break;
 	 			}
 	 		}
-	 		
 	 	}
-	 	return $searchFilter;
+	 	$filterCondition['condition'] = $searchFilter;
+	 	$filterCondition['order'] = $orderFilter;
+	 	$this->LogInfo("ConvertToCondition, fitler condition is ".json_encode($filterCondition));
+	 	return $filterCondition;
 	 }
 	 public function GetCondition()
 	 {
-	 	$json = $this->GetReqJson();
-	 	$req = json_decode($json);
-	 	$searchFilter = $this->ConvertToCondition($req->conditionList);
+	 	$searchFilter = array();
+	 	$ReqType = $this->GetReqType();
+	 	if(($ReqType == ClientTypeEnum::IOS)||($ReqType == ClientTypeEnum::ANDROID))
+	 	{
+	 		$json = $this->GetReqJson();
+	 		$req = json_decode($json);
+	 		$searchFilter = $this->ConvertToCondition($req->conditionList);
+	 	}
+	 	else 
+	 	{
+	 		if(null == $_POST['filter'])
+	 		{
+	 			$this->LogWarn("Web search Filter condition is empty");
+	 		}
+	 		else
+	 		{
+	 			$PostStr = stripslashes($_POST['filter']);
+	 			$this->LogInfo("Web search Filter condition is ".$PostStr);
+	 			$filterList = json_decode($PostStr);
+	 			$searchFilter = $this->ConvertToCondition($filterList);
+	 		}
+	 	}
+	 	$this->LogInfo("search filter is ".json_encode($searchFilter));
 	 	return $searchFilter;
 	 }
 	 public function GetReqAppID()
@@ -209,7 +238,7 @@ class BaseAction extends Action
 	 	$req = json_decode($json); 
 	 	return $req->app_id;
 	 }
-	 public function GetPageData()
+	 public function GetAppPage()
 	 {
 	 	$json = $this->GetReqJson();
 	 	$req = json_decode($json);
