@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backcolor"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/tabbar_height"
+    android:background="@color/themecolor"
+        android:gravity="center" >
+
+        <LinearLayout
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/misp_title_back"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/misp_tilte_btn_selector"
+                android:drawableLeft="@drawable/back"
+                android:drawablePadding="5dp"
+                android:gravity="left|center_vertical"
+                android:paddingLeft="10dp"
+                android:text="@string/misp_back"
+                android:textColor="@color/theme_text_color"
+                android:textSize="@dimen/top_head_btn_size" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/misp_title_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/theme_text_color"
+                android:textSize="@dimen/top_head_title_font_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/ttt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@drawable/misp_tilte_btn_selector"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="@string/misp_save"
+                android:textColor="@color/theme_text_color"
+                android:textSize="@dimen/top_head_btn_size"
+                android:visibility="invisible" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+ 
+</LinearLayout>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/common_item"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/item_backgroud"
+        android:padding="18dp" >
+
+        <TextView
+            android:id="@+id/item_btn_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_filter_categories"
+            android:textColor="#434343"
+            android:textSize="@dimen/content_font_size" />
+
+        <TextView
+            android:id="@+id/item_btn_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/forward_sm"
+            android:text="All"
+            android:textColor="#888c90"
+            android:textSize="@dimen/content_font_size" />
+
+        <ImageView
+            android:id="@+id/forward_sm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/btn_forward_icon" />
+    </RelativeLayout>
+
+</LinearLayout>

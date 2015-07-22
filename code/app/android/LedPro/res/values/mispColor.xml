@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color  name="list_normal">#FFFFFF</color> 
+    <color  name="list_active">#FFFFFF</color> 
+    <color  name="list_pressed">#c4cedc</color> 
+
+    <color  name="misp_list_item_normal">#FFFFFF</color> 
+    <color  name="misp_list_item_active">#FFFFFF</color> 
+    <color  name="misp_list_item_pressed">#c4cedc</color> 
+    
+    <color  name="misp_title_btn_seletor_normal">#143844</color> 
+    <color  name="misp_title_btn_seletor_active">#143844</color> 
+    <color  name="misp_title_btn_seletor_pressed">#143823</color> 
+    
+    <color name="blue">#205ba9</color>
+    <color name="gray">#c8c8c8</color>
+    <color name="active_color">#f08300</color>
+</resources>

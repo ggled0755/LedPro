@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backcolor"
+    android:orientation="vertical" xmlns:app="http://schemas.android.com/apk/res/cn.fuego.led">
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="REFINE BY"
+        android:textColor="#0a0d17"
+        android:textSize="@dimen/head_font_size_sm" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ScrollView
+            android:id="@+id/scrollView1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/btn_area" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@drawable/divider_v"
+                android:orientation="vertical"
+                android:showDividers="middle" >
+
+                <cn.fuego.misp.ui.base.MispListViewAdaptScroll
+                    android:id="@+id/pop_filter_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+                </cn.fuego.misp.ui.base.MispListViewAdaptScroll>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:padding="18dp" >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" >
+
+                        <TextView
+                            android:id="@+id/TextView01"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/title_filter_lumen"
+                            android:textColor="#434343"
+                            android:textSize="@dimen/content_font_size" />
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" >
+
+                            <TextView
+                                android:id="@+id/TextView02"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@drawable/edittext_nomal"
+                                android:padding="5dp"
+                                android:text="3"
+                                android:textColor="#888c90"
+                                android:textSize="13sp" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" >
+
+                            <TextView
+                                android:id="@+id/TextView03"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@drawable/edittext_nomal"
+                                android:padding="5dp"
+                                android:text="1000"
+                                android:textColor="#888c90"
+                                android:textSize="13sp" />
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/filter_seek_lm"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="30dip" >
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:id="@+id/btn_area"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_weight="1" >
+
+            <Button
+                android:id="@+id/pop_filter_cancel_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="left|center_vertical"
+                android:padding="20dp"
+                android:text="@string/btn_filter_cancel"
+                android:textSize="@dimen/content_font_size" />
+
+            <Button
+                android:id="@+id/pop_filter_confirm_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="right|center_vertical"
+                android:padding="20dp"
+                android:text="@string/btn_filter_confirm"
+                android:textSize="@dimen/content_font_size" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

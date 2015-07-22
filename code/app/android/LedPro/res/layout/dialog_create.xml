@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#5e5e57"
+    android:divider="@drawable/divider_v"
+    android:orientation="vertical"
+    android:showDividers="middle" >
+
+    <TextView
+        android:id="@+id/dialog_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="title"
+        android:textColor="@color/white"
+        android:textSize="@dimen/content_font_size" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/dialog_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:ems="10"
+            android:gravity="top|left"
+            android:hint="Please enter your name here"
+            android:lines="3"
+            android:paddingBottom="20dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="10dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/backcolor" >
+
+            <requestFocus />
+        </EditText>
+
+        <LinearLayout
+            android:id="@+id/btn_area"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <Button
+                android:id="@+id/dialog_cancel_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="left|center_vertical"
+                android:padding="20dp"
+                android:text="@string/btn_filter_cancel"
+                android:textColor="@color/white"
+                android:textSize="@dimen/content_font_size" />
+
+            <Button
+                android:id="@+id/dialog_confirm_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="right|center_vertical"
+                android:padding="20dp"
+                android:text="@string/btn_filter_confirm"
+                android:textColor="@color/themecolor"
+                android:textSize="@dimen/content_font_size" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

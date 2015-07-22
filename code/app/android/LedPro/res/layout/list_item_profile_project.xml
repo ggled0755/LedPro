@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/common_item"
+    android:orientation="horizontal"
+    android:padding="18dp" >
+
+    <LinearLayout
+        android:id="@+id/pro_l"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/ll"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:background="@drawable/btn_border" >
+
+            <ImageView
+                android:id="@+id/item_project_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:src="@drawable/icon_add" />
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/item_project_email_btn"
+            android:layout_width="90dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/profile_email_btn"
+            android:focusable="false"
+            android:minHeight="20dp"
+            android:minWidth="32dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/item_project_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Project 1"
+                android:textSize="@dimen/head_font_size_sm" />
+
+            <Button
+                android:id="@+id/item_project_edit_btn"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/icon_edit"
+                android:focusable="false" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/item_project_notes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:text="Free Notes"
+            android:textSize="13sp" />
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#c3bfbf" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/item_project_product_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:alpha="0.9"
+                android:text="Products"
+                android:textColor="@color/black"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/item_project_watt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:alpha="0.9"
+                android:text="Watt/Month"
+                android:textColor="@color/black"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/item_project_tco"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:alpha="0.9"
+                android:text="TCO"
+                android:textColor="@color/black"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

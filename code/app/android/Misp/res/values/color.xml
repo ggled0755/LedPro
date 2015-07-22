@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="white">#FFFFFF</color><!--白色 -->
+	<color name="black">#000000</color><!-- 黑色 -->
+	<color name="themecolor">#ff8902</color> <!-- 主题橘色 -->
+	<color name="backcolor">#f2f2ef</color>  <!-- 背景墙纸颜色 -->
+	<color name="bg_color_orange">#fff8e9</color>  <!-- 橙色背景 -->
+	
+	<!-- 字体颜色-->
+	<color name="content_text_color_green">#75d01d</color>  
+	<color name="content_text_color_gray">#a8a8a8</color>  
+	<color name="content_text_color_orange">#ff8902</color>  
+	<color name="content_text_color_red">#d9300c</color>
+
+	<color name="item_title_color">#4b4b4b</color> 
+	<color name="item_desp_color">#7a7a7a</color>
+	
+	<!-- 按钮颜色-->
+	<color name="btn_color_red">#db3000</color>
+	<color name="btn_color_red_d">#a54123</color>
+	<color name="btn_color_green">#74d11c</color>
+	<color name="btn_color_green_d">#74d11c</color>
+	
+
+	
+	
+	<color name="theme_text_color">#FFFFFF</color>
+	<color name="content_text_color">#000000</color>
+
+	
+	<color name="focuscolor">#FF643F</color> <!-- 选中字体颜色 ，橘红色（255,100,63）-->
+
+	<color name="selectedcolor">#F6AB00</color>
+
+	</resources>

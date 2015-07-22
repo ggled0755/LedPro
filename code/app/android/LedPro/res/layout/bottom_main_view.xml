@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/backcolor"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/bottom_search_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#EFEFEF"
+        android:paddingBottom="10dp"
+        android:paddingLeft="18dp"
+        android:paddingRight="18dp"
+        android:paddingTop="10dp"
+        android:visibility="gone" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <cn.fuego.led.ui.widget.OrderButton
+                android:id="@+id/order_pf_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+            </cn.fuego.led.ui.widget.OrderButton>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <cn.fuego.led.ui.widget.OrderButton
+                android:id="@+id/order_like_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true" >
+
+            </cn.fuego.led.ui.widget.OrderButton>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <cn.fuego.led.ui.widget.OrderButton
+                android:id="@+id/order_price_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true" >
+
+            </cn.fuego.led.ui.widget.OrderButton>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <Button
+                android:id="@+id/sort_filter_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_weight="1"
+                android:background="@null"
+                android:drawableLeft="@drawable/icon_filter_normal"
+                android:minHeight="24dp"
+                android:minWidth="24dp" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/search_box_bg"
+        android:paddingBottom="10dp"
+        android:paddingLeft="18dp"
+        android:paddingRight="18dp"
+        android:paddingTop="10dp" >
+
+        <CheckBox
+            android:id="@+id/host_tab_chk"
+            style="@null"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/btn_host_tab"
+            android:button="@null"
+            android:checked="false"
+            android:focusable="false" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/host_search_chk"
+            android:layout_toRightOf="@+id/host_tab_chk"
+            android:background="@drawable/search_box" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:focusable="true"
+                android:focusableInTouchMode="true" >
+
+                <EditText
+                    android:id="@+id/host_search_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toLeftOf="@+id/host_search_clear_btn"
+                    android:background="@null"
+                    android:drawableLeft="@drawable/icon_search"
+                    android:drawablePadding="10dp"
+                    android:ems="10"
+                    android:gravity="center_vertical"
+                    android:hint="@string/search_hint"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
+                    android:padding="5dp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/content_font_size_sm"
+                    android:visibility="gone" >
+
+                    <requestFocus />
+                </EditText>
+
+                <Button
+                    android:id="@+id/host_search_clear_btn"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/icon_search_clear"
+                    android:focusable="false"
+                    android:visibility="gone" />
+
+                <RelativeLayout
+                    android:id="@+id/host_search_preview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false" >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true" >
+
+                        <ImageView
+                            android:id="@+id/imageView1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/icon_search" />
+
+                        <TextView
+                            android:id="@+id/textView1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:gravity="center_vertical"
+                            android:text="@string/search_hint"
+                            android:textColor="@color/gray"
+                            android:textSize="@dimen/content_font_size" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/host_search_chk"
+            style="@null"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/btn_host_search"
+            android:button="@null"
+            android:focusable="false" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/bottom_tab_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="10dp"
+        android:visibility="gone" >
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:background="@drawable/tab_divider" />
+
+        <LinearLayout
+            android:id="@+id/b"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" >
+
+                <Button
+                    android:id="@+id/bottom_home_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/btn_tab_home"
+                    android:focusable="false"
+                    android:minHeight="24dp"
+                    android:minWidth="24dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" >
+
+                <Button
+                    android:id="@+id/bottom_scan_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="36dp"
+                    android:background="@drawable/btn_tab_scan"
+                    android:focusable="false"
+                    android:minHeight="24dp"
+                    android:minWidth="24dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" >
+
+                <Button
+                    android:id="@+id/bottom_profile_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="36dp"
+                    android:background="@drawable/btn_tab_profile"
+                    android:focusable="false"
+                    android:minHeight="24dp"
+                    android:minWidth="24dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" >
+
+                <Button
+                    android:id="@+id/bottom_setting_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="36dp"
+                    android:background="@drawable/btn_tab_setting"
+                    android:focusable="false"
+                    android:minHeight="24dp"
+                    android:minWidth="24dp" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

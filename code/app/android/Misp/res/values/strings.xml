@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">咪厨</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="tabbar_home">首页</string>
+    <string name="tabbar_grab">抢单</string>
+    <string name="tabbar_cart">购物车</string>
+    <string name="tabbar_user">我的</string>
+    <string name="tabbar_default">菜单</string>
+    <string name="user_user_name">真实姓名</string>
+    <string name="user_user_nickname">昵称</string>
+    <string name="user_user_sex">性别</string>
+    <string name="user_user_birthday">生日</string>
+    <string name="user_user_phone">手机号码</string>
+    <string name="user_user_email">邮箱</string>
+    <string name="user_user_addr">常用地址</string>
+    <string name="deliver_take_addr">取衣地址</string>
+    <string name="deliver_delivery_addr">送衣地址</string>
+    <string name="deliver_contact">联系人</string>
+    <string name="deliver_contact_phone">联系电话</string>
+    <string name="order_pay_option">支付方式</string>
+    <string name="order_note">您的要求</string>
+    <string name="default_addr">默认地址</string>
+    <string name="location_addr">当前地址</string>
+    <string name="gl_wait">请稍等</string>
+    <string name="gl_choose_title">请选择图片</string>
+
+    <!-- jpush 准备清理 -->
+    <string name="tag_hint">Tag can be numbe alphabet, underscore, Chinese. Use , to split many tags.</string>
+    <string name="alias_hint">Alias can be number, alphabet, underscore, Chinese.</string>
+    <string name="style_hint">style should be number</string>
+    <string name="error_style_empty">style cannot be empty</string>
+    <string name="error_alias_empty">alias cannot be empty</string>
+    <string name="error_tag_empty">tag cannot be empty</string>
+    <string name="error_tag_gs_empty">Invalid format</string>
+    <string name="error_network">Failed to init due to network exception.</string>
+    <string name="logining">Running in background. Please see log.</string>
+    <string name="setting_su">Succeed to set</string>
+    <string name="title_activity_grab_fragment">GrabFragment</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_seller_list">SellerListActivity</string>
+    <string name="title_activity_product_type_list">ProductTypeListActivity</string>
+    <string name="title_activity_product_list">ProductListActivity</string>
+    <string name="title_activity_product_info">ProductInfoActivity</string>
+    <string name="title_activity_delivery_info">DeliveryInfoActivity</string>
+    <string name="title_activity_pay">PayActivity</string>
+    <string name="title_activity_grab_detail">GrabDetailActivity</string>
+    <string name="title_activity_user_info">UserInfoActivity</string>
+    <string name="title_activity_account">AccountActivity</string>
+    <string name="title_activity_order_history">OrderHistoryActivity</string>
+    <string name="title_activity_order_message">OrderMessageActivity</string>
+    <string name="title_activity_courier_info">CourierInfoActivity</string>
+    <string name="title_activity_setting">SettingActivity</string>
+    <string name="title_activity_courier_apply">CourierApplyActivity</string>
+    <string name="title_activity_shop_manage_apply">ShopManageApplyActivity</string>
+    <string name="title_activity_img_crop">ImgCropActivity</string>
+    <string name="title_activity_eval">EvalActivity</string>
+
+    
+    <string name="pull_to_refresh">下拉刷新</string>
+    <string name="release_to_refresh">释放立即刷新</string>
+    <string name="refreshing">正在刷新...</string>
+    <string name="refresh_succeed">刷新成功</string>
+    <string name="refresh_fail">刷新失败</string>
+    <string name="pullup_to_load">上拉加载更多</string>
+    <string name="release_to_load">释放立即加载</string>
+    <string name="loading">正在加载...</string>
+    <string name="load_succeed">加载成功</string>
+    <string name="load_fail">加载失败</string>
+</resources>

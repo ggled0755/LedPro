@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+ 
+    
+    <string name="misp_back">返回</string>
+    <string name="misp_save">保存</string>
+    <string name="misp_title">标题</string>
+    <string name="misp_submit">提交</string>
+    
+    <string name="misp_type">分类</string>
+    
+    <string name="misp_confirm">确定</string>
+    <string name="misp_cancel">取消</string>
+    <string name="misp_modify">修改</string>
+    <string name="misp_delete">删除</string>
+    <string name="misp_create">新增</string>
+    <string name="misp_udpate">更新</string>
+    <string name="misp_old_password">原始密码</string>
+    <string name="misp_new_password">新密码</string>
+    <string name="misp_confirm_password">确认密码</string>
+    
+    <string name="misp_rmb_unit">￥:</string>
+ 
+
+</resources>
+ 
+ 

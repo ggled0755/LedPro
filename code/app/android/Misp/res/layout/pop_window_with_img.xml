@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/backcolor"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/themecolor" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/themecolor" >
+
+            <TextView
+                android:id="@+id/pop_window_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="标题"
+                android:textColor="@color/white"
+                android:textSize="@dimen/content_font_size" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_margin="10dp"
+            android:layout_weight="2" >
+
+            <Button
+                android:id="@+id/check_log_email_btn"
+                style="@null"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/btn_green"
+                android:text="分享到微信"
+                android:textColor="@color/white"
+                android:textSize="@dimen/content_font_size_sm" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/pop_window_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="暂无描述信息"
+        android:textColor="@color/focuscolor"
+        android:textSize="@dimen/content_font_size" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/edittext_focused"
+        android:padding="10dp" >
+
+        <ImageView
+            android:id="@+id/pop_window_imgarea"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/load_large_image_failed" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/TextView01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="巡检员："
+            android:textColor="@color/black"
+            android:textSize="@dimen/content_font_size" />
+
+        <TextView
+            android:id="@+id/check_log_checker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="巡检员："
+            android:textColor="@color/black"
+            android:textSize="@dimen/content_font_size" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/TextView03"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="巡检时间："
+            android:textColor="@color/black"
+            android:textSize="@dimen/content_font_size" />
+
+        <TextView
+            android:id="@+id/check_log_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="巡检员："
+            android:textColor="@color/black"
+            android:textSize="@dimen/content_font_size" />
+    </LinearLayout>
+
+</LinearLayout>

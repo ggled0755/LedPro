@@ -1,0 +1,85 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backcolor"
+    android:orientation="vertical"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <TextView
+        android:id="@+id/misp_title_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="REFINE BY"
+        android:textColor="#0a0d17"
+        android:textSize="@dimen/head_font_size_sm" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ScrollView
+            android:id="@+id/scrollView1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/btn_area"
+            android:visibility="visible" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@drawable/divider_v"
+                android:orientation="vertical"
+                android:showDividers="middle" >
+
+                <cn.fuego.misp.ui.base.MispListViewAdaptScroll
+                    android:id="@+id/filter_refine_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:divider="@color/backcolor"
+                    android:dividerHeight="1dp"
+                    android:minHeight="30dip" >
+
+                </cn.fuego.misp.ui.base.MispListViewAdaptScroll>
+            </LinearLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:id="@+id/btn_area"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_weight="1" >
+
+            <Button
+                android:id="@+id/misp_title_back"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="left|center_vertical"
+                android:padding="20dp"
+                android:text="@string/btn_filter_cancel"
+                android:textColor="@color/black"
+                android:textSize="@dimen/content_font_size" />
+
+            <Button
+                android:id="@+id/misp_title_save"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="right|center_vertical"
+                android:padding="20dp"
+                android:text="@string/btn_filter_confirm"
+                android:textColor="@color/black"
+                android:textSize="@dimen/content_font_size" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>
