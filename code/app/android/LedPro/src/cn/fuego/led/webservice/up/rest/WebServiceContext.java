@@ -94,4 +94,12 @@ public class WebServiceContext
 
 		return rest;
 	}
+	
+	public SubfolderRest getSubfolderRest(HttpListener handler)
+	{
+	 
+		SubfolderRest rest = MispProxyFactory.create( hostURL,SubfolderRest.class, getHttpClient(),handler);
+
+		return rest;
+	}
 }

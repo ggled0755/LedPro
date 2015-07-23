@@ -31,7 +31,7 @@ public interface ProjectRest
 {
 	
 	@POST
-	@Path("/Project/LoadList")
+	@Path("/Project/LoadAll")
 	MispBaseRspJson loadAll(MispBaseReqJson req);
 	
 	@POST

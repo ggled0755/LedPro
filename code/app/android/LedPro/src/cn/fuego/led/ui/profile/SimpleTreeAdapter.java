@@ -55,7 +55,9 @@ public class SimpleTreeAdapter<T> extends TreeListViewAdapter<T>
 			viewHolder.node_icon.setVisibility(View.VISIBLE);
 			viewHolder.node_icon.setImageResource(node.getIcon());
 		}
-		if(node.getChildren().size()>0)
+
+		//viewHolder.folder_icon.setImageResource((R.drawable.tree_icon_folder));
+		if(node.isSelected())
 		{
 			viewHolder.folder_icon.setImageResource(R.drawable.icon_folder_full);
 		}

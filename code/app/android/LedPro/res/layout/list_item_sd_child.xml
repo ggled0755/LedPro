@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/common_item"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/item_sd_child_num_btn" >
+
+            <CheckBox
+                android:id="@+id/item_sd_child_chk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/checkbox"
+                android:button="@null"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/item_sd_child_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="TextView"
+                android:textColor="@color/black"
+                android:textSize="@dimen/content_font_size" />
+
+        </LinearLayout>
+
+        <cn.fuego.led.ui.widget.RecAddAndSubView
+            android:id="@+id/item_sd_child_num_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="false"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp" >
+
+        </cn.fuego.led.ui.widget.RecAddAndSubView>
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -13,7 +13,7 @@ import java.util.List;
 
 import cn.fuego.led.webservice.up.model.base.ProductJson;
 import cn.fuego.led.webservice.up.model.base.ProjectJson;
-import cn.fuego.led.webservice.up.model.base.ProjectSubfolderJson;
+import cn.fuego.led.webservice.up.model.base.SubfolderJson;
 
 /** 
  * @ClassName: Stub 
@@ -92,24 +92,24 @@ public class StubData
 		
 	}
 
-	public static List<ProjectSubfolderJson> getSubfolderList()
+	public static List<SubfolderJson> getSubfolderList()
 	{
-		List<ProjectSubfolderJson> fList = new ArrayList<ProjectSubfolderJson>();
-		ProjectSubfolderJson f1 = new ProjectSubfolderJson();
+		List<SubfolderJson> fList = new ArrayList<SubfolderJson>();
+		SubfolderJson f1 = new SubfolderJson();
 		f1.setSubfolder_id(1);
 		f1.setSubfolder_parent_id(0);
 		f1.setSubfolder_name("subfolder1");
 		f1.setProject_id(1);
 		fList.add(f1);
 
-		ProjectSubfolderJson f2 = new ProjectSubfolderJson();
+		SubfolderJson f2 = new SubfolderJson();
 		f2.setSubfolder_id(2);
 		f2.setSubfolder_parent_id(1);
 		f2.setSubfolder_name("subfolder1.1");
 		f2.setProject_id(1);
 		fList.add(f2);
 		
-		ProjectSubfolderJson f3 = new ProjectSubfolderJson();
+		SubfolderJson f3 = new SubfolderJson();
 		f3.setSubfolder_id(3);
 		f3.setSubfolder_parent_id(0);
 		f3.setSubfolder_name("subfolder2");

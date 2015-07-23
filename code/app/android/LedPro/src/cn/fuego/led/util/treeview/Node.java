@@ -41,6 +41,7 @@ public class Node implements Serializable
 	 */
 	private Node parent;
 
+	private boolean isSelected =false;
 	public Node()
 	{
 	}
@@ -73,12 +74,12 @@ public class Node implements Serializable
 		this.id = id;
 	}
 
-	public int getpId()
+	public int getPId()
 	{
 		return pId;
 	}
 
-	public void setpId(int pId)
+	public void setPId(int pId)
 	{
 		this.pId = pId;
 	}
@@ -180,6 +181,17 @@ public class Node implements Serializable
 			}
 		}
 	}
+
+	public boolean isSelected()
+	{
+		return isSelected;
+	}
+
+	public void setSelected(boolean isSelected)
+	{
+		this.isSelected = isSelected;
+	}
+
 
 
 

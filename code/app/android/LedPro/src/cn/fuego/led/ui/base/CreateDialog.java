@@ -11,7 +11,11 @@ package cn.fuego.led.ui.base;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.WindowManager.LayoutParams;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -56,7 +60,11 @@ public class CreateDialog extends Dialog
             super.onCreate(savedInstanceState);
             setContentView(R.layout.dialog_create);
            
-
+            Window dialogWindow = CreateDialog.this.getWindow();  
+            WindowManager.LayoutParams lp = dialogWindow.getAttributes();  
+            dialogWindow.setGravity(Gravity.CENTER);  
+            lp.width = LayoutParams.FILL_PARENT;  
+            dialogWindow.setAttributes(lp); 
             //设置标题
             TextView title = (TextView) findViewById(R.id.dialog_title);
             title.setText(txt_title);

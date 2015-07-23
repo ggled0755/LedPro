@@ -32,7 +32,7 @@ public interface SubfolderRest
 	//该部分接口还存在问题，待改进
 	@POST
 	@Path("/Subfolder/LoadList")
-	MispBaseRspJson loadSubfolder(MispBaseReqJson req);
+	MispBaseRspJson loadAll(MispBaseReqJson req);
 	
 	@POST
 	@Path("/Subfolder/Create")
@@ -47,16 +47,18 @@ public interface SubfolderRest
 	MispBaseRspJson deleteSubfolder(MispBaseReqJson req);
 	
 	@POST
-	@Path("/SubfolderDeatil/Create")
+	@Path("/SubfolderDetail/Create")
 	MispBaseRspJson createSubfolderDetail(MispBaseReqJson req);
 	
 	@POST
-	@Path("/SubfolderDeatil/Modify")
+	@Path("/SubfolderDetail/Modify")
 	MispBaseRspJson modifySubfolderDetail(MispBaseReqJson req);
 	
 	@POST
-	@Path("/SubfolderDeatil/Delete")
+	@Path("/SubfolderDetail/Delete")
 	MispBaseRspJson deleteSubfolderDetail(MispBaseReqJson req);
 	
-	
+	@POST
+	@Path("/SubfolderDetail/LoadAll")
+	MispBaseRspJson loadDetailList(MispBaseReqJson req);	
 }

@@ -36,7 +36,7 @@
             android:paddingRight="20dp"
             android:paddingTop="10dp"
             android:textColor="@color/white"
-            android:textColorHint="@color/backcolor" >
+            android:textColorHint="@color/gray" >
 
             <requestFocus />
         </EditText>

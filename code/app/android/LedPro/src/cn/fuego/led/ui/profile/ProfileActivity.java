@@ -1,8 +1,10 @@
 package cn.fuego.led.ui.profile;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import test.StubData;
+import org.codehaus.jackson.type.TypeReference;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,12 +12,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import cn.fuego.common.contanst.ConditionTypeEnum;
+import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.led.R;
+import cn.fuego.led.cache.AppCache;
 import cn.fuego.led.ui.base.LedBaseListActivity;
 import cn.fuego.led.ui.project.ProjectDetailActivity;
 import cn.fuego.led.ui.widget.OrderButton;
 import cn.fuego.led.webservice.up.model.base.ProjectJson;
+import cn.fuego.led.webservice.up.rest.WebServiceContext;
 import cn.fuego.misp.ui.util.LoadImageUtil;
+import cn.fuego.misp.webservice.json.MispBaseReqJson;
+import cn.fuego.misp.webservice.json.MispBaseRspJson;
 
 public class ProfileActivity extends LedBaseListActivity<ProjectJson>
 {
@@ -36,7 +44,7 @@ public class ProfileActivity extends LedBaseListActivity<ProjectJson>
 		
 		this.setAdapterForScrollView();
 		
-		this.setDataList(StubData.getProjectList());
+		//this.setDataList(StubData.getProjectList());
 	}
 	public static void jump(Context context)
 	{
@@ -83,16 +91,23 @@ public class ProfileActivity extends LedBaseListActivity<ProjectJson>
 	@Override
 	public void loadSendList()
 	{
-		// TODO Auto-generated method stub
+		MispBaseReqJson req = new MispBaseReqJson();
+		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
+		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "create_user_id", AppCache.getInstance().getUser().getUser_id()));
+		req.setConditionList(conditionList);
+		
+		WebServiceContext.getInstance().getProjectRest(this).loadAll(req);
 		
 	}
 
 	@Override
 	public List<ProjectJson> loadListRecv(Object obj)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		MispBaseRspJson rsp = (MispBaseRspJson) obj;
+		
+		return rsp.GetReqCommonField(new TypeReference<List<ProjectJson>>(){});
 	}
+	
 	@Override
 	public void onOrderStateChanged(OrderButton orderBtn, Integer orderState)
 	{

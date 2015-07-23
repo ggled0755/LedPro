@@ -16,7 +16,11 @@
     <string name="title_activity_project_detail">ProjectDetail</string>
     <string name="title_activity_subfolder_detail">SubfolderDetail</string>
     <string name="title_activity_setting">Settings</string>
-
+ 	<!-- text -->
+ 	<string name="text_summary_product">Products</string>
+ 	<string name="text_summary_watt">Watt/Month</string>
+ 	<string name="text_summary_tco">Total cost of ownership TCO</string>
+ 	
     <!-- hint -->
     <string name="project_note_hints">Please add your free notes here</string>
     <string name="title_notes">Notes</string>
@@ -49,6 +53,8 @@
     <string name="scan_one">Scan Bar Code</string>
     <string name="btn_input_bar_code">or input bar code here</string>
     <string name="btn_add_to_project">Add this product to a project</string>
+    <string name="btn_delete">Delete</string>
+    
     <!-- others -->
     <string name="scan_scan">扫一扫</string>
     <string name="scan_result">扫描结果</string>

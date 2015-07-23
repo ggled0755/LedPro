@@ -1,107 +1,108 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="${relativePackage}.${activityClass}" >
 
-    <LinearLayout
-        android:id="@+id/linearLayout1"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/profile_bottom"
-        android:orientation="vertical" >
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@drawable/profile_bg" />
 
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:id="@+id/profile_head_to_edit"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerInParent="true"
+            android:visibility="gone" >
 
             <ImageView
-                android:id="@+id/imageView1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="fitXY"
-                android:src="@drawable/profile_bg" />
+                android:id="@+id/imageView2"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/profile_head_bg" />
 
-            <RelativeLayout
-                android:id="@+id/profile_head_to_edit"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_centerInParent="true"
-                android:visibility="gone" >
+                android:src="@drawable/icon_profile_default_head" />
 
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:src="@drawable/profile_head_bg" />
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/icon_profile_head_edit" />
+        </RelativeLayout>
 
-                <ImageView
-                    android:id="@+id/imageView3"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_centerInParent="true"
-                    android:src="@drawable/icon_profile_default_head" />
+        <LinearLayout
+            android:id="@+id/profile_login_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical" >
 
-                <ImageView
-                    android:id="@+id/imageView4"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentTop="true"
-                    android:src="@drawable/icon_profile_head_edit" />
+            <cn.fuego.misp.ui.widget.RoundImageView
+                android:id="@+id/roundImageView1"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:src="@drawable/default_head" />
 
-            </RelativeLayout>
-
-            <LinearLayout
-                android:id="@+id/profile_login_view"
+            <TextView
+                android:id="@+id/TextView01"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:orientation="vertical" >
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="Richard Wang"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
 
-                <cn.fuego.misp.ui.widget.RoundImageView
-                    android:id="@+id/roundImageView1"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/default_head" />
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="cooperation"
+                android:textColor="@color/backcolor"
+                android:textSize="14dp" />
+        </LinearLayout>
+    </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/TextView01"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:text="Richard Wang"
-                    android:textColor="@color/white"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/textView1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="cooperation"
-                    android:textColor="@color/backcolor"
-                    android:textSize="14dp" />
-
-            </LinearLayout>
-
-        </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/RelativeLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
 
         <ListView
             android:id="@+id/profile_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/profile_bottom"
+            android:layout_alignParentTop="true" >
+
         </ListView>
 
-    </LinearLayout>
+        <include
+            android:id="@+id/profile_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            layout="@layout/bottom_main_view" />
 
-    <include
-        android:id="@+id/profile_bottom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        layout="@layout/bottom_main_view" />
+    </RelativeLayout>
 
-</RelativeLayout>
+</LinearLayout>

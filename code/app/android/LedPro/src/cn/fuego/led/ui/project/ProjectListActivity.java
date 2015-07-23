@@ -8,8 +8,10 @@ import org.codehaus.jackson.type.TypeReference;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -42,6 +44,7 @@ public class ProjectListActivity extends LedBaseListActivity<ProjectJson>
 		super.onCreate(savedInstanceState);
 		View add_btn = findViewById(R.id.project_list_add_btn);
 		add_btn.setOnClickListener(this);
+
 	}
 	
 	@Override
@@ -49,8 +52,11 @@ public class ProjectListActivity extends LedBaseListActivity<ProjectJson>
 	{
 		this.activityRes.setAvtivityView(R.layout.activity_project_list);
 		this.activityRes.setName("BUILD A PROJECT");
+		
+		
 		this.listViewRes.setListView(R.id.project_list_content);
 		this.listViewRes.setListItemView(R.layout.list_item_project_sel);
+		this.setAdapterForScrollView();
 		
 		product =(ProductJson) this.getIntent().getSerializableExtra(ListViewResInfo.SELECT_ITEM);
 		
@@ -82,6 +88,7 @@ public class ProjectListActivity extends LedBaseListActivity<ProjectJson>
 				}
 			});
 			dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+			
 			dialog.show();
 		}
 	}
@@ -136,7 +143,7 @@ public class ProjectListActivity extends LedBaseListActivity<ProjectJson>
 	
 	private void selProject(ProjectJson item)
 	{
-		// TODO Auto-generated method stub
+		ProjectDetailActivity.jump(this, item, product);
 		
 	}
 	@Override
@@ -165,4 +172,6 @@ public class ProjectListActivity extends LedBaseListActivity<ProjectJson>
 		// TODO Auto-generated method stub
 		
 	}
+
+
 }

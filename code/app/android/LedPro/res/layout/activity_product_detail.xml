@@ -17,7 +17,7 @@
             layout="@layout/misp_tilte_with_back_layout" />
 
         <ScrollView
-            android:id="@+id/scrollView1"
+            android:id="@+id/project_list_sv"
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
 

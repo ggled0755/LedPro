@@ -30,6 +30,7 @@ import cn.fuego.led.ui.widget.OrderButton;
 import cn.fuego.led.webservice.up.model.base.ProductJson;
 import cn.fuego.led.webservice.up.rest.WebServiceContext;
 import cn.fuego.misp.service.MemoryCache;
+import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.misp.ui.util.LoadImageUtil;
 import cn.fuego.misp.webservice.json.MispBaseReqJson;
 import cn.fuego.misp.webservice.json.MispBaseRspJson;
@@ -140,6 +141,17 @@ public class HomeActivity extends LedBaseListActivity<ProductJson> implements On
 		
 		return productList;
 	}
+	
+	@Override
+	public void showMessage(MispHttpMessage message)
+	{
+		// TODO Auto-generated method stub
+		super.showMessage(message);
+		if(!message.isNetSuccess())
+		{
+			pd.dismiss();
+		}
+	}
 	@Override
 	public void onOrderStateChanged(OrderButton orderBtn, Integer orderState)
 	{
@@ -223,8 +235,15 @@ public class HomeActivity extends LedBaseListActivity<ProductJson> implements On
         {  
             /*隐藏软键盘*/  
     		String keyword=search_input.getText().toString().trim();
-        	showMessage(keyword);
-        	if(!ValidatorUtil.isEmpty(keyword))
+        	//showMessage(keyword);
+    		InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            if(inputMethodManager.isActive()){  
+                inputMethodManager.hideSoftInputFromWindow(v.getApplicationWindowToken(), 0);  
+            }  
+    		FilterDataCache.getInstance().getFilterList().clear();
+        	FilterDataCache.getInstance().getFilterList().add(new QueryCondition(ConditionTypeEnum.INCLUDLE, "product_name", keyword));
+        	loadSendList();
+/*        	if(!ValidatorUtil.isEmpty(keyword))
         	{
         		InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 if(inputMethodManager.isActive()){  
@@ -237,7 +256,7 @@ public class HomeActivity extends LedBaseListActivity<ProductJson> implements On
         	else
         	{
         		showMessage("请输入检索信息");
-        	}
+        	}*/
               
             return true;  
         }  

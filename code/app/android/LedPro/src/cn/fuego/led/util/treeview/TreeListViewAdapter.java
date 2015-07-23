@@ -86,6 +86,13 @@ public abstract class TreeListViewAdapter<T> extends BaseAdapter
 				{
 					onTreeNodeClickListener.onClick(mNodes.get(position),
 							position);
+					for(Node node:mAllNodes)
+					{
+						node.setSelected(false);
+					}					
+					//设置选中
+					mNodes.get(position).setSelected(true);
+					notifyDataSetChanged();// 刷新视图
 				}
 			}
 
@@ -144,4 +151,11 @@ public abstract class TreeListViewAdapter<T> extends BaseAdapter
 	public abstract View getConvertView(Node node, int position,
 			View convertView, ViewGroup parent);
 
+	public List<Node> getAllNodes()
+	{
+		return mAllNodes;
+	}
+
+
+	
 }

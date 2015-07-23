@@ -20,9 +20,45 @@ import java.io.Serializable;
 public class SubfolderDetailJson implements Serializable
 {
 
-	private int detail_id;
+	private int subfolder_detail_id;
 	private int subfolder_id;
-	private String file_name;
-	private int file_num;
+	private int product_id;
+	private int product_num;
+	
+	public int getSubfolder_detail_id()
+	{
+		return subfolder_detail_id;
+	}
+	public void setSubfolder_detail_id(int subfolder_detail_id)
+	{
+		this.subfolder_detail_id = subfolder_detail_id;
+	}
+	public int getSubfolder_id()
+	{
+		return subfolder_id;
+	}
+	public void setSubfolder_id(int subfolder_id)
+	{
+		this.subfolder_id = subfolder_id;
+	}
+	public int getProduct_id()
+	{
+		return product_id;
+	}
+	public void setProduct_id(int product_id)
+	{
+		this.product_id = product_id;
+	}
+
+	public int getProduct_num()
+	{
+		return product_num;
+	}
+	public void setProduct_num(int product_num)
+	{
+		this.product_num = product_num;
+	}
+	
+	
 	
 }

@@ -63,7 +63,11 @@ public abstract class LedBaseListActivity<E> extends MispListActivity<E> impleme
 		
 		View bottom_up = findViewById(R.id.bottom_search_view);
 		View bottom_down = findViewById(R.id.bottom_tab_view);
-		HostChkListener.initView(this, bottom_up, bottom_down);
+		if(bottom_up!=null&&bottom_down!=null)
+		{
+			HostChkListener.initView(this, bottom_up, bottom_down);
+		}
+		
 		
 		if(this.getTitleView()!=null)
 		{

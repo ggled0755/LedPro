@@ -20,7 +20,7 @@
         android:layout_height="wrap_content" >
 
         <ScrollView
-            android:id="@+id/scrollView1"
+            android:id="@+id/project_list_sv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/btn_area" >

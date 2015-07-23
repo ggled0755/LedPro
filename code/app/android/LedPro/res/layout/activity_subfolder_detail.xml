@@ -3,6 +3,7 @@
     android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context="${relativePackage}.${activityClass}" >
 
@@ -114,7 +115,7 @@
         android:textSize="14sp" />
 
     <EditText
-        android:id="@+id/project_detail_notes"
+        android:id="@+id/subfolder_detail_notes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@null"
@@ -124,5 +125,13 @@
         android:minLines="3"
         android:padding="18dp"
         android:textSize="13sp" />
+
+    <ExpandableListView
+        android:id="@+id/subfolder_detail_exlist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:groupIndicator="@null" >
+
+    </ExpandableListView>
 
 </LinearLayout>
