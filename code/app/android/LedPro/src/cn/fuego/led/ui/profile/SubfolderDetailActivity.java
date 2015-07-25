@@ -78,7 +78,10 @@ public class SubfolderDetailActivity extends LedBaseActivity
 					
 					List<ViewSubfolderJson> dataSource = rsp.GetReqCommonField(new TypeReference<List<ViewSubfolderJson>>(){});
 					sdAdapter.setDatasource(dataSource);
-					exListView.expandGroup(0);
+			        for (int i=0; i<sdAdapter.getGroupCount(); i++) 
+			        {
+			        	exListView.expandGroup(i);
+			        }
 				}
 				else
 				{

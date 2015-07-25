@@ -10,6 +10,7 @@ import cn.fuego.led.cache.AppCache;
 import cn.fuego.led.constant.IntentCodeConst;
 import cn.fuego.led.ui.LoginActivity;
 import cn.fuego.led.ui.base.LedBaseActivity;
+import cn.fuego.led.ui.home.HomeActivity;
 import cn.fuego.misp.service.MemoryCache;
 
 public class SettingActivity extends LedBaseActivity
@@ -61,7 +62,8 @@ public class SettingActivity extends LedBaseActivity
 			if(MemoryCache.isLogined())
 			{
 				AppCache.getInstance().clear();
-				
+				HomeActivity.jump(v.getContext());
+				finish();
 			}
 			else
 			{

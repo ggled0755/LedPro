@@ -165,8 +165,7 @@ public class ProjectDetailActivity extends LedBaseActivity
 						}
 						else
 						{
-							//List<Node> childList=node.getChildren();
-							showMessage(SubfolderCache.getInstance().getSelIDList().toString());
+							//showMessage(SubfolderCache.getInstance().getSelIDList().toString());
 							SubfolderDetailActivity.jump(ProjectDetailActivity.this, SubfolderCache.getInstance().getSelSd(node.getId()));
 							
 						}

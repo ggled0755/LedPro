@@ -9,10 +9,14 @@
 package cn.fuego.led.ui.base;
 
 import cn.fuego.led.R;
+import cn.fuego.led.cache.AppCache;
+import cn.fuego.led.constant.IntentCodeConst;
+import cn.fuego.led.ui.LoginActivity;
 import cn.fuego.led.ui.home.HomeActivity;
 import cn.fuego.led.ui.profile.ProfileActivity;
 import cn.fuego.led.ui.scan.CaptureActivity;
 import cn.fuego.led.ui.setting.SettingActivity;
+import cn.fuego.misp.service.MemoryCache;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.view.View;
@@ -52,11 +56,18 @@ public class TabbarClickListener implements OnClickListener
 			CaptureActivity.jump(v.getContext(), CaptureActivity.STATE_QR);
 			break;
 		case R.id.bottom_profile_btn:
-			if(ProfileActivity.class.getName().equals(runningActivity))
+			if(MemoryCache.isLogined())
 			{
-				return;
+				if(ProfileActivity.class.getName().equals(runningActivity))
+				{
+					return;
+				}
+				ProfileActivity.jump(v.getContext());
 			}
-			ProfileActivity.jump(v.getContext());
+			else
+			{
+				LoginActivity.jump(mContext, ProfileActivity.class, IntentCodeConst.REQUEST_CODE);
+			}
 
 			break;
 		case R.id.bottom_setting_btn:

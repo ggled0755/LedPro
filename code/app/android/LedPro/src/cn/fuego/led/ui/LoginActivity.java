@@ -2,6 +2,7 @@ package cn.fuego.led.ui;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.led.R;
 import cn.fuego.led.cache.AppCache;
 import cn.fuego.led.ui.base.LedBaseActivity;
+import cn.fuego.led.ui.profile.UserRegisterActivity;
 import cn.fuego.led.webservice.up.model.base.CustomerJson;
 import cn.fuego.led.webservice.up.rest.WebServiceContext;
 import cn.fuego.misp.constant.MispErrorCode;
@@ -49,14 +51,17 @@ public class LoginActivity extends LedBaseActivity
 
 		clazz = (Class) this.getIntent().getSerializableExtra(JUMP_SOURCE);
 		this.activityRes.getButtonIDList().add(R.id.login_btn);
+		this.activityRes.getButtonIDList().add(R.id.login_find_pwd);
+		this.activityRes.getButtonIDList().add(R.id.login_register);
+		
 	}
 	
-	public static void jump(Activity activity,Class clazz,int code)
+	public static void jump(Context context,Class clazz,int code)
 	{
 		AppCache.getInstance().clear();
-		Intent intent = new Intent(activity,LoginActivity.class);
+		Intent intent = new Intent(context,LoginActivity.class);
 		intent.putExtra(LoginActivity.JUMP_SOURCE, clazz);
-		activity.startActivityForResult(intent,code);
+		((Activity) context).startActivityForResult(intent,code);
 	}
 	public static void jump(Fragment fragment,int code)
 	{
@@ -91,11 +96,17 @@ public class LoginActivity extends LedBaseActivity
 				checkLogin(userName,password);
 		
 				break;
-			case R.id.user_login_find_password:
+			case R.id.login_find_pwd:
 /*				Intent i = new Intent();
 				i.putExtra(UserRegisterActivity.OPERTATE_NAME, UserRegisterActivity.FIND_PWD);
 				i.setClass(this, UserRegisterActivity.class);
 		        this.startActivity(i);*/
+				break;
+			case R.id.login_register:
+				Intent i = new Intent();
+				i.putExtra(UserRegisterActivity.OPERTATE_NAME, UserRegisterActivity.REGISTER);
+				i.setClass(this, UserRegisterActivity.class);
+		        this.startActivity(i);
 		        break;
 		        
 		}

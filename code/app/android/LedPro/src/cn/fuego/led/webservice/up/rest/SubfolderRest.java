@@ -55,8 +55,8 @@ public interface SubfolderRest
 	MispBaseRspJson modifySubfolderDetail(MispBaseReqJson req);
 	
 	@POST
-	@Path("/SubfolderDetail/Delete")
-	MispBaseRspJson deleteSubfolderDetail(MispBaseReqJson req);
+	@Path("/SubfolderDetail/DeleteList")
+	MispBaseRspJson deleteDetailList(MispBaseReqJson req);
 	
 	@POST
 	@Path("/SubfolderDetail/LoadAll")

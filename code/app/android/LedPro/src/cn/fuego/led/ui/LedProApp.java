@@ -11,6 +11,7 @@ import cn.fuego.led.R;
 import cn.fuego.led.cache.AppCache;
 import cn.fuego.misp.dao.SharedPreUtil;
 import cn.fuego.misp.service.MemoryCache;
+import cn.smssdk.SMSSDK;
 
 import com.lidroid.xutils.DbUtils;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
@@ -42,6 +43,9 @@ public class LedProApp extends Application
 		initMemoryCache();
 		//initial image cache
 		initImageCache();
+		
+		//init Mob SMS
+		SMSSDK.initSDK(this, "8faa74f2ef01", "2c929861d197b945a13fd2d8e9a9e660");
 
 	}
 	//初始化MISP-memorycache
@@ -65,7 +69,8 @@ public class LedProApp extends Application
 		MemoryCache.setProgramName("LedPro");
 		MemoryCache.setServerIp("192.168.1.105");
 		MemoryCache.setServerPort("7000");	
-
+/*		MemoryCache.setServerIp("120.25.216.218");
+		MemoryCache.setServerPort("88");*/
 	}
 	//加载本地数据库
 	private void loadDB()

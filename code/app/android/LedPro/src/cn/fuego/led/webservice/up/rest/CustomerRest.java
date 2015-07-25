@@ -43,7 +43,7 @@ public interface CustomerRest
 	
 	//删除图片
 	@POST
-	@Path("/Customer/ImgDelete")
+	@Path("/MispFile/ImgDelete")
 	MispBaseRspJson deleteFile(MispBaseReqJson req);	
 	
 }

@@ -8,11 +8,13 @@
 */ 
 package cn.fuego.led.ui.base;
 
-import cn.fuego.led.R;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import cn.fuego.led.R;
+import cn.fuego.led.ui.profile.ProfileActivity;
 
 /** 
  * @ClassName: HostChkListener 
@@ -37,6 +39,11 @@ public class HostChkListener implements OnCheckedChangeListener
 	@Override
 	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
 	{
+
+		//get current task
+		ActivityManager activityManager=(ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);  
+		String runningActivity=activityManager.getRunningTasks(1).get(0).topActivity.getClassName();
+		
 		if(buttonView.getId()==R.id.host_tab_chk)
 		{
 			if(isChecked)
@@ -50,6 +57,10 @@ public class HostChkListener implements OnCheckedChangeListener
 		}
 		if(buttonView.getId()==R.id.host_search_chk)
 		{
+			if(ProfileActivity.class.getName().equals(runningActivity))
+			{
+				return;
+			}
 			if(isChecked)
 			{
 				bottom_up.setVisibility(View.VISIBLE);

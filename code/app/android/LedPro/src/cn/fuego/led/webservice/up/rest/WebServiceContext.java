@@ -19,14 +19,13 @@ public class WebServiceContext
 
 	private static WebServiceContext instance;
 
-	public static String hostURL = MemoryCache.getWebContextUrl();
 	
 	private WebServiceContext()
 	{
-		log.info("the host and base url is "+hostURL);
+		log.info("the host and base url is "+getHostURL());
 
 	}
-
+	
 	public static synchronized WebServiceContext getInstance()
 	{
 		if (null == instance)
@@ -35,7 +34,10 @@ public class WebServiceContext
 		}
 		return instance;
 	}
- 
+	public  String getHostURL()
+	{
+		return MemoryCache.getWebContextUrl();
+	}
 	private HttpClient getHttpClient()
 	{
 		HttpClient httpClient = new DefaultHttpClient();
@@ -50,14 +52,14 @@ public class WebServiceContext
 	public MispUserManageRest getMispUserManageRest(HttpListener handler)
 	{
 	 
-		MispUserManageRest rest = MispProxyFactory.create(hostURL,MispUserManageRest.class, getHttpClient(),handler);
+		MispUserManageRest rest = MispProxyFactory.create(getHostURL(),MispUserManageRest.class, getHttpClient(),handler);
 
 		return rest;
 	}
 	public MispSystemManageRest getMispSystemManageRest(HttpListener handler)
 	{
 	 
-		MispSystemManageRest rest = MispProxyFactory.create( hostURL,MispSystemManageRest.class, getHttpClient(),handler);
+		MispSystemManageRest rest = MispProxyFactory.create(getHostURL(),MispSystemManageRest.class, getHttpClient(),handler);
 
 		return rest;
 	}
@@ -66,7 +68,7 @@ public class WebServiceContext
 	public CustomerRest getCustomerRest(HttpListener handler)
 	{
 	 
-		CustomerRest rest = MispProxyFactory.create( hostURL,CustomerRest.class, getHttpClient(),handler);
+		CustomerRest rest = MispProxyFactory.create(getHostURL(),CustomerRest.class, getHttpClient(),handler);
 
 		return rest;
 	}
@@ -74,7 +76,7 @@ public class WebServiceContext
 	public ProductRest getProductRest(HttpListener handler)
 	{
 	 
-		ProductRest rest = MispProxyFactory.create( hostURL,ProductRest.class, getHttpClient(),handler);
+		ProductRest rest = MispProxyFactory.create(getHostURL(),ProductRest.class, getHttpClient(),handler);
 
 		return rest;
 	}
@@ -82,7 +84,7 @@ public class WebServiceContext
 	public EnumRest getEnumRest(HttpListener handler)
 	{
 	 
-		EnumRest rest = MispProxyFactory.create( hostURL,EnumRest.class, getHttpClient(),handler);
+		EnumRest rest = MispProxyFactory.create(getHostURL(),EnumRest.class, getHttpClient(),handler);
 
 		return rest;
 	}
@@ -90,7 +92,7 @@ public class WebServiceContext
 	public ProjectRest getProjectRest(HttpListener handler)
 	{
 	 
-		ProjectRest rest = MispProxyFactory.create( hostURL,ProjectRest.class, getHttpClient(),handler);
+		ProjectRest rest = MispProxyFactory.create(getHostURL(),ProjectRest.class, getHttpClient(),handler);
 
 		return rest;
 	}
@@ -98,8 +100,13 @@ public class WebServiceContext
 	public SubfolderRest getSubfolderRest(HttpListener handler)
 	{
 	 
-		SubfolderRest rest = MispProxyFactory.create( hostURL,SubfolderRest.class, getHttpClient(),handler);
+		SubfolderRest rest = MispProxyFactory.create(getHostURL(),SubfolderRest.class, getHttpClient(),handler);
 
 		return rest;
 	}
+
+
+
+
+	
 }

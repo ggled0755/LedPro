@@ -10,7 +10,7 @@
     android:layout_height="fill_parent"
     android:layout_weight="1" 
     android:background="@color/backcolor">
-    <view class="cn.fuego.helpbuy.util.imgcrop.CropImageView"
+    <view class="cn.fuego.led.util.imgcrop.CropImageView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/gl_modify_avatar_image"

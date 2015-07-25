@@ -119,7 +119,7 @@ public class HomeActivity extends LedBaseListActivity<ProductJson> implements On
 	@Override
 	public void loadSendList()
 	{
-		pd = ProgressDialog.show(this, null, getResources().getString(R.string.progress_msg));
+		pd = ProgressDialog.show(this, null, getResources().getString(R.string.progress_msg_loading));
 		
 		MispBaseReqJson req = new MispBaseReqJson();
 		PageJson page = new PageJson();

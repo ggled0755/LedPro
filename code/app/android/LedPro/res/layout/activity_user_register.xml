@@ -1,15 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backcolor"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    tools:context="${relativePackage}.${activityClass}" >
 
-       <include
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_marginBottom="1dp"
-           layout="@layout/misp_tilte_with_back_layout" />
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/misp_tilte_with_back_layout" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -20,23 +21,38 @@
         android:paddingLeft="10dp" >
 
         <EditText
+            android:id="@+id/user_register_country"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:ems="10"
+            android:gravity="center_vertical|center_horizontal"
+            android:hint="country code"
+            android:textSize="@dimen/content_font_size_sm" />
+
+        <EditText
             android:id="@+id/user_register_txt_phoneNum"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:layout_marginRight="30dp"
+            android:layout_toRightOf="@+id/user_register_country"
             android:autoText="false"
             android:background="@null"
             android:capitalize="none"
             android:ems="11"
             android:gravity="left|center_vertical"
-            android:hint="请输入您的手机号码"
+            android:hint="@string/hint_input_phone"
             android:inputType="phone"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:singleLine="true"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="@dimen/content_font_size_sm" />
+            android:textSize="@dimen/content_font_size_sm" >
+
+            <requestFocus />
+        </EditText>
     </RelativeLayout>
 
     <RelativeLayout
@@ -59,13 +75,14 @@
                 android:capitalize="none"
                 android:ems="11"
                 android:gravity="left|center_vertical"
-                android:hint="请输入验证码"
+                android:hint="@string/hint_input_verifycode"
                 android:inputType="number"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:selectAllOnFocus="false"
                 android:singleLine="true"
                 android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/black"
                 android:textSize="@dimen/content_font_size_sm" />
 
             <Button
@@ -74,11 +91,11 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:background="@color/focuscolor"
-                android:text="获取验证码"
-                android:textColor="@color/white" />
+                android:text="@string/btn_get_code"
+                android:textColor="@color/white"
+                android:textSize="@dimen/content_font_size_sm" />
 
         </LinearLayout>
-
     </RelativeLayout>
 
     <RelativeLayout
@@ -95,41 +112,13 @@
             android:layout_height="match_parent"
             android:background="@null"
             android:capitalize="none"
-            android:ems="12"
-            android:hint="请输入登录密码"
+            android:ems="11"
+            android:hint="@string/hint_input_password"
             android:password="true"
-            android:selectAllOnFocus="false"
             android:singleLine="true"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/black"
-            android:textSize="@dimen/content_font_size_sm" >
-
-            <requestFocus />
-        </EditText>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="1dp"
-        android:background="@color/white"
-        android:paddingLeft="20dp"
-        android:paddingRight="30dp" >
-
-        <EditText
-            android:id="@+id/user_register_rec_phone"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@null"
-            android:capitalize="none"
-            android:ems="12"
-            android:hint="请输入推荐人手机号"
-            android:password="true"
-            android:selectAllOnFocus="false"
-            android:singleLine="true"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/black"
-            android:textSize="@dimen/content_font_size_sm" />
+            android:textSize="@dimen/content_font_size" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -145,10 +134,9 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:background="@drawable/common_btn"
-            android:text="提  交"
+            android:text="@string/btn_submit"
             android:textColor="@color/white"
             android:textSize="@dimen/content_font_size" />
-
     </RelativeLayout>
 
 </LinearLayout>

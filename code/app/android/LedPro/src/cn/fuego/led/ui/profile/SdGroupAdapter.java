@@ -13,23 +13,30 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface.OnClickListener;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.Toast;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
+import android.widget.Toast;
+import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.led.R;
 import cn.fuego.led.ui.widget.RecAddAndSubView;
 import cn.fuego.led.ui.widget.RecAddAndSubView.OnNumChangeListener;
 import cn.fuego.led.webservice.up.model.base.ViewSubfolderJson;
+import cn.fuego.led.webservice.up.rest.WebServiceContext;
+import cn.fuego.misp.constant.MispErrorCode;
+import cn.fuego.misp.service.http.MispHttpHandler;
+import cn.fuego.misp.service.http.MispHttpMessage;
+import cn.fuego.misp.webservice.json.MispBaseReqJson;
 
 /** 
  * @ClassName: SdGroupAdapter 
@@ -46,9 +53,12 @@ public class SdGroupAdapter extends BaseExpandableListAdapter
 
 	private List<List<ViewSubfolderJson>> itemList = new ArrayList<List<ViewSubfolderJson>>();
 	
-	private List<ViewSubfolderJson> dataSource;
+	private List<ViewSubfolderJson> dataSource=new ArrayList<ViewSubfolderJson>();
 
-	
+	private ProgressDialog pd;
+	//存储选中项目
+	private Map<Integer,List<Integer>> selMap = new HashMap<Integer, List<Integer>>();
+	private List<Integer> idList;
 	public SdGroupAdapter(Context context)
 	{
 		this.mContext = context;
@@ -64,28 +74,32 @@ public class SdGroupAdapter extends BaseExpandableListAdapter
 	{
 		Map<String, List<ViewSubfolderJson>> detailMap = new HashMap<String, List<ViewSubfolderJson>>();
 		itemList.clear();
-		for(ViewSubfolderJson json : dataSource)
+		if(!ValidatorUtil.isEmpty(dataSource))
 		{
-			List<ViewSubfolderJson> detailList = detailMap.get(json.getSubfolder_name());
-			if(null == detailList)
+			for(ViewSubfolderJson json : dataSource)
 			{
-				detailList = new ArrayList<ViewSubfolderJson>();
-				detailList.add(json);
-				detailMap.put(json.getSubfolder_name(), detailList);
+				List<ViewSubfolderJson> detailList = detailMap.get(json.getSubfolder_name());
+				if(null == detailList)
+				{
+					detailList = new ArrayList<ViewSubfolderJson>();
+					detailList.add(json);
+					detailMap.put(json.getSubfolder_name(), detailList);
+				}
+				else
+				{
+					detailList.add(json);
+				}
+				 
 			}
-			else
-			{
-				detailList.add(json);
-			}
-			 
+			
+			groupList = new ArrayList<String>(detailMap.keySet());
+
+	    		for(String group : groupList)
+	    		{
+	     			itemList.add(detailMap.get(group));
+	    		}
 		}
 		
-		groupList = new ArrayList<String>(detailMap.keySet());
-
-    		for(String group : groupList)
-    		{
-     			itemList.add(detailMap.get(group));
-    		}
      
 
 
@@ -105,7 +119,7 @@ public class SdGroupAdapter extends BaseExpandableListAdapter
 	}
 
 	@Override
-	public View getChildView(int groupPosition, int childPosition,boolean isLastChild, View convertView, ViewGroup parent)
+	public View getChildView(final int groupPosition, final int childPosition,boolean isLastChild, View convertView, ViewGroup parent)
 	{
 		
 		final ViewSubfolderJson detail = itemList.get(groupPosition).get(childPosition);
@@ -116,7 +130,6 @@ public class SdGroupAdapter extends BaseExpandableListAdapter
 				ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
 	    layout.setLayoutParams(lp);
-	    //lp.setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
 	    
 	    TextView txt_title = (TextView) layout.findViewById(R.id.item_sd_child_title);
 	    txt_title.setText(detail.getProduct_name());
@@ -128,7 +141,25 @@ public class SdGroupAdapter extends BaseExpandableListAdapter
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
 			{
-				Toast.makeText(mContext, detail.toString(), Toast.LENGTH_LONG).show();
+				if(isChecked)
+				{
+					if(null!=selMap.get(groupPosition)&&!ValidatorUtil.isEmpty(selMap.get(groupPosition)))
+					{
+						selMap.get(groupPosition).add(detail.getSubfolder_detail_id());
+					}
+					else
+					{
+						List<Integer> temp = new ArrayList<Integer>();
+						temp.add(detail.getSubfolder_detail_id());
+						selMap.put(groupPosition, temp);
+					}
+					
+				}
+				else
+				{
+					selMap.get(groupPosition).remove(detail.getSubfolder_detail_id());
+
+				}
 				
 			}
 		});
@@ -142,15 +173,42 @@ public class SdGroupAdapter extends BaseExpandableListAdapter
 			@Override
 			public void onNumChange(View view, int stype, int num)
 			{
-				Toast.makeText(mContext, String.valueOf(num), Toast.LENGTH_LONG).show();
+				detail.setProduct_num(num);
+				modifyNum(detail,groupPosition,childPosition);
 				
 			}
+
+
 		});
 		return layout;
 	}
-	
+	//修改产品数量
+	private void modifyNum(final ViewSubfolderJson detail, final int groupPosition, final int childPosition)
+	{
+		pd = ProgressDialog.show(mContext, null, "Processing……");
+		
+		MispBaseReqJson req = new MispBaseReqJson();
+		req.setObj(detail);
+		WebServiceContext.getInstance().getSubfolderRest(new MispHttpHandler(){
+			@Override
+			public void handle(MispHttpMessage message)
+			{
+				pd.dismiss();
+				if(message.isSuccess())
+				{
+					itemList.get(groupPosition).get(childPosition).setProduct_num(detail.getProduct_num());
+				}
+				else
+				{
+					Toast.makeText(mContext, MispErrorCode.getMessageByErrorCode(message.getErrorCode()) , Toast.LENGTH_SHORT).show();
+				}
+				notifyDataSetChanged();
+
+			}
+		}).modifySubfolderDetail(req);
+	}	
 	@Override
-	public View getGroupView(int groupPosition, boolean isExpanded,View convertView, ViewGroup parent)
+	public View getGroupView(final int groupPosition, boolean isExpanded,View convertView, ViewGroup parent)
 	{
 		String name = groupList.get(groupPosition);
 		LayoutInflater inflater = LayoutInflater.from(mContext);
@@ -158,10 +216,80 @@ public class SdGroupAdapter extends BaseExpandableListAdapter
 
 	    TextView txt_title = (TextView) layout.findViewById(R.id.item_sd_father_title);
 	    txt_title.setText(name);
-	    		
+	    
+	    Button btn_delete = (Button) layout.findViewById(R.id.item_sd_father_delete_btn);
+	    btn_delete.setOnClickListener(new OnClickListener()
+		{
+			
+			@Override
+			public void onClick(View v)
+			{
+				removeItems(groupPosition);
+				
+			}
+		});
 		return layout;
 	}
-	
+	//删除子项目
+	protected void removeItems(final int groupPosition)
+	{
+		if(!selMap.containsKey(groupPosition))
+		{
+			Toast.makeText(mContext, "Please select at least one child item", Toast.LENGTH_LONG).show();
+		}
+		else
+		{
+			pd = ProgressDialog.show(mContext, null, "Processing……");
+			idList = new ArrayList<Integer>();
+			idList =selMap.get(groupPosition);
+
+			
+			MispBaseReqJson req = new MispBaseReqJson();
+			req.setObj(idList);
+			
+			WebServiceContext.getInstance().getSubfolderRest(new MispHttpHandler(){
+				@Override
+				public void handle(MispHttpMessage message)
+				{
+					pd.dismiss();
+					if(message.isSuccess())
+					{
+						//删除代码较为复杂，建议改善，注意grouplist 的remove
+						for(int i=0;i<itemList.size();i++)
+						{
+							int count =itemList.get(i).size();
+							for(int j=0;j<itemList.get(i).size();j++)
+							{
+								if(idList.contains(itemList.get(i).get(j).getSubfolder_detail_id()))
+								{
+									itemList.get(i).remove(j);
+									j--;
+									count--;
+								}
+								
+							}
+							if(count==0)
+							{
+								itemList.remove(i);
+								groupList.remove(i);
+								i--;
+								
+							}
+							
+						}
+						notifyDataSetChanged();
+
+
+					}
+					else
+					{
+						Toast.makeText(mContext, "Please select at least one child item", Toast.LENGTH_LONG).show();
+					}
+				}
+			}).deleteDetailList(req);
+		}
+		
+	}
 	@Override
 	public int getChildrenCount(int groupPosition)
 	{
@@ -205,4 +333,6 @@ public class SdGroupAdapter extends BaseExpandableListAdapter
 		// 如果不为true，则不能点击child项
 		return true;
 	}
+
+	
 }

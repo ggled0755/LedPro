@@ -304,8 +304,7 @@ public class CropImageActivity extends MispBaseActivtiy implements OnClickListen
 				break;
 			case UPLOAD_FILE_DONE:
 				msg.getMessage().what = MispErrorCode.SUCCESS;
-				waitDailog.dismiss();
-				showMessage(msg);
+				waitDailog.dismiss();				
 				if(msg.isSuccess())
 				{
 					MispBaseRspJson json = (MispBaseRspJson) msg.getMessage().obj;
@@ -317,6 +316,10 @@ public class CropImageActivity extends MispBaseActivtiy implements OnClickListen
 		    		setResult(RESULT_OK, intent);
 					finish();
 					
+				}
+				else
+				{
+					showMessage(msg);
 				}
  				break;
 			default:
