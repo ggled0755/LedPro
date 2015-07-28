@@ -15,6 +15,9 @@
             android:id="@+id/item_btn_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/item_btn_value"
             android:text="@string/btn_filter_categories"
             android:textColor="#434343"
             android:textSize="@dimen/content_font_size" />

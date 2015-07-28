@@ -20,7 +20,7 @@
     <string name="text_summary_product">Products</string>
     <string name="text_summary_watt">Watt/Month</string>
     <string name="text_summary_tco">Total cost of ownership TCO</string>
-	<string name="text_sel_img">Choose a photo</string>
+    <string name="text_sel_img">Choose a photo</string>
     <!-- hint -->
     <string name="project_note_hints">Please add your free notes here</string>
     <string name="title_notes">Notes</string>
@@ -59,7 +59,7 @@
     <string name="btn_submit">Submit</string>
     <string name="btn_get_code">Get verifycode</string>
     <string name="misp_save">Save</string>
-    
+    <string name="btn_save">Save</string>
     <string name="btn_sel_album">From album</string>
     <string name="btn_sel_take">Take a photo</string>
     <!-- others -->
@@ -91,6 +91,9 @@
     <string name="info_user_cellphone">Cellphone</string>
     <string name="info_user_email">E-mail</string>
     <string name="info_user_company_name">Company</string>
+    <string name="info_energy_consumption">Energy consumption</string>
+    <string name="info_product_quality">Product quality</string>
+    <string name="info_user_evaluation">User evaluation</string>
 
     <!-- error msg -->
     <string name="msg_input_null">Input Empty</string>
@@ -101,5 +104,8 @@
     <string name="title_activity_user_info">UserInfo</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_img_select">ImgSelectActivity</string>
+    <string name="title_activity_product_eval">Rating</string>
+    <string name="title_activity_pro_eval_create">Evaluation</string>
+    <string name="title_activity_pro_attrs">ProAttrsActivity</string>
 
 </resources>

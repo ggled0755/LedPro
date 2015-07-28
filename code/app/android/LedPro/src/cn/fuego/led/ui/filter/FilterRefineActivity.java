@@ -43,10 +43,9 @@ public class FilterRefineActivity extends LedBaseActivity implements OnItemClick
 		}
 		mAdapter = new DistinctAdapter(this, FilterDataCache.getInstance().getData());
 		listview.setAdapter(mAdapter);
-		//listview.setAdapter(new DistinctAdapter(this, data));
-		listview.setOnItemClickListener(this);
 		
-		//initSeekbar();
+		listview.setOnItemClickListener(this);
+
 	}
 
 
@@ -73,7 +72,6 @@ public class FilterRefineActivity extends LedBaseActivity implements OnItemClick
 		FilterItemMeta selItem=(FilterItemMeta) parent.getAdapter().getItem(position);
 		if(selItem!=null&&selItem.getItemType()==0)
 		{
-			//loadConditionList(selItem);
 			Intent i = new Intent();
 			i.setClass(this, FilterListActivity.class);
 			i.putExtra(ListViewResInfo.SELECT_ITEM, selItem);
@@ -98,9 +96,4 @@ public class FilterRefineActivity extends LedBaseActivity implements OnItemClick
 		}
 	}
 
-	private void loadConditionList(FilterItemMeta selItem)
-	{
-		// TODO Auto-generated method stub
-		
-	}
 }

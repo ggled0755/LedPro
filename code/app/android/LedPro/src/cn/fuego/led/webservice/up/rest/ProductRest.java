@@ -34,9 +34,26 @@ public interface ProductRest
 	@POST
 	@Path("/Product/Load")
 	MispBaseRspJson loadProduct(MispBaseReqJson req);
+
+	//全部加载
+	@POST
+	@Path("/Product/LoadAll")
+	MispBaseRspJson loadProductAll(MispBaseReqJson req);
+	
+	//产品评价,多项
+	@POST
+	@Path("/Eval/CreateList")
+	MispBaseRspJson createEvalList(MispBaseReqJson req);
 	
 	//产品评价
 	@POST
-	@Path("/Eval/Create")
-	MispBaseRspJson createEval(MispBaseReqJson req);
+	@Path("/Eval/LoadEvalSum")
+	MispBaseRspJson loadEvalSum(MispBaseReqJson req);
+	
+	//产品评价类型
+	@POST
+	@Path("/EvalType/LoadAll")
+	MispBaseRspJson loadEvalType(MispBaseReqJson req);
+	
+
 }

@@ -38,7 +38,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/RelativeLayout1"
+            android:id="@+id/project_detail_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
@@ -92,7 +92,7 @@
             android:orientation="vertical" >
 
             <Button
-                android:id="@+id/ttt"
+                android:id="@+id/misp_title_save"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"

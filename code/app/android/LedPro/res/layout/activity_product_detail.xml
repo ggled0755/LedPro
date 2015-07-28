@@ -30,7 +30,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="18dp" >
+                    android:padding="18dp"
+                    android:visibility="visible" >
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -124,13 +125,13 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentLeft="true"
                             android:layout_centerVertical="true"
-                            android:layout_toLeftOf="@+id/score_view"
+                            android:layout_toLeftOf="@+id/product_detail_score_view"
                             android:text="TextView"
                             android:textColor="#0a0d17"
                             android:textSize="25dp" />
 
                         <LinearLayout
-                            android:id="@+id/score_view"
+                            android:id="@+id/product_detail_score_view"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
@@ -247,9 +248,20 @@
                         android:id="@+id/textView1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
                         android:text="Related Items"
                         android:textColor="#646161"
                         android:textSize="15dp" />
+
+                    <cn.fuego.led.ui.widget.GalleryBaseView
+                        android:id="@+id/product_detail_gallery"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginTop="20dp" >
+
+                    </cn.fuego.led.ui.widget.GalleryBaseView>
 
                 </LinearLayout>
 

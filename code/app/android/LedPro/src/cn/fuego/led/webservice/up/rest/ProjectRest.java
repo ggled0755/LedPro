@@ -42,4 +42,8 @@ public interface ProjectRest
 	@Path("/Project/Modify")
 	MispBaseRspJson modifyProject(MispBaseReqJson req);
 	
+	//创建PDF文件
+	@POST
+	@Path("/Project/CreatePdf")
+	MispBaseRspJson createPdf(MispBaseReqJson req);	
 }

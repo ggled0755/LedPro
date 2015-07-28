@@ -1,5 +1,6 @@
 package cn.fuego.led.ui.project;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,9 @@ import org.codehaus.jackson.type.TypeReference;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
@@ -15,6 +18,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
+import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.led.R;
 import cn.fuego.led.cache.SubfolderCache;
@@ -32,12 +36,21 @@ import cn.fuego.led.webservice.up.model.base.ProjectJson;
 import cn.fuego.led.webservice.up.model.base.SubfolderDetailJson;
 import cn.fuego.led.webservice.up.model.base.SubfolderJson;
 import cn.fuego.led.webservice.up.rest.WebServiceContext;
+import cn.fuego.misp.service.MemoryCache;
 import cn.fuego.misp.service.http.MispHttpHandler;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.misp.ui.model.ListViewResInfo;
 import cn.fuego.misp.ui.util.StrUtil;
 import cn.fuego.misp.webservice.json.MispBaseReqJson;
 import cn.fuego.misp.webservice.json.MispBaseRspJson;
+
+import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.HttpHandler;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.lidroid.xutils.http.client.HttpRequest;
+import com.nostra13.universalimageloader.utils.StorageUtils;
 
 public class ProjectDetailActivity extends LedBaseActivity
 {
@@ -49,6 +62,7 @@ public class ProjectDetailActivity extends LedBaseActivity
 	
 	private ListView mTree;	
 	private List<SubfolderJson> datas =new ArrayList<SubfolderJson>();
+	@SuppressWarnings("rawtypes")
 	private TreeListViewAdapter mAdapter;
 	
 	private ProjectJson project;
@@ -57,11 +71,13 @@ public class ProjectDetailActivity extends LedBaseActivity
 	private ProductJson product;
 	private int parent_id=0;
 	private boolean addEnable=false;
+	
 	@Override
 	public void initRes()
 	{
 		this.activityRes.setAvtivityView(R.layout.activity_project_detail);
 		this.activityRes.getButtonIDList().add(R.id.project_detail_add_btn);
+		this.activityRes.getButtonIDList().add(R.id.project_detail_title);
 		
 		project = (ProjectJson) this.getIntent().getSerializableExtra(ListViewResInfo.SELECT_ITEM);
 		product = (ProductJson) this.getIntent().getSerializableExtra(IntentCodeConst.DATA_PRODUCT);
@@ -222,6 +238,86 @@ public class ProjectDetailActivity extends LedBaseActivity
 				showToast(this, "Please select your parent subfolder");
 			}
 		}
+		if(v.getId()==R.id.project_detail_title)
+		{
+			generatePDF();
+		}
+	}
+
+	private void generatePDF()
+	{
+		MispBaseReqJson req = new MispBaseReqJson();
+		req.setObj(project.getProject_id());
+		
+		WebServiceContext.getInstance().getProjectRest(new MispHttpHandler(){
+			@Override
+			public void handle(MispHttpMessage message)
+			{
+
+				if(message.isSuccess())
+				{
+					MispBaseRspJson rsp = (MispBaseRspJson) message.getMessage().obj;
+					String url = rsp.GetReqCommonField(String.class);
+					if(!ValidatorUtil.isEmpty(url))
+					{
+						String webUrl=MemoryCache.getWebContextUrl()+"/Client/Public/Fuego/PDF/"+url;
+						HttpUtils http = new HttpUtils();
+						String appName = getResources().getString(R.string.app_name);
+						File cacheDir = StorageUtils.getOwnCacheDirectory(getApplicationContext(), appName+"/pdf"); 
+						//目标文件加上时间戳
+						String target =cacheDir.getAbsolutePath()+"/"+System.currentTimeMillis()+url;
+
+						@SuppressWarnings({ "unused", "rawtypes" })
+						HttpHandler handler = http.download(webUrl,
+								target,
+							    true, // 如果目标文件存在，接着未完成的部分继续下载。服务器不支持RANGE时将从新下载。
+							    true, // 如果从请求返回信息中获取到文件名，下载完成后自动重命名。
+							    new RequestCallBack<File>() {
+
+							        @Override
+							        public void onStart() {
+							            //testTextView.setText("conn...");
+							        }
+
+							        @Override
+							        public void onLoading(long total, long current, boolean isUploading) {
+							           // testTextView.setText(current + "/" + total);
+							        }
+
+							        @Override
+							        public void onSuccess(ResponseInfo<File> responseInfo) {
+							           // testTextView.setText("downloaded:" + responseInfo.result.getPath());
+							        	showMessage("Success");
+							        	Intent intent = new Intent("android.intent.action.VIEW");  
+							        	intent.addCategory("android.intent.category.DEFAULT");  
+							        	intent.addFlags (Intent.FLAG_ACTIVITY_NEW_TASK);  
+							        	Uri uri = Uri.fromFile(responseInfo.result); 
+							        	 
+							        	intent.setDataAndType (uri, "application/pdf");  
+							        	startActivity(intent); 
+							        }
+
+
+							        @Override
+							        public void onFailure(HttpException error, String msg) {
+							            //testTextView.setText(msg);
+							        	Log.e("download", msg, error);
+							        	showMessage("Failed");
+							        }
+							});
+
+					}
+					
+					
+				}
+				else
+				{
+					showMessage(message);
+				}
+				
+			}
+		}).createPdf(req);
+		
 	}
 
 	private void createSubfolder(String name)
