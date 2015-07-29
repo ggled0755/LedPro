@@ -67,10 +67,10 @@ public class LedProApp extends Application
 		}
 
 		MemoryCache.setProgramName("LedPro");
-		MemoryCache.setServerIp("192.168.1.105");
-		MemoryCache.setServerPort("7000");	
-/*		MemoryCache.setServerIp("120.25.216.218");
-		MemoryCache.setServerPort("88");*/
+		//MemoryCache.setServerIp("192.168.1.105");
+		//MemoryCache.setServerPort("7000");	
+		MemoryCache.setServerIp("120.25.216.218");
+		MemoryCache.setServerPort("88");
 	}
 	//加载本地数据库
 	private void loadDB()

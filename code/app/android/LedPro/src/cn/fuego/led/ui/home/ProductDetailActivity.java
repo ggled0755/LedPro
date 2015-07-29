@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.codehaus.jackson.type.TypeReference;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -44,66 +46,7 @@ public class ProductDetailActivity extends LedBaseActivity
 		initView();
 		loadRelatedItems();
 	}
-	
-	private void loadRelatedItems()
-	{
-		String ids=product.getRelated_product_ids();
-		//String[] ids = product.getRelated_product_ids().;
-		//List<Integer> relate_list=JsonConvert.jsonToObject(ids, new TypeReference<List<Integer>>(){});
-		List<String> relate_list=JsonConvert.jsonToObject(ids, new TypeReference<List<String>>(){});
-		if(!ValidatorUtil.isEmpty(relate_list))
-		{
-			MispBaseReqJson req = new MispBaseReqJson();
-			List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
-			conditionList.add(new QueryCondition(ConditionTypeEnum.IN, "product_id", relate_list));
-			req.setConditionList(conditionList);
-			
-			WebServiceContext.getInstance().getProductRest(new MispHttpHandler(){
-				@Override
-				public void handle(MispHttpMessage message)
-				{
-					if(message.isSuccess())
-					{
-						MispBaseRspJson rsp  = (MispBaseRspJson) message.getMessage().obj;
-						List<ProductJson> productList =rsp.GetReqCommonField(new TypeReference<List<ProductJson>>(){});
-						if(!ValidatorUtil.isEmpty(productList))
-						{
-							displayGallery(productList);
-						}
-						
-						
-					}
-					else
-					{
-						showMessage(message);
-					}
-				}
 
-			}).loadProductAll(req);
-		}
-		
-	}
-
-	private void displayGallery(List<ProductJson> productList)
-	{
-		
-		List<String> strList = new ArrayList<String>();
-		for(ProductJson p:productList)
-		{
-			strList.add(MemoryCache.getImageUrl()+p.getProduct_img());
-		}
-		gallery_product.initUI(strList.toArray(new String[strList.size()]) , new ItemClickCallback()
-		{
-			
-			@Override
-			public void onItemClick(Integer position)
-			{
-				//ProductDetailActivity.jumpToActivity(context, clazz);
-	
-			}
-		});
-		
-	}
 	@Override
 	public void initRes()
 	{
@@ -118,7 +61,14 @@ public class ProductDetailActivity extends LedBaseActivity
 		this.activityRes.getButtonIDList().add(R.id.product_detail_fl_btn);
 		this.activityRes.getButtonIDList().add(R.id.product_detail_score_view);
 	}
-	
+	public static void jump(Context context, ProductJson product)
+	{
+		Intent i = new Intent();
+		i.setClass(context, ProductDetailActivity.class);
+		i.putExtra(ListViewResInfo.SELECT_ITEM, product);
+		context.startActivity(i);
+		
+	}
 	@Override
 	public void onClick(View v)
 	{
@@ -131,7 +81,6 @@ public class ProductDetailActivity extends LedBaseActivity
 			}
 			else
 			{
-				//LoginActivity.jump(this, ProductDetailActivity.class, IntentCodeConst.REQUEST_CODE);
 				LoginActivity.jump(this, IntentCodeConst.REQUEST_CODE);
 			}
 			break;
@@ -142,7 +91,14 @@ public class ProductDetailActivity extends LedBaseActivity
 			
 			break;	
 		case R.id.product_detail_score_view:
-			ProEvalCreateActivity.jump(this, product);
+			if(MemoryCache.isLogined())
+			{
+				ProEvalCreateActivity.jump(this, product);
+			}
+			else
+			{
+				LoginActivity.jump(this, IntentCodeConst.REQUEST_CODE);
+			}
 			break;
 		default:
 			break;
@@ -202,4 +158,63 @@ public class ProductDetailActivity extends LedBaseActivity
 
 		
 	}
+	
+	private void loadRelatedItems()
+	{
+		String ids=product.getRelated_product_ids();
+		List<String> relate_list=JsonConvert.jsonToObject(ids, new TypeReference<List<String>>(){});
+		if(!ValidatorUtil.isEmpty(relate_list))
+		{
+			MispBaseReqJson req = new MispBaseReqJson();
+			List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
+			conditionList.add(new QueryCondition(ConditionTypeEnum.IN, "product_id", relate_list));
+			req.setConditionList(conditionList);
+			
+			WebServiceContext.getInstance().getProductRest(new MispHttpHandler(){
+				@Override
+				public void handle(MispHttpMessage message)
+				{
+					if(message.isSuccess())
+					{
+						MispBaseRspJson rsp  = (MispBaseRspJson) message.getMessage().obj;
+						List<ProductJson> productList =rsp.GetReqCommonField(new TypeReference<List<ProductJson>>(){});
+						if(!ValidatorUtil.isEmpty(productList))
+						{
+							displayGallery(productList);
+						}
+						
+						
+					}
+					else
+					{
+						showMessage(message);
+					}
+				}
+
+			}).loadProductAll(req);
+		}
+		
+	}
+
+	private void displayGallery(List<ProductJson> productList)
+	{
+		
+		List<String> strList = new ArrayList<String>();
+		for(ProductJson p:productList)
+		{
+			strList.add(MemoryCache.getImageUrl()+p.getProduct_img());
+		}
+		gallery_product.initUI(strList.toArray(new String[strList.size()]) , new ItemClickCallback()
+		{
+			
+			@Override
+			public void onItemClick(Integer position)
+			{
+				//ProductDetailActivity.jumpToActivity(context, clazz);
+	
+			}
+		});
+		
+	}
+
 }

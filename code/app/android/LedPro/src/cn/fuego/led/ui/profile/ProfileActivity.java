@@ -20,6 +20,7 @@ import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.led.R;
 import cn.fuego.led.cache.AppCache;
+import cn.fuego.led.cache.ProjectCache;
 import cn.fuego.led.constant.IntentCodeConst;
 import cn.fuego.led.ui.base.CreateDialog;
 import cn.fuego.led.ui.base.LedBaseListActivity;
@@ -80,12 +81,9 @@ public class ProfileActivity extends LedBaseListActivity<ProjectJson>
 		this.activityRes.getButtonIDList().add(R.id.profile_add_project_btn);
 		this.listViewRes.setListView(R.id.profile_list);
 		this.listViewRes.setListItemView(R.layout.list_item_profile_project);
-		//this.listViewRes.setListItemView(R.layout.list_item_home_product);
 		this.listViewRes.setClickActivityClass(ProjectDetailActivity.class);
 		
 		this.setAdapterForScrollView();
-		
-		//this.setDataList(StubData.getProjectList());
 	}
 	
 	@Override
@@ -198,8 +196,10 @@ public class ProfileActivity extends LedBaseListActivity<ProjectJson>
 	public List<ProjectJson> loadListRecv(Object obj)
 	{
 		MispBaseRspJson rsp = (MispBaseRspJson) obj;
+		List<ProjectJson> result =rsp.GetReqCommonField(new TypeReference<List<ProjectJson>>(){});
+		ProjectCache.getInstance().setProjectList(result);
 		
-		return rsp.GetReqCommonField(new TypeReference<List<ProjectJson>>(){});
+		return result;
 	}
 	
 	@Override
@@ -229,6 +229,18 @@ public class ProfileActivity extends LedBaseListActivity<ProjectJson>
 		}  
 
 		return super.onKeyDown(keyCode, event);
+	}
+
+	@Override
+	protected void onRestart()
+	{
+		// TODO Auto-generated method stub
+		super.onRestart();
+		if(ProjectCache.getInstance().isChanged())
+		{
+			ProjectCache.getInstance().setChanged(false);
+			refreshList(ProjectCache.getInstance().getProjectList());
+		}
 	}
 
 

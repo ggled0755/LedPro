@@ -6,7 +6,7 @@
 * @date 2015-7-22 下午9:45:10 
 * @version V1.0   
 */ 
-package cn.fuego.led.ui.profile;
+package cn.fuego.led.ui.project;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -415,4 +415,14 @@ public final class CameraManager {
 				rect.top, rect.width(), rect.height(), false);
 	}
 
+	public Camera getCamera()
+	{
+		return camera;
+	}
+
+	public void setCamera(Camera camera)
+	{
+		this.camera = camera;
+	}
+
 }

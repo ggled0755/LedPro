@@ -1,5 +1,5 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/LinearLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -93,15 +93,18 @@
 
             <Button
                 android:id="@+id/misp_title_save"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background="@drawable/misp_tilte_btn_selector"
+                android:background="@null"
+                android:drawableRight="@drawable/icon_pdf"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="@string/misp_save"
+                android:minHeight="24dp"
+                android:minWidth="24dp"
                 android:textColor="@color/theme_text_color"
                 android:textSize="@dimen/top_head_btn_size"
-                android:visibility="invisible" />
+                android:visibility="visible" />
+
         </LinearLayout>
     </RelativeLayout>
 
@@ -116,20 +119,21 @@
         android:textColor="@color/black"
         android:textSize="14sp" />
 
-    <EditText
+    <TextView
         android:id="@+id/project_detail_notes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@null"
         android:ems="10"
+        android:focusable="true"
+        android:focusableInTouchMode="false"
         android:gravity="top|left"
         android:hint="@string/project_note_hints"
         android:minLines="3"
         android:padding="18dp"
         android:textSize="13sp" >
 
-        <requestFocus />
-    </EditText>
+    </TextView>
 
     <TextView
         android:id="@+id/TextView01"

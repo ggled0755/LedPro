@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.codehaus.jackson.type.TypeReference;
 
+import android.app.ProgressDialog;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -13,21 +15,22 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
-import cn.fuego.common.util.format.DateUtil;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.led.R;
+import cn.fuego.led.cache.ProjectCache;
 import cn.fuego.led.cache.SubfolderCache;
 import cn.fuego.led.constant.IntentCodeConst;
 import cn.fuego.led.ui.base.CreateDialog;
 import cn.fuego.led.ui.base.CreateDialog.OnConfirmListener;
+import cn.fuego.led.ui.base.ExportPdfDialog;
+import cn.fuego.led.ui.base.ExportPdfDialog.OnExConfirmListener;
 import cn.fuego.led.ui.base.LedBaseActivity;
-import cn.fuego.led.ui.profile.SimpleTreeAdapter;
-import cn.fuego.led.ui.profile.SubfolderDetailActivity;
+import cn.fuego.led.ui.base.ModifyDialog;
+import cn.fuego.led.ui.base.ModifyDialog.OnModifyConfirmListener;
 import cn.fuego.led.util.treeview.Node;
 import cn.fuego.led.util.treeview.TreeListViewAdapter;
 import cn.fuego.led.util.treeview.TreeListViewAdapter.OnTreeNodeClickListener;
@@ -49,7 +52,6 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.HttpHandler;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
-import com.lidroid.xutils.http.client.HttpRequest;
 import com.nostra13.universalimageloader.utils.StorageUtils;
 
 public class ProjectDetailActivity extends LedBaseActivity
@@ -66,12 +68,13 @@ public class ProjectDetailActivity extends LedBaseActivity
 	private TreeListViewAdapter mAdapter;
 	
 	private ProjectJson project;
-	private EditText txt_notes;
+	private TextView txt_notes,txt_title;
 	
 	private ProductJson product;
 	private int parent_id=0;
 	private boolean addEnable=false;
 	
+	private ProgressDialog pd;
 	@Override
 	public void initRes()
 	{
@@ -90,7 +93,113 @@ public class ProjectDetailActivity extends LedBaseActivity
 		
 			
 	}
-	
+	public static void jump(Context context,ProjectJson project,ProductJson product)
+	{
+		Intent intent = new Intent(context,ProjectDetailActivity.class);
+		intent.putExtra(ListViewResInfo.SELECT_ITEM, project);
+		intent.putExtra(IntentCodeConst.DATA_PRODUCT, product);
+		
+		context.startActivity(intent);
+
+	}
+	@Override
+	protected void onCreate(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+
+		initSubfolderTree();
+		loadSubfolder();
+		txt_title = (TextView) findViewById(R.id.misp_title_name);
+		txt_notes = (TextView) findViewById(R.id.project_detail_notes);
+		initView();
+		
+		
+		TextView txt_products = (TextView) findViewById(R.id.project_detail_products);
+		txt_products.setText(String.valueOf(project.getTotal_catg())+"/"+String.valueOf(project.getTotal_num()));
+		
+		TextView txt_watt = (TextView) findViewById(R.id.project_detail_watt);
+		txt_watt.setText(String.valueOf(project.getTotal_watt()));
+		
+		TextView txt_tco = (TextView) findViewById(R.id.project_detail_tco);
+		txt_tco.setText(String.valueOf(project.getTotal_cost()));
+		
+	}
+	private void initView()
+	{
+		txt_title.setText(project.getProject_name());
+		txt_notes.setText(StrUtil.noNullStr(project.getProject_note()));
+		
+	}
+	@Override
+	public void saveOnClick(View v)
+	{
+		pd = ProgressDialog.show(this, null, getString(R.string.progress_msg_processing));
+		MispBaseReqJson req = new MispBaseReqJson();
+		req.setObj(project.getProject_id());
+		WebServiceContext.getInstance().getProjectRest(new MispHttpHandler(){
+			@Override
+			public void handle(MispHttpMessage message)
+			{
+				if(pd!=null&&pd.isShowing())
+				{
+					pd.dismiss();
+				}
+				if(message.isSuccess())
+				{
+					MispBaseRspJson rsp = (MispBaseRspJson) message.getMessage().obj;
+					String url = rsp.GetReqCommonField(String.class);
+					if(!ValidatorUtil.isEmpty(url))
+					{
+						selOperDialog(url);
+					}
+				}
+				else
+				{
+					showMessage(message);
+				}
+			}
+		}).createPdf(req);
+	}
+
+	private void selOperDialog(final String url)
+	{
+		String webUrl=MemoryCache.getWebContextUrl()+"/Client/Public/Fuego/PDF/"+url;
+		ExportPdfDialog dialog = new ExportPdfDialog(this, project.getProject_name(), webUrl);
+		dialog.setConfirmListener(new OnExConfirmListener()
+		{
+			
+			@Override
+			public void otherCallbak(String content)
+			{
+				copyUrl(content);
+				
+			}
+			
+			@Override
+			public void confirmCallback(String content)
+			{
+
+				downloadPDF(content,url);
+
+				
+			}
+		});
+		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		
+		dialog.show();
+		
+	}
+
+	@SuppressWarnings("deprecation")
+	protected void copyUrl(String content)
+	{
+		// 得到剪贴板管理器  
+		ClipboardManager cmb = (ClipboardManager)getSystemService(Context.CLIPBOARD_SERVICE);  
+		cmb.setText(content);  
+		showMessage("copy to clipbord");
+		
+	}
+
 	private void loadSubfolder()
 	{
 		MispBaseReqJson req = new MispBaseReqJson();
@@ -120,38 +229,7 @@ public class ProjectDetailActivity extends LedBaseActivity
 		
 	}
 
-	public static void jump(Context context,ProjectJson project,ProductJson product)
-	{
-		Intent intent = new Intent(context,ProjectDetailActivity.class);
-		intent.putExtra(ListViewResInfo.SELECT_ITEM, project);
-		intent.putExtra(IntentCodeConst.DATA_PRODUCT, product);
-		
-		context.startActivity(intent);
 
-	}
-	@Override
-	protected void onCreate(Bundle savedInstanceState)
-	{
-		super.onCreate(savedInstanceState);
-		
-		initSubfolderTree();
-		loadSubfolder();
-		
-		txt_notes = (EditText) findViewById(R.id.project_detail_notes);
-		txt_notes.clearFocus();
-		
-		TextView txt_products = (TextView) findViewById(R.id.project_detail_products);
-		txt_products.setText(String.valueOf(project.getTotal_catg())+"/"+String.valueOf(project.getTotal_num()));
-		txt_products.requestFocus();
-		txt_products.requestFocusFromTouch();
-		
-		TextView txt_watt = (TextView) findViewById(R.id.project_detail_watt);
-		txt_watt.setText(String.valueOf(project.getTotal_watt()));
-		
-		TextView txt_tco = (TextView) findViewById(R.id.project_detail_tco);
-		txt_tco.setText(String.valueOf(project.getTotal_cost()));
-		
-	}
 
 	@SuppressWarnings("unchecked")
 	private void initSubfolderTree()
@@ -181,8 +259,8 @@ public class ProjectDetailActivity extends LedBaseActivity
 						}
 						else
 						{
-							//showMessage(SubfolderCache.getInstance().getSelIDList().toString());
-							SubfolderDetailActivity.jump(ProjectDetailActivity.this, SubfolderCache.getInstance().getSelSd(node.getId()));
+							SubfolderDetailActivity.jump(ProjectDetailActivity.this,
+									SubfolderCache.getInstance().getSelSd(node.getId()));
 							
 						}
 					}
@@ -213,111 +291,135 @@ public class ProjectDetailActivity extends LedBaseActivity
 		super.onClick(v);
 		if(v.getId()==R.id.project_detail_add_btn)
 		{
-			if(addEnable)
-			{
-				addEnable=false;
-				CreateDialog dialog= new CreateDialog(this, "Add a subfolder for", "Please enter your subfolder name here", new OnConfirmListener()
-				{
-					
-					@Override
-					public void confirmCallback(String name)
-					{
-						createSubfolder(name);
-						
-					}
-
-
-				});
-				dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-				
-				dialog.show();
-			}
-			else
-			{
-				addEnable=true;
-				showToast(this, "Please select your parent subfolder");
-			}
+			createSubfolder();
+			
 		}
 		if(v.getId()==R.id.project_detail_title)
 		{
-			generatePDF();
+			modifyProject(project.getProject_name(),StrUtil.noNullStr(project.getProject_note()));
 		}
 	}
-
-	private void generatePDF()
+	
+	private void createSubfolder()
 	{
-		MispBaseReqJson req = new MispBaseReqJson();
-		req.setObj(project.getProject_id());
-		
-		WebServiceContext.getInstance().getProjectRest(new MispHttpHandler(){
-			@Override
-			public void handle(MispHttpMessage message)
+		if(addEnable)
+		{
+			addEnable=false;
+			CreateDialog dialog= new CreateDialog(this, "Add a subfolder for", "Please enter your subfolder name here", new OnConfirmListener()
 			{
-
-				if(message.isSuccess())
+				
+				@Override
+				public void confirmCallback(String name)
 				{
-					MispBaseRspJson rsp = (MispBaseRspJson) message.getMessage().obj;
-					String url = rsp.GetReqCommonField(String.class);
-					if(!ValidatorUtil.isEmpty(url))
+					createSubfolder(name);
+					
+				}
+
+
+			});
+			dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+			
+			dialog.show();
+		}
+		else
+		{
+			addEnable=true;
+			showToast(this, "Please select your parent subfolder");
+		}
+		
+	}
+	//修改project信息，包含name 和notes
+	private void modifyProject(String name,String note)
+	{
+		ModifyDialog dialog = new ModifyDialog(this, name, note);
+		dialog.setConfirmListener(new OnModifyConfirmListener()
+		{
+
+			@Override
+			public void confirmCallback(String name, String note)
+			{
+				project.setProject_name(name);
+				project.setProject_note(note);
+				MispBaseReqJson req = new MispBaseReqJson();
+				req.setObj(project);
+				WebServiceContext.getInstance().getProjectRest(new MispHttpHandler(){
+					@Override
+					public void handle(MispHttpMessage message)
 					{
-						String webUrl=MemoryCache.getWebContextUrl()+"/Client/Public/Fuego/PDF/"+url;
-						HttpUtils http = new HttpUtils();
-						String appName = getResources().getString(R.string.app_name);
-						File cacheDir = StorageUtils.getOwnCacheDirectory(getApplicationContext(), appName+"/pdf"); 
-						//目标文件加上时间戳
-						String target =cacheDir.getAbsolutePath()+"/"+System.currentTimeMillis()+url;
-
-						@SuppressWarnings({ "unused", "rawtypes" })
-						HttpHandler handler = http.download(webUrl,
-								target,
-							    true, // 如果目标文件存在，接着未完成的部分继续下载。服务器不支持RANGE时将从新下载。
-							    true, // 如果从请求返回信息中获取到文件名，下载完成后自动重命名。
-							    new RequestCallBack<File>() {
-
-							        @Override
-							        public void onStart() {
-							            //testTextView.setText("conn...");
-							        }
-
-							        @Override
-							        public void onLoading(long total, long current, boolean isUploading) {
-							           // testTextView.setText(current + "/" + total);
-							        }
-
-							        @Override
-							        public void onSuccess(ResponseInfo<File> responseInfo) {
-							           // testTextView.setText("downloaded:" + responseInfo.result.getPath());
-							        	showMessage("Success");
-							        	Intent intent = new Intent("android.intent.action.VIEW");  
-							        	intent.addCategory("android.intent.category.DEFAULT");  
-							        	intent.addFlags (Intent.FLAG_ACTIVITY_NEW_TASK);  
-							        	Uri uri = Uri.fromFile(responseInfo.result); 
-							        	 
-							        	intent.setDataAndType (uri, "application/pdf");  
-							        	startActivity(intent); 
-							        }
-
-
-							        @Override
-							        public void onFailure(HttpException error, String msg) {
-							            //testTextView.setText(msg);
-							        	Log.e("download", msg, error);
-							        	showMessage("Failed");
-							        }
-							});
-
+						if(message.isSuccess())
+						{
+							initView();
+							ProjectCache.getInstance().updatePro(project);
+							ProjectCache.getInstance().setChanged(true);
+						}
+						else
+						{
+							showMessage(message);
+						}
 					}
-					
-					
-				}
-				else
-				{
-					showMessage(message);
-				}
+				}).modifyProject(req);
 				
 			}
-		}).createPdf(req);
+
+		});
+		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		
+		dialog.show();
+		
+	}
+
+	private void downloadPDF(String webUrl,String fileName)
+	{
+
+		HttpUtils http = new HttpUtils();
+		String appName = getResources().getString(R.string.app_name);
+		File cacheDir = StorageUtils.getOwnCacheDirectory(getApplicationContext(), appName+"/pdf"); 
+		//目标文件加上时间戳
+		String target =cacheDir.getAbsolutePath()+"/"+System.currentTimeMillis()+fileName;
+		@SuppressWarnings({ "unused", "rawtypes" })
+		HttpHandler handler = http.download(webUrl,
+				target,
+			    true, // 如果目标文件存在，接着未完成的部分继续下载。服务器不支持RANGE时将从新下载。
+			    true, // 如果从请求返回信息中获取到文件名，下载完成后自动重命名。
+			    new RequestCallBack<File>() {
+
+			        @Override
+			        public void onStart() {
+			        	pd = ProgressDialog.show(ProjectDetailActivity.this, null, getString(R.string.progress_msg_processing));
+			        }
+
+			        @Override
+			        public void onLoading(long total, long current, boolean isUploading) {
+			           // testTextView.setText(current + "/" + total);
+			        }
+
+			        @Override
+			        public void onSuccess(ResponseInfo<File> responseInfo) {
+					if(pd!=null&&pd.isShowing())
+						{
+							pd.dismiss();
+						}
+			        	showMessage("Success");
+			        	Intent intent = new Intent("android.intent.action.VIEW");  
+			        	intent.addCategory("android.intent.category.DEFAULT");  
+			        	intent.addFlags (Intent.FLAG_ACTIVITY_NEW_TASK);  
+			        	Uri uri = Uri.fromFile(responseInfo.result); 			        	 
+			        	intent.setDataAndType (uri, "application/pdf");  
+			        	startActivity(intent); 
+			        }
+
+
+			        @Override
+			        public void onFailure(HttpException error, String msg) {
+						if(pd!=null&&pd.isShowing())
+						{
+							pd.dismiss();
+						}
+			        	Log.e("download", msg, error);
+			        	showMessage("Failed");
+			        }
+			});
+
 	}
 
 	private void createSubfolder(String name)
@@ -361,7 +463,7 @@ public class ProjectDetailActivity extends LedBaseActivity
 			{
 				if(message.isSuccess())
 				{
-					showMessage(message);
+					//showMessage(message);
 				}
 				else
 				{
@@ -372,4 +474,18 @@ public class ProjectDetailActivity extends LedBaseActivity
 		
 		
 	}
+	@Override
+	protected void onRestart()
+	{
+		// TODO Auto-generated method stub
+		super.onRestart();
+		if(SubfolderCache.getInstance().isChange())
+		{
+			SubfolderCache.getInstance().setChange(false);
+			datas =SubfolderCache.getInstance().getSubfolderList();
+			initSubfolderTree();
+		}
+	}
+	
+	
 }

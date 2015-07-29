@@ -17,18 +17,20 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.GET_TASKS" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.FLASHLIGHT" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- SMS SDK -->
 
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
+        <!-- 打开Camera的权限 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.autofocus" />
+
+    <!-- 开启闪光灯权限 -->
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
     <application
         android:name=".ui.LedProApp"
         android:allowBackup="true"
@@ -73,7 +75,7 @@
             android:label="@string/title_activity_project_detail" >
         </activity>
         <activity
-            android:name=".ui.profile.SubfolderDetailActivity"
+            android:name="cn.fuego.led.ui.project.SubfolderDetailActivity"
             android:label="@string/title_activity_subfolder_detail" >
         </activity>
         <activity
@@ -132,8 +134,12 @@
             android:label="@string/title_activity_pro_eval_create" >
         </activity>
         <activity
-            android:name="cn.fuego.led.ui.home.ProAttrsActivity"
+            android:name=".ui.home.ProAttrsActivity"
             android:label="@string/title_activity_pro_attrs" >
+        </activity>
+        <activity
+            android:name="cn.fuego.led.ui.scan.BarInputActivity"
+            android:label="@string/title_activity_bar_input" >
         </activity>
     </application>
 

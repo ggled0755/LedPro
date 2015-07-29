@@ -14,7 +14,6 @@ import java.util.List;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.led.util.treeview.Node;
 import cn.fuego.led.webservice.up.model.base.SubfolderJson;
-import cn.fuego.led.webservice.up.model.base.ViewSubfolderJson;
 
 /** 
  * @ClassName: SubfolderCache 
@@ -30,6 +29,7 @@ public class SubfolderCache
 	private List<Node> allNode = new ArrayList<Node>();
 	private Integer targetID;
 	private List<SubfolderJson> subfolderList = new ArrayList<SubfolderJson>();
+	private boolean isChange=false;//标记是否修改信息
 	
 	public synchronized static SubfolderCache getInstance()
 	{
@@ -107,6 +107,27 @@ public class SubfolderCache
 			}
 		}
 		return new SubfolderJson();
+	}
+	public boolean isChange()
+	{
+		return isChange;
+	}
+	public void setChange(boolean isChange)
+	{
+		this.isChange = isChange;
+	}
+	public void updateSf(SubfolderJson detail)
+	{
+		for(int i=0;i<this.subfolderList.size();i++)
+		{
+			if(subfolderList.get(i).getSubfolder_id()==detail.getSubfolder_id())
+			{
+				subfolderList.remove(i);
+				subfolderList.add(detail);
+				break;
+			}
+		}
+		
 	}
 	
 	

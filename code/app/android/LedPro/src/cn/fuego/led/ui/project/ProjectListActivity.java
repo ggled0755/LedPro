@@ -5,13 +5,12 @@ import java.util.List;
 
 import org.codehaus.jackson.type.TypeReference;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Display;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -37,7 +36,8 @@ import cn.fuego.misp.webservice.json.MispBaseRspJson;
 public class ProjectListActivity extends LedBaseListActivity<ProjectJson>
 {
 	private ProductJson product;
-	
+	private ProgressDialog pd;
+	private int selId=0;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -51,7 +51,7 @@ public class ProjectListActivity extends LedBaseListActivity<ProjectJson>
 	public void initRes()
 	{
 		this.activityRes.setAvtivityView(R.layout.activity_project_list);
-		this.activityRes.setName("BUILD A PROJECT");
+		this.activityRes.setName(getString(R.string.title_activity_project_list));
 		
 		
 		this.listViewRes.setListView(R.id.project_list_content);
@@ -120,6 +120,10 @@ public class ProjectListActivity extends LedBaseListActivity<ProjectJson>
 	public View getListItemView(View view, final ProjectJson item)
 	{
 		CheckBox chk = (CheckBox) view.findViewById(R.id.item_project_sel_chk);
+		if(item.getProject_id()!=selId)
+		{
+			chk.setChecked(false);
+		}
 		chk.setOnCheckedChangeListener(new OnCheckedChangeListener()
 		{
 			
@@ -128,6 +132,8 @@ public class ProjectListActivity extends LedBaseListActivity<ProjectJson>
 			{
 				if(isChecked)
 				{
+					selId=item.getProject_id();
+					repaint();
 					selProject(item);
 				}				
 				
@@ -149,6 +155,7 @@ public class ProjectListActivity extends LedBaseListActivity<ProjectJson>
 	@Override
 	public void loadSendList()
 	{
+		pd = ProgressDialog.show(this, null, getString(R.string.progress_msg_loading));
 		MispBaseReqJson req = new MispBaseReqJson();
 		List<QueryCondition> conditionList=new ArrayList<QueryCondition>();
 		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "create_user_id", AppCache.getInstance().getUser().getUser_id()));
@@ -161,6 +168,10 @@ public class ProjectListActivity extends LedBaseListActivity<ProjectJson>
 	@Override
 	public List<ProjectJson> loadListRecv(Object obj)
 	{
+		if(pd!=null&&pd.isShowing())
+		{
+			pd.dismiss();
+		}
 		MispBaseRspJson rsp = (MispBaseRspJson) obj;
 		
 		return rsp.GetReqCommonField(new TypeReference<List<ProjectJson>>(){});

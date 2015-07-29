@@ -6,7 +6,7 @@
 * @date 2015-7-22 下午10:03:01 
 * @version V1.0   
 */ 
-package cn.fuego.led.ui.profile;
+package cn.fuego.led.ui.project;
 
 /** 
  * @ClassName: SdGroup 

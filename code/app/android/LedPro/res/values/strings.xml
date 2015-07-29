@@ -33,8 +33,9 @@
     <string name="hint_input_phone">Enter your cellphone number here</string>
     <string name="hint_input_verifycode">Enter your verifycode here</string>
     <string name="hint_input_password">Enter your password here</string>
+    <string name="hint_input_barcode">Please input bar code</string>
     <!-- btn name -->
-
+	<string name="btn_or_scan">Or scan QR/Bar code</string>
     <string name="btn_logout">Log Out</string>
     <string name="btn_forget_pwd">Forget password?</string>
     <string name="btn_register">Join Now</string>
@@ -60,6 +61,8 @@
     <string name="btn_get_code">Get verifycode</string>
     <string name="misp_save">Save</string>
     <string name="btn_save">Save</string>
+    <string name="btn_view">View</string>
+    <string name="btn_export_pdf">Export</string>
     <string name="btn_sel_album">From album</string>
     <string name="btn_sel_take">Take a photo</string>
     <!-- others -->
@@ -99,7 +102,7 @@
     <string name="msg_input_null">Input Empty</string>
     <string name="msg_send_code_success">Verify code has been sent</string>
     <string name="title_activity_filter_list">FilterListActivity</string>
-    <string name="title_activity_project_list">ProjectListActivity</string>
+    <string name="title_activity_project_list">BUILD A PROJECT</string>
     <string name="title_activity_user_register">UserRegisterActivity</string>
     <string name="title_activity_user_info">UserInfo</string>
     <string name="title_activity_login">LoginActivity</string>
@@ -107,5 +110,6 @@
     <string name="title_activity_product_eval">Rating</string>
     <string name="title_activity_pro_eval_create">Evaluation</string>
     <string name="title_activity_pro_attrs">ProAttrsActivity</string>
-
+    <string name="title_activity_bar_input">BarCode</string>
+	<string name="title_activity_result">Scan result</string>
 </resources>

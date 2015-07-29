@@ -38,7 +38,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/RelativeLayout1"
+            android:id="@+id/subfolder_detail_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
@@ -114,7 +114,7 @@
         android:textColor="@color/black"
         android:textSize="14sp" />
 
-    <EditText
+    <TextView
         android:id="@+id/subfolder_detail_notes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

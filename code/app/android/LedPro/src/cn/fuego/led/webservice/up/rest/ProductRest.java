@@ -35,6 +35,11 @@ public interface ProductRest
 	@Path("/Product/Load")
 	MispBaseRspJson loadProduct(MispBaseReqJson req);
 
+	//分页加载，带过滤条件搜索
+	@POST
+	@Path("/Product/GetUnique")
+	MispBaseRspJson getProduct(MispBaseReqJson req);
+	
 	//全部加载
 	@POST
 	@Path("/Product/LoadAll")

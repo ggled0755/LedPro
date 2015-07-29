@@ -17,11 +17,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.hardware.Camera;
+import android.hardware.Camera.Parameters;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -71,7 +72,7 @@ public class CaptureActivity extends LedBaseActivity implements SurfaceHolder.Ca
 	private ImageView img_flash;
 
 	public static final String STATE_QR="qrcode";
-	public final String STATE_BAR="onecode";
+	public static final String STATE_BAR="onecode";
 	/**
 	 * 活动监控器，用于省电，如果手机没有连接电源线，那么当相机开启后如果一直处于不被使用状态则该服务会将当前activity关闭。
 	 * 活动监控器全程监控扫描活跃状态，与CaptureActivity生命周期相同.每一次扫描过后都会重置该监控，即重新倒计时。
@@ -81,6 +82,8 @@ public class CaptureActivity extends LedBaseActivity implements SurfaceHolder.Ca
 	private Vector<BarcodeFormat> decodeFormats;// 编码格式
 	private CaptureActivityHandler mHandler;// 解码线程
 
+	private boolean isFlashOpen = false;
+	//private Camera camera;
 	private static final Collection<ResultMetadataType> DISPLAYABLE_METADATA_TYPES = EnumSet
 			.of(ResultMetadataType.ISSUE_NUMBER,
 					ResultMetadataType.SUGGESTED_PRICE,
@@ -90,7 +93,7 @@ public class CaptureActivity extends LedBaseActivity implements SurfaceHolder.Ca
 	@Override
 	public void initRes()
 	{
-		//this.activityRes.setAvtivityView(R.layout.activity_capture);
+		this.activityRes.setAvtivityView(R.layout.activity_capture);
 		String state= this.getIntent().getStringExtra(IntentCodeConst.JUMP_DATA);
 		if(!ValidatorUtil.isEmpty(state))
 		{
@@ -116,7 +119,7 @@ public class CaptureActivity extends LedBaseActivity implements SurfaceHolder.Ca
 	{
 		super.onCreate(savedInstanceState);
 		initSetting();
-		setContentView(R.layout.activity_capture);
+		
 		initComponent();
 		initView();
 		initEvent();
@@ -161,6 +164,9 @@ public class CaptureActivity extends LedBaseActivity implements SurfaceHolder.Ca
 		img_album = (ImageView) findViewById(R.id.capture_album_img);
 		img_flash = (ImageView) findViewById(R.id.capture_flash_img);
 		
+		ImageView back_btn = (ImageView) findViewById(R.id.capture_back);
+		back_btn.setOnClickListener(this);
+		
 		Button btn_bar = (Button) findViewById(R.id.capture_bar_code_btn);
 		btn_bar.setOnClickListener(this);
 	}
@@ -177,16 +183,9 @@ public class CaptureActivity extends LedBaseActivity implements SurfaceHolder.Ca
 	}
 
 	@Override
-	public void backOnClick()
-	{
-		showMessage("back");
-		super.backOnClick();
-	}
-	@Override
 	public void onClick(View v)
 	{
-		// TODO Auto-generated method stub
-		showMessage("back");
+
 		switch (v.getId())
 		{
 		case R.id.capture_album_img:
@@ -196,15 +195,56 @@ public class CaptureActivity extends LedBaseActivity implements SurfaceHolder.Ca
 			
 			break;
 		case R.id.capture_flash_img:
-			
+			switchFlash();
 			break;
-		case R.id.misp_title_back:
+		case R.id.capture_back:
+			finish();
 			break;
 		case R.id.capture_bar_code_btn:
+			Intent i = new Intent();
+			i.setClass(this, BarInputActivity.class);
+			startActivity(i);
+			inactivityTimer.shutdown();
+			saveScanTypeToSp();
 			break;
 		default:
 			break;
 		}
+	}
+	//打开关闭闪光灯
+	private void switchFlash()
+	{
+		if(!isFlashOpen)
+		{
+			isFlashOpen =true;
+			img_flash.setSelected(true);
+			try {
+				Log.i("tag", "~~~~~~~~~~~打开闪光灯~~~~~~~~~~~");
+				//camera = Camera.open();
+				//cameraManager.getCamera().startPreview();
+				Parameters parameters = cameraManager.getCamera().getParameters();
+				parameters.setFlashMode(Parameters.FLASH_MODE_TORCH);
+				cameraManager.getCamera().setParameters(parameters);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else
+		{
+			isFlashOpen =false;
+			img_flash.setSelected(false);
+			try {
+				Log.i("tag", "~~~~~~~~~~~关闭闪光灯~~~~~~~~~~~");
+				Parameters parameters = cameraManager.getCamera().getParameters();
+				parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
+				cameraManager.getCamera().setParameters(parameters);
+				//camera.release();
+				//camera = null;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
 	}
 	/**
 	 * 初始设置扫描类型（最后一次使用类型）
@@ -484,7 +524,7 @@ public class CaptureActivity extends LedBaseActivity implements SurfaceHolder.Ca
 			barcodeImageView.setImageBitmap(barcode);
 		}
 
-		TextView formatTextView = (TextView) findViewById(R.id.format_text_view);
+/*		TextView formatTextView = (TextView) findViewById(R.id.format_text_view);
 		formatTextView.setText(rawResult.getBarcodeFormat().toString());
 
 		DateFormat formatter = DateFormat.getDateTimeInstance(DateFormat.SHORT,
@@ -494,10 +534,10 @@ public class CaptureActivity extends LedBaseActivity implements SurfaceHolder.Ca
 				.setText(formatter.format(new Date(rawResult.getTimestamp())));
 
 		TextView metaTextView = (TextView) findViewById(R.id.meta_text_view);
-		View metaTextViewLabel = findViewById(R.id.meta_text_view_label);
-		metaTextView.setVisibility(View.GONE);
-		metaTextViewLabel.setVisibility(View.GONE);
-		Map<ResultMetadataType, Object> metadata = rawResult
+		View metaTextViewLabel = findViewById(R.id.meta_text_view_label);*/
+/*		metaTextView.setVisibility(View.GONE);
+		metaTextViewLabel.setVisibility(View.GONE);*/
+/*		Map<ResultMetadataType, Object> metadata = rawResult
 				.getResultMetadata();
 		if (metadata != null) {
 			StringBuilder metadataText = new StringBuilder(20);
@@ -513,7 +553,7 @@ public class CaptureActivity extends LedBaseActivity implements SurfaceHolder.Ca
 				metaTextView.setVisibility(View.VISIBLE);
 				metaTextViewLabel.setVisibility(View.VISIBLE);
 			}
-		}
+		}*/
 
 /*		TextView contentsTextView = (TextView) findViewById(R.id.contents_text_view);
 
