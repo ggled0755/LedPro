@@ -90,16 +90,17 @@
             android:orientation="vertical" >
 
             <Button
-                android:id="@+id/ttt"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:id="@+id/misp_title_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background="@drawable/misp_tilte_btn_selector"
+                android:background="@drawable/icon_delete"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="@string/misp_save"
+                android:minHeight="24dp"
+                android:minWidth="24dp"
                 android:textColor="@color/theme_text_color"
-                android:textSize="@dimen/top_head_btn_size"
-                android:visibility="invisible" />
+                android:textSize="@dimen/top_head_btn_size" />
+
         </LinearLayout>
     </RelativeLayout>
 

@@ -4,6 +4,7 @@ package cn.fuego.led.ui;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import cn.fuego.led.R;
+import cn.fuego.led.ui.home.HomeActivity;
 import cn.fuego.misp.service.MemoryCache;
 import cn.fuego.misp.ui.base.MispBaseActivtiy;
 
@@ -46,7 +47,7 @@ public class StartActivity extends MispBaseActivtiy
 	private void startMain()
 	{
 		//MainTabbarActivity.jump(this, MainTabbarActivity.class, 1);
- 
+		jumpToActivity(this, HomeActivity.class);
 
 		@SuppressWarnings("deprecation")
 		int VERSION = Integer.parseInt(android.os.Build.VERSION.SDK);

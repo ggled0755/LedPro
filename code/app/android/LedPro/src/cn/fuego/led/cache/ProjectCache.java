@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.led.webservice.up.model.base.ProjectJson;
 
 /** 
@@ -42,8 +43,12 @@ public class ProjectCache
 
 	public void clear()
 	{
-		projectList.clear();
-		projectMap.clear();
+		if(!ValidatorUtil.isEmpty(projectList))
+		{
+			projectList.clear();
+			projectMap.clear();
+		}
+
 	}
 
 	//更新产品信息
@@ -71,11 +76,15 @@ public class ProjectCache
 	public void setProjectList(List<ProjectJson> projectList)
 	{
 		clear();
-		this.projectList = projectList;		
-		for(int i=0;i<projectList.size();i++)
+		this.projectList = projectList;
+		if(!ValidatorUtil.isEmpty(projectList))
 		{
-			projectMap.put(projectList.get(i).getProject_id(), projectList.get(i));
+			for(int i=0;i<projectList.size();i++)
+			{
+				projectMap.put(projectList.get(i).getProject_id(), projectList.get(i));
+			}
 		}
+		
 	}
 	public Map<Integer, ProjectJson> getProjectMap()
 	{

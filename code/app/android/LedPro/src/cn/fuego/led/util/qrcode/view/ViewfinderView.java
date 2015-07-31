@@ -108,10 +108,10 @@ public final class ViewfinderView extends View {
 		// 将像素转换成dp
 		ScreenRate = (int) (20 * density);
 		paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-		Resources resources = getResources();
+		Resources resources = context.getResources();
+
 		maskColor = resources.getColor(R.color.viewfinder_mask);
 		resultColor = resources.getColor(R.color.result_view);
-
 		resultPointColor = resources.getColor(R.color.possible_result_points);
 		possibleResultPoints = new ArrayList<ResultPoint>(5);
 		lastPossibleResultPoints = null;

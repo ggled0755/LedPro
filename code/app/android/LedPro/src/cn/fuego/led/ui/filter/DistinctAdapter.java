@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,11 +37,15 @@ public class DistinctAdapter extends BaseAdapter
 	private final int type_btn=0,type_seekbar=1;
 	private final int type_count =2;
 	private LayoutInflater layout;
+	public Typeface ttf_cabin_semibold;
+	public Typeface ttf_cabin_regular;
 	public DistinctAdapter(Context context,List<FilterItemMeta> data)
 	{
 		mContext=context;
 		dataList=data;
 		layout = LayoutInflater.from(context);
+		ttf_cabin_semibold = Typeface.createFromAsset(context.getAssets(), "fonts/Cabin-SemiBold.ttf");
+		ttf_cabin_regular = Typeface.createFromAsset(context.getAssets(), "fonts/Cabin-Regular.otf");
 	}
 	
 	@Override
@@ -126,6 +131,8 @@ public class DistinctAdapter extends BaseAdapter
 		{
 		case type_btn:
 			vh_btn.title.setText(dataList.get(position).getTitle());
+			vh_btn.title.setTypeface(ttf_cabin_regular);
+			vh_btn.content.setTypeface(ttf_cabin_regular);
 			if(ValidatorUtil.isEmpty(dataList.get(position).getContent()))
 			{
 				
@@ -138,6 +145,8 @@ public class DistinctAdapter extends BaseAdapter
 			break;
 		case type_seekbar:
 			vh_seek.title.setText(dataList.get(position).getTitle());
+			vh_seek.title.setTypeface(ttf_cabin_regular);
+
 			vh_seek.minValue.setText(dataList.get(position).getMinValue());
 			vh_seek.maxValue.setText(dataList.get(position).getMaxValue());
 			final RangeSeekBar<Integer> seekbar =new RangeSeekBar<Integer>(0, 100, mContext, dataList.get(position).getTheme());

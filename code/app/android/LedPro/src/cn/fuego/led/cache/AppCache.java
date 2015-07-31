@@ -4,6 +4,7 @@ package cn.fuego.led.cache;
 
 import cn.fuego.common.log.FuegoLog;
 import cn.fuego.common.util.validate.ValidatorUtil;
+import cn.fuego.led.dao.ConfigInfo;
 import cn.fuego.led.webservice.up.model.base.CustomerJson;
 import cn.fuego.led.webservice.up.rest.WebServiceContext;
 import cn.fuego.misp.dao.SharedPreUtil;
@@ -36,6 +37,9 @@ public class AppCache
 	private boolean firstStarted = true;
 	private boolean started = false;
 
+	public static final String CONFIG = "config"; //存储一些个人配置信息
+	private ConfigInfo cfgInfo;
+	
 	public boolean isFirstStarted()
 	{
 		String startStr = (String) SharedPreUtil.getInstance().get("isFirstStarted");
@@ -134,10 +138,13 @@ public class AppCache
 		MemoryCache.setToken((String) SharedPreUtil.getInstance().get(TOKEN_CACHE));
 		this.user =  (UserJson) SharedPreUtil.getInstance().get(USER_CACHE);
 		this.customer = (CustomerJson) SharedPreUtil.getInstance().get(CUSTOMER_CACHE);
-
+		this.cfgInfo = (ConfigInfo) SharedPreUtil.getInstance().get(CONFIG);
 	
 	}
- 
+	public void updateConfig(ConfigInfo config)
+	{
+		SharedPreUtil.getInstance().put(CONFIG, config);
+	}
 	public UserJson getUser()
 	{
 		return user;
@@ -170,6 +177,16 @@ public class AppCache
 			}
 		}).getCustomer(req);
 		
+	}
+
+	public ConfigInfo getCfgInfo()
+	{
+		return cfgInfo;
+	}
+
+	public void setCfgInfo(ConfigInfo cfgInfo)
+	{
+		this.cfgInfo = cfgInfo;
 	}
 
 	 

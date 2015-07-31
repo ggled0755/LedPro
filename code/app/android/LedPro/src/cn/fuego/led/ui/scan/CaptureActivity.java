@@ -1,10 +1,13 @@
 package cn.fuego.led.ui.scan;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.text.DateFormat;
 import java.util.Collection;
 import java.util.Date;
 import java.util.EnumSet;
+import java.util.Hashtable;
 import java.util.Map;
 import java.util.Vector;
 
@@ -13,15 +16,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.hardware.Camera;
 import android.hardware.Camera.Parameters;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -31,6 +39,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.led.R;
 import cn.fuego.led.constant.IntentCodeConst;
@@ -41,12 +50,20 @@ import cn.fuego.led.util.qrcode.decode.CaptureActivityHandler;
 import cn.fuego.led.util.qrcode.decode.DecodeThread;
 import cn.fuego.led.util.qrcode.decode.FinishListener;
 import cn.fuego.led.util.qrcode.decode.InactivityTimer;
+import cn.fuego.led.util.qrcode.decode.RGBLuminanceSource;
 import cn.fuego.led.util.qrcode.view.ViewfinderView;
 
 import com.google.zxing.BarcodeFormat;
+import com.google.zxing.BinaryBitmap;
+import com.google.zxing.ChecksumException;
+import com.google.zxing.DecodeHintType;
+import com.google.zxing.FormatException;
+import com.google.zxing.NotFoundException;
 import com.google.zxing.Result;
 import com.google.zxing.ResultMetadataType;
 import com.google.zxing.ResultPoint;
+import com.google.zxing.common.HybridBinarizer;
+import com.google.zxing.qrcode.QRCodeReader;
 
 /**
  * 条码二维码扫描功能实现
@@ -73,6 +90,8 @@ public class CaptureActivity extends LedBaseActivity implements SurfaceHolder.Ca
 
 	public static final String STATE_QR="qrcode";
 	public static final String STATE_BAR="onecode";
+	public static final int FLAG_CHOOSE_IMG = 5;  //从本地相册获取
+	private Bitmap scanBitmap;
 	/**
 	 * 活动监控器，用于省电，如果手机没有连接电源线，那么当相机开启后如果一直处于不被使用状态则该服务会将当前activity关闭。
 	 * 活动监控器全程监控扫描活跃状态，与CaptureActivity生命周期相同.每一次扫描过后都会重置该监控，即重新倒计时。
@@ -94,16 +113,6 @@ public class CaptureActivity extends LedBaseActivity implements SurfaceHolder.Ca
 	public void initRes()
 	{
 		this.activityRes.setAvtivityView(R.layout.activity_capture);
-		String state= this.getIntent().getStringExtra(IntentCodeConst.JUMP_DATA);
-		if(!ValidatorUtil.isEmpty(state))
-		{
-			currentState =state;
-		}
-		else
-		{
-			currentState = STATE_QR;//默认二维码扫描
-		}
-		
 		
 	}
 	public static void jump(Context context,String currentState)
@@ -118,8 +127,17 @@ public class CaptureActivity extends LedBaseActivity implements SurfaceHolder.Ca
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
-		initSetting();
-		
+		String state= this.getIntent().getStringExtra(IntentCodeConst.JUMP_DATA);
+		if(!ValidatorUtil.isEmpty(state))
+		{
+			currentState =state;
+			saveScanTypeToSp();
+		}
+		else
+		{
+			currentState = STATE_QR;//默认二维码扫描
+		}
+		initSetting();		
 		initComponent();
 		initView();
 		initEvent();
@@ -143,7 +161,7 @@ public class CaptureActivity extends LedBaseActivity implements SurfaceHolder.Ca
 		hasSurface = false;
 		inactivityTimer = new InactivityTimer(this);
 		beepManager = new BeepManager(this);
-		mSharedPreferences = PreferenceManager
+	mSharedPreferences = PreferenceManager
 				.getDefaultSharedPreferences(this);
 		currentState = this.mSharedPreferences.getString("currentState",
 				"qrcode");
@@ -189,7 +207,7 @@ public class CaptureActivity extends LedBaseActivity implements SurfaceHolder.Ca
 		switch (v.getId())
 		{
 		case R.id.capture_album_img:
-			
+			decodeFromAlbum();
 			break;
 		case R.id.capture_camera_img:
 			
@@ -210,6 +228,18 @@ public class CaptureActivity extends LedBaseActivity implements SurfaceHolder.Ca
 		default:
 			break;
 		}
+	}
+	//从本地截取图片解析
+	private void decodeFromAlbum()
+	{
+ 
+		//支持高版本照片选取
+		Intent intent = new Intent(Intent.ACTION_PICK);
+		intent.setType("image/*"); 	  
+	    //Intent wrapperIntent = Intent.createChooser(intent, "Choose code pic");  
+	  
+	    CaptureActivity.this.startActivityForResult(intent, FLAG_CHOOSE_IMG);  
+		
 	}
 	//打开关闭闪光灯
 	private void switchFlash()
@@ -395,6 +425,12 @@ public class CaptureActivity extends LedBaseActivity implements SurfaceHolder.Ca
 	 * 保存退出进程前选中的二维码条形码的状态
 	 */
 	private void saveScanTypeToSp() {
+		
+		if(null==this.mSharedPreferences)
+		{
+			mSharedPreferences = PreferenceManager
+					.getDefaultSharedPreferences(this);
+		}
 		SharedPreferences.Editor localEditor = this.mSharedPreferences.edit();
 		localEditor.putString("currentState", CaptureActivity.currentState);
 		localEditor.commit();
@@ -514,7 +550,6 @@ public class CaptureActivity extends LedBaseActivity implements SurfaceHolder.Ca
 	private void handleDecodeInternally(Result rawResult, Bitmap barcode) {
 		statusView.setVisibility(View.GONE);
 		viewfinderView.setVisibility(View.GONE);
-		//resultView.setVisibility(View.VISIBLE);
 
 		ImageView barcodeImageView = (ImageView) findViewById(R.id.barcode_image_view);
 		if (barcode == null) {
@@ -524,44 +559,6 @@ public class CaptureActivity extends LedBaseActivity implements SurfaceHolder.Ca
 			barcodeImageView.setImageBitmap(barcode);
 		}
 
-/*		TextView formatTextView = (TextView) findViewById(R.id.format_text_view);
-		formatTextView.setText(rawResult.getBarcodeFormat().toString());
-
-		DateFormat formatter = DateFormat.getDateTimeInstance(DateFormat.SHORT,
-				DateFormat.SHORT);
-		TextView timeTextView = (TextView) findViewById(R.id.time_text_view);
-		timeTextView
-				.setText(formatter.format(new Date(rawResult.getTimestamp())));
-
-		TextView metaTextView = (TextView) findViewById(R.id.meta_text_view);
-		View metaTextViewLabel = findViewById(R.id.meta_text_view_label);*/
-/*		metaTextView.setVisibility(View.GONE);
-		metaTextViewLabel.setVisibility(View.GONE);*/
-/*		Map<ResultMetadataType, Object> metadata = rawResult
-				.getResultMetadata();
-		if (metadata != null) {
-			StringBuilder metadataText = new StringBuilder(20);
-			for (Map.Entry<ResultMetadataType, Object> entry : metadata
-					.entrySet()) {
-				if (DISPLAYABLE_METADATA_TYPES.contains(entry.getKey())) {
-					metadataText.append(entry.getValue()).append('\n');
-				}
-			}
-			if (metadataText.length() > 0) {
-				metadataText.setLength(metadataText.length() - 1);
-				metaTextView.setText(metadataText);
-				metaTextView.setVisibility(View.VISIBLE);
-				metaTextViewLabel.setVisibility(View.VISIBLE);
-			}
-		}*/
-
-/*		TextView contentsTextView = (TextView) findViewById(R.id.contents_text_view);
-
-		// Crudely scale betweeen 22 and 32 -- bigger font for shorter text
-		contentsTextView.setText(rawResult.getText());
-		TextView supplementTextView = (TextView) findViewById(R.id.contents_supplement_text_view);
-		supplementTextView.setText("");
-		supplementTextView.setOnClickListener(null);*/
 	}
 
 	/**
@@ -674,6 +671,144 @@ public class CaptureActivity extends LedBaseActivity implements SurfaceHolder.Ca
 			mHandler.sendEmptyMessageDelayed(R.id.restart_preview, delayMS);
 		}
 		resetStatusView();
+	}
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data)
+	{
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == FLAG_CHOOSE_IMG && resultCode == RESULT_OK) 
+		{
+			if (data != null) 
+			{
+				Uri uri = data.getData();
+				final String locPath;
+				if (!TextUtils.isEmpty(uri.getAuthority())) {
+					Cursor cursor = getContentResolver().query(uri,
+							new String[] { MediaStore.Images.Media.DATA },
+							null, null, null);
+					if (null == cursor) {
+						Toast.makeText(this, "photo not found!", 0).show();
+						return;
+					}
+					cursor.moveToFirst();
+					String path = cursor.getString(cursor
+							.getColumnIndex(MediaStore.Images.Media.DATA));
+					cursor.close();
+					Log.i("","path=" + path);
+					locPath = path;
+				} 
+				else 
+				{
+					Log.i("","path=" + uri.getPath());
+					locPath = uri.getPath();
+				}
+                new Thread(new Runnable() {  
+                	  
+                    @Override  
+                    public void run() {  
+  
+                        Result result = scanningImage(locPath);  
+                        // String result = decode(photo_path);  
+                        if (result == null) {  
+                            Looper.prepare();  
+                            Toast.makeText(getApplicationContext(), "target format wrong", 0)  
+                                    .show();  
+                            Looper.loop();  
+                        } else {  
+                            Log.i("123result", result.toString());  
+                            // Log.i("123result", result.getText());  
+                            // 数据返回  
+                            String recode = recode(result.toString()); 
+                            Log.i("recode", recode);
+/*                            Intent data = new Intent();  
+                            data.putExtra("result", recode);  
+                            setResult(300, data);  
+                            finish();  */
+                    		Intent intent = new Intent();
+                    		Bundle bundle = new Bundle();
+                    		bundle.putParcelable("bitmap", scanBitmap);
+                    		bundle.putString("resultString", recode);
+                    		//获取到信息跳转
+                    		intent.setClass(CaptureActivity.this, ResultActivity.class);
+                    		intent.putExtras(bundle);
+                    		startActivity(intent);
+                    		CaptureActivity.this.finish();
+                        }  
+                    }  
+                }).start();  
+			}
+		}
+
+	}
+	protected String recode(String str)
+	{
+        String formart = "";  
+        
+        try {  
+            boolean ISO = Charset.forName("ISO-8859-1").newEncoder()  
+                    .canEncode(str);  
+            if (ISO) {  
+                formart = new String(str.getBytes("ISO-8859-1"), "GB2312");  
+                Log.i("1234  ISO8859-1", formart);  
+            } else {  
+                formart = str;  
+                Log.i("1234  stringExtra", str);  
+            }  
+        } catch (UnsupportedEncodingException e) {  
+            // TODO Auto-generated catch block  
+            e.printStackTrace();  
+        }  
+        return formart;
+	}
+	protected Result scanningImage(String path)
+	{
+		if (TextUtils.isEmpty(path)) {  
+			  
+            return null;  
+  
+        }  
+        // DecodeHintType 和EncodeHintType  
+        Hashtable<DecodeHintType, String> hints = new Hashtable<DecodeHintType, String>();  
+        hints.put(DecodeHintType.CHARACTER_SET, "utf-8"); // 设置二维码内容的编码  
+        BitmapFactory.Options options = new BitmapFactory.Options();  
+        options.inJustDecodeBounds = true; // 先获取原大小  
+        
+        scanBitmap = BitmapFactory.decodeFile(path, options);  
+        options.inJustDecodeBounds = false; // 获取新的大小  
+  
+        int sampleSize = (int) (options.outHeight / (float) 200);  
+  
+        if (sampleSize <= 0)  
+            sampleSize = 1;  
+        options.inSampleSize = sampleSize;  
+        scanBitmap = BitmapFactory.decodeFile(path, options);  
+
+       RGBLuminanceSource source = new RGBLuminanceSource(scanBitmap); 
+        //int width =scanBitmap.getWidth();
+       // int height =scanBitmap.getHeight();
+        //RGBLuminanceSource source = new RGBLuminanceSource(width,height , new int[width*height]);
+        BinaryBitmap bitmap1 = new BinaryBitmap(new HybridBinarizer(source));  
+        QRCodeReader reader = new QRCodeReader();  
+        try {  
+  
+            return reader.decode(bitmap1, hints);  
+  
+        } catch (NotFoundException e) {  
+  
+            e.printStackTrace();  
+  
+        } catch (ChecksumException e) {  
+  
+            e.printStackTrace();  
+  
+        } catch (FormatException e) {  
+  
+            e.printStackTrace();  
+  
+        }  
+  
+        return null; 
 	}
 
 /*	public boolean onKeyDown(int keyCode, KeyEvent event) {

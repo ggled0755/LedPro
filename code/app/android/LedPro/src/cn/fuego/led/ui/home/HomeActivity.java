@@ -65,6 +65,11 @@ public class HomeActivity extends LedBaseListActivity<ProductJson> implements On
         txt_title.setText(getResources().getString(R.string.title_activity_home));
 		search_input.setOnEditorActionListener(this);
 		search_input.addTextChangedListener(this);
+		if(!ValidatorUtil.isEmpty(FilterDataCache.getInstance().getFilterList()))
+		{
+			FilterDataCache.getInstance().getFilterList().clear();
+		}
+		
 	}
 	public static void jump(Context context)
 	{
@@ -76,11 +81,12 @@ public class HomeActivity extends LedBaseListActivity<ProductJson> implements On
 	@Override
 	public View getListItemView(View view, ProductJson item)
 	{
+
 		
-		TextView txt_category = (TextView) view.findViewById(R.id.item_product_type);
-		txt_category.setTypeface(ttf_cabin_regular);		
-		txt_category.setText(item.getProdcut_catg());
-		
+		TextView title_manufacture = (TextView) view.findViewById(R.id.item_product_title_m);
+		title_manufacture.setTypeface(ttf_cabin_regular);
+		title_manufacture.setText("Manufacture");
+				
 		TextView txt_manufacture = (TextView) view.findViewById(R.id.item_product_manufacture);
 		txt_manufacture.setTypeface(ttf_cabin_regular);
 		txt_manufacture.setText(item.getManufacture());
@@ -89,10 +95,10 @@ public class HomeActivity extends LedBaseListActivity<ProductJson> implements On
 		txt_name.setTypeface(ttf_cabin_semibold);
 		txt_name.setText(item.getProduct_name());
 		
-		TextView txt_cert = (TextView) view.findViewById(R.id.item_product_cert);
-		txt_cert.setTypeface(ttf_cabin_regular);
-		txt_cert.setText(item.getCertification());
-		
+		TextView title_warranty = (TextView) view.findViewById(R.id.item_product_title_w);
+		title_warranty.setTypeface(ttf_cabin_regular);
+		title_warranty.setText("Warranty");
+
 		TextView txt_warranty = (TextView) view.findViewById(R.id.item_product_warranty);
 		txt_warranty.setTypeface(ttf_cabin_regular);
 		txt_warranty.setText(item.getWarranty());
@@ -120,7 +126,7 @@ public class HomeActivity extends LedBaseListActivity<ProductJson> implements On
 	public void loadSendList()
 	{
 		pd = ProgressDialog.show(this, null, getResources().getString(R.string.progress_msg_loading));
-		
+		pd.setCancelable(true);
 		MispBaseReqJson req = new MispBaseReqJson();
 		PageJson page = new PageJson();
 		page.setCurrentPage(1);
@@ -243,20 +249,6 @@ public class HomeActivity extends LedBaseListActivity<ProductJson> implements On
     		FilterDataCache.getInstance().getFilterList().clear();
         	FilterDataCache.getInstance().getFilterList().add(new QueryCondition(ConditionTypeEnum.INCLUDLE, "product_name", keyword));
         	loadSendList();
-/*        	if(!ValidatorUtil.isEmpty(keyword))
-        	{
-        		InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                if(inputMethodManager.isActive()){  
-                    inputMethodManager.hideSoftInputFromWindow(v.getApplicationWindowToken(), 0);  
-                }  
-        		FilterDataCache.getInstance().getFilterList().clear();
-            	FilterDataCache.getInstance().getFilterList().add(new QueryCondition(ConditionTypeEnum.INCLUDLE, "product_name", keyword));
-            	loadSendList();
-        	}
-        	else
-        	{
-        		showMessage("请输入检索信息");
-        	}*/
               
             return true;  
         }  

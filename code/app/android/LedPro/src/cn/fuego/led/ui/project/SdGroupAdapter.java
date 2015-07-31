@@ -217,6 +217,13 @@ public class SdGroupAdapter extends BaseExpandableListAdapter
 	    TextView txt_title = (TextView) layout.findViewById(R.id.item_sd_father_title);
 	    txt_title.setText(name);
 	    
+	    TextView txt_num = (TextView) layout.findViewById(R.id.item_sd_father_num);
+	    int num_catg = getChildrenCount(groupPosition);
+	    int num_sum = getChildSum(groupPosition);
+	    if(num_catg!=0)
+	    {
+	    	txt_num.setText(String.valueOf(num_catg)+"/"+String.valueOf(num_sum));
+	    }
 	    Button btn_delete = (Button) layout.findViewById(R.id.item_sd_father_delete_btn);
 	    btn_delete.setOnClickListener(new OnClickListener()
 		{
@@ -229,6 +236,20 @@ public class SdGroupAdapter extends BaseExpandableListAdapter
 			}
 		});
 		return layout;
+	}
+	
+	private int getChildSum(int groupPosition)
+	{
+		int sum=0;
+		List<ViewSubfolderJson> childList= itemList.get(groupPosition);
+		if(!ValidatorUtil.isEmpty(childList))
+		{
+			for(int i=0;i<childList.size();i++)
+			{
+				sum +=childList.get(i).getProduct_num();
+			}
+		}
+		return sum;
 	}
 	//删除子项目
 	protected void removeItems(final int groupPosition)
@@ -293,7 +314,7 @@ public class SdGroupAdapter extends BaseExpandableListAdapter
 	@Override
 	public int getChildrenCount(int groupPosition)
 	{
-		// TODO Auto-generated method stub
+
 		return itemList.get(groupPosition).size();
 	}
 

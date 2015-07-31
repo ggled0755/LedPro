@@ -1,13 +1,27 @@
 package cn.fuego.led.ui.scan;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import cn.fuego.common.contanst.ConditionTypeEnum;
+import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.led.R;
 import cn.fuego.led.constant.IntentCodeConst;
 import cn.fuego.led.ui.base.LedBaseActivity;
+import cn.fuego.led.ui.home.ProductDetailActivity;
+import cn.fuego.led.webservice.up.model.base.ProductJson;
+import cn.fuego.led.webservice.up.rest.WebServiceContext;
+import cn.fuego.misp.constant.MispErrorCode;
+import cn.fuego.misp.service.http.MispHttpHandler;
+import cn.fuego.misp.service.http.MispHttpMessage;
+import cn.fuego.misp.webservice.json.MispBaseReqJson;
+import cn.fuego.misp.webservice.json.MispBaseRspJson;
 
 public class BarInputActivity extends LedBaseActivity
 {
@@ -47,7 +61,37 @@ public class BarInputActivity extends LedBaseActivity
 
 	private void serachProByBar(String code)
 	{
-		// TODO Auto-generated method stub
+		final ProgressDialog pd = ProgressDialog.show(this, null, getString(R.string.progress_msg_loading));
+		
+		MispBaseReqJson req = new MispBaseReqJson();
+		List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
+		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "product_code", code));
+		req.setConditionList(conditionList);		
+		WebServiceContext.getInstance().getProductRest(new MispHttpHandler(){
+			@Override
+			public void handle(MispHttpMessage message)
+			{
+				pd.dismiss();
+				if(message.isSuccess())
+				{
+					MispBaseRspJson rsp = (MispBaseRspJson) message.getMessage().obj;
+					ProductJson p = rsp.GetReqCommonField(ProductJson.class);
+					if(null!=p)
+					{
+						ProductDetailActivity.jump(BarInputActivity.this, p);
+					}
+					else
+					{
+						showMessage(MispErrorCode.RESULT_NULL);
+					}
+					
+				}
+				else
+				{
+					showMessage(message);
+				}
+			}
+		}).getProduct(req);	
 		
 	}
 

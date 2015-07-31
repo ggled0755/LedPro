@@ -1,0 +1,55 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/misp_tilte_with_back_layout" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <ImageView
+            android:id="@+id/about_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="80dp"
+            android:src="@drawable/app_logo" />
+
+        <TextView
+            android:id="@+id/about_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/about_logo"
+            android:layout_centerHorizontal="true"
+            android:padding="10dp"
+            android:text="TextView"
+            android:textColor="@color/gray"
+            android:textSize="@dimen/content_font_size" />
+
+        <Button
+            android:id="@+id/about_update_btn"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/about_info"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="@color/themecolor"
+            android:minHeight="24dip"
+            android:padding="10dp"
+            android:text="@string/btn_update"
+            android:textColor="@color/white"
+            android:textSize="@dimen/content_font_size" />
+
+    </RelativeLayout>
+
+</LinearLayout>

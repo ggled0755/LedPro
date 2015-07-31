@@ -23,7 +23,6 @@ public class ProductJson implements Serializable
 	private int product_id;
 	private String product_name;
 	private String product_code;
-	
 	private String product_desp;
 	private float product_score;  
 	private float product_price;

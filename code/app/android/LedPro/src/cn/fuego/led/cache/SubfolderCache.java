@@ -130,5 +130,18 @@ public class SubfolderCache
 		
 	}
 	
+	public void deleteSf(SubfolderJson detail)
+	{
+		for(int i=0;i<this.subfolderList.size();i++)
+		{
+			if(subfolderList.get(i).getSubfolder_id()==detail.getSubfolder_id())
+			{
+				subfolderList.remove(i);
+				break;
+			}
+		}
+		
+	}
+	
 	
 }

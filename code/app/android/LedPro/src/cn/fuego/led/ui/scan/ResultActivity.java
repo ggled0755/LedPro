@@ -19,6 +19,7 @@ import cn.fuego.led.ui.base.LedBaseActivity;
 import cn.fuego.led.ui.home.ProductDetailActivity;
 import cn.fuego.led.webservice.up.model.base.ProductJson;
 import cn.fuego.led.webservice.up.rest.WebServiceContext;
+import cn.fuego.misp.constant.MispErrorCode;
 import cn.fuego.misp.service.http.MispHttpHandler;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.misp.webservice.json.MispBaseReqJson;
@@ -87,6 +88,10 @@ public class ResultActivity extends LedBaseActivity
 					if(null!=p)
 					{
 						ProductDetailActivity.jump(ResultActivity.this, p);
+					}
+					else
+					{
+						showMessage(MispErrorCode.RESULT_NULL);
 					}
 					
 				}

@@ -68,9 +68,15 @@ public class SettingActivity extends LedBaseActivity
 			else
 			{
 				LoginActivity.jump(this, IntentCodeConst.REQUEST_CODE);
+				finish();
 			}
 			break;
-
+		case R.id.setting_notifications_btn:
+			jumpToActivity(this, NotifyActivity.class);
+			break;
+		case R.id.setting_about_btn:
+			jumpToActivity(this, AboutActivity.class);
+			break;
 		default:
 			break;
 		}

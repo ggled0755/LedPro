@@ -42,7 +42,7 @@
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:background="@drawable/gl_btn_gray"
-            android:text="取消" />
+            android:text="Cancel" />
 
         <Button
             android:id="@+id/gl_modify_avatar_save"
@@ -52,7 +52,7 @@
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:background="@drawable/gl_btn_green"
-            android:text="保存" />
+            android:text="Save" />
 
         <Button
             android:id="@+id/gl_modify_avatar_rotate_right"

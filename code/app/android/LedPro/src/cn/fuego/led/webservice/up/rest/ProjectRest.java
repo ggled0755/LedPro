@@ -39,11 +39,16 @@ public interface ProjectRest
 	MispBaseRspJson createProject(MispBaseReqJson req);
 	
 	@POST
+	@Path("/Project/Delete")
+	MispBaseRspJson deleteProject(MispBaseReqJson req);
+	
+	@POST
 	@Path("/Project/Modify")
 	MispBaseRspJson modifyProject(MispBaseReqJson req);
 	
 	//创建PDF文件
 	@POST
 	@Path("/Project/CreatePdf")
-	MispBaseRspJson createPdf(MispBaseReqJson req);	
+	MispBaseRspJson createPdf(MispBaseReqJson req);
+	
 }

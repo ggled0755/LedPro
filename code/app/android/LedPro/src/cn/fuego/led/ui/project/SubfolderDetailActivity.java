@@ -5,7 +5,10 @@ import java.util.List;
 
 import org.codehaus.jackson.type.TypeReference;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -78,6 +81,55 @@ public class SubfolderDetailActivity extends LedBaseActivity
 
 	}
 	
+	@Override
+	public void saveOnClick(View v)
+	{
+		 Dialog alertDialog = new AlertDialog.Builder(this). 
+	                setTitle("Info."). 
+	                setMessage("Are you sure to delete this subfolder?"). 
+	                setPositiveButton("Confirm", new DialogInterface.OnClickListener() { 
+	                     
+	                    @Override 
+	                    public void onClick(DialogInterface dialog, int which) { 
+	                        // TODO Auto-generated method stub  
+	                    	deleteSfd();
+	                    } 
+	                    
+	                }). 
+	                setNegativeButton("Cancel", new DialogInterface.OnClickListener() { 
+	                     
+	                    @Override 
+	                    public void onClick(DialogInterface dialog, int which) { 
+	                    	dialog.dismiss();
+	                    } 
+	                }).create();
+		 alertDialog.show();
+		
+	}
+
+	private void deleteSfd()
+	{
+		MispBaseReqJson req= new MispBaseReqJson();
+		req.setObj(detail.getSubfolder_id());
+		WebServiceContext.getInstance().getSubfolderRest(new MispHttpHandler(){
+			@Override
+			public void handle(MispHttpMessage message)
+			{
+				if(message.isSuccess())
+				{
+					showMessage(message);
+					SubfolderCache.getInstance().deleteSf(detail);
+					SubfolderCache.getInstance().setChange(true);
+					finish();
+				}
+				else
+				{
+					showMessage(message);
+				}
+			}
+		}).deleteSubfolder(req);
+	}
+
 	@Override
 	public void onClick(View v)
 	{

@@ -88,7 +88,7 @@ public class ProductDetailActivity extends LedBaseActivity
 			ProEvalExplainActivity.jump(this, product);
 			break;
 		case R.id.product_detail_fl_btn:
-			
+			ProAttrsActivity.jump(this, product);
 			break;	
 		case R.id.product_detail_score_view:
 			if(MemoryCache.isLogined())

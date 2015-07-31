@@ -21,6 +21,19 @@
     <string name="text_summary_watt">Watt/Month</string>
     <string name="text_summary_tco">Total cost of ownership TCO</string>
     <string name="text_sel_img">Choose a photo</string>
+    <string name="title_attr_pro_info">Base Info.</string>
+    <string name="title_attr_pro_manufacture">Manufacture</string>
+    <string name="title_attr_pro_perf">Performance</string>
+    <string name="title_attr_pro_function">Function</string>
+    <string name="title_attr_pro_others">Others</string>
+    <string name="text_attr_size">Size:</string>
+    <string name="text_attr_manufacture">Manufacture:</string>
+    <string name="text_attr_warranty">Warranty:</string>
+    <string name="text_attr_lumen">Lumen output:</string>
+    <string name="text_attr_watt">Input watt:</string>
+    <string name="text_attr_use_loc">Use Location:</string>
+    <string name="text_attr_mounting_base">Mounting_base:</string>
+
     <!-- hint -->
     <string name="project_note_hints">Please add your free notes here</string>
     <string name="title_notes">Notes</string>
@@ -35,7 +48,7 @@
     <string name="hint_input_password">Enter your password here</string>
     <string name="hint_input_barcode">Please input bar code</string>
     <!-- btn name -->
-	<string name="btn_or_scan">Or scan QR/Bar code</string>
+    <string name="btn_or_scan">Or scan QR/Bar code</string>
     <string name="btn_logout">Log Out</string>
     <string name="btn_forget_pwd">Forget password?</string>
     <string name="btn_register">Join Now</string>
@@ -62,6 +75,7 @@
     <string name="misp_save">Save</string>
     <string name="btn_save">Save</string>
     <string name="btn_view">View</string>
+    <string name="btn_update">Update</string>
     <string name="btn_export_pdf">Export</string>
     <string name="btn_sel_album">From album</string>
     <string name="btn_sel_take">Take a photo</string>
@@ -109,7 +123,10 @@
     <string name="title_activity_img_select">ImgSelectActivity</string>
     <string name="title_activity_product_eval">Rating</string>
     <string name="title_activity_pro_eval_create">Evaluation</string>
-    <string name="title_activity_pro_attrs">ProAttrsActivity</string>
+    <string name="title_activity_pro_attrs">Full attrs</string>
     <string name="title_activity_bar_input">BarCode</string>
-	<string name="title_activity_result">Scan result</string>
+    <string name="title_activity_result">Scan result</string>
+    <string name="title_activity_notify">NotifyActivity</string>
+    <string name="title_activity_about">AboutActivity</string>
+
 </resources>

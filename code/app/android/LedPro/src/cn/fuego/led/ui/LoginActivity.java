@@ -97,19 +97,23 @@ public class LoginActivity extends LedBaseActivity
 		
 				break;
 			case R.id.login_find_pwd:
-/*				Intent i = new Intent();
-				i.putExtra(UserRegisterActivity.OPERTATE_NAME, UserRegisterActivity.FIND_PWD);
-				i.setClass(this, UserRegisterActivity.class);
-		        this.startActivity(i);*/
+				{
+					Intent i = new Intent();
+					i.putExtra(UserRegisterActivity.OPERTATE_NAME, UserRegisterActivity.FIND_PWD);
+					i.setClass(this, UserRegisterActivity.class);
+			        this.startActivity(i);
+				}
 				break;
 			case R.id.login_register:
+			{
 				Intent i = new Intent();
 				i.putExtra(UserRegisterActivity.OPERTATE_NAME, UserRegisterActivity.REGISTER);
 				i.setClass(this, UserRegisterActivity.class);
 		        this.startActivity(i);
+			}		        
 		        break;
-		        
-		}
+		}     
+
 		
 	}
 

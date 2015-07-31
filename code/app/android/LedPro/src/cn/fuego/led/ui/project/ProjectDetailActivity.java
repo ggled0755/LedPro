@@ -114,6 +114,7 @@ public class ProjectDetailActivity extends LedBaseActivity
 		initView();
 		
 		
+		
 		TextView txt_products = (TextView) findViewById(R.id.project_detail_products);
 		txt_products.setText(String.valueOf(project.getTotal_catg())+"/"+String.valueOf(project.getTotal_num()));
 		
@@ -251,18 +252,26 @@ public class ProjectDetailActivity extends LedBaseActivity
 					//showMessage(String.valueOf(node.getId()));
 					parent_id=node.getId();
 					SubfolderCache.getInstance().setTargetID(node.getId());
-					if(node.isExpand()&&!addEnable)
-					{						
-						if(product!=null)
-						{
-							createSubfolderDetail();
+					if(!addEnable)
+					{
+						if(node.isLeaf()||node.isExpand())
+						{						
+							if(product!=null)
+							{
+								createSubfolderDetail();
+							}
+							else
+							{
+								SubfolderDetailActivity.jump(ProjectDetailActivity.this,
+										SubfolderCache.getInstance().getSelSd(node.getId()));
+								
+							}
 						}
-						else
-						{
-							SubfolderDetailActivity.jump(ProjectDetailActivity.this,
-									SubfolderCache.getInstance().getSelSd(node.getId()));
-							
-						}
+					}
+					else
+					{
+						//showMessage("press add subfolder button to cancel");
+						showToast(ProjectDetailActivity.this, "press add subfolder button to cancel");
 					}
 					
 				}
@@ -291,7 +300,15 @@ public class ProjectDetailActivity extends LedBaseActivity
 		super.onClick(v);
 		if(v.getId()==R.id.project_detail_add_btn)
 		{
-			createSubfolder();
+			if(!addEnable)
+			{
+				addEnable=true;
+				createSubfolder();
+			}
+			else
+			{
+				addEnable=false;
+			}
 			
 		}
 		if(v.getId()==R.id.project_detail_title)
@@ -302,10 +319,27 @@ public class ProjectDetailActivity extends LedBaseActivity
 	
 	private void createSubfolder()
 	{
-		if(addEnable)
+		CreateDialog dialog= new CreateDialog(this, "Add a subfolder for "+StrUtil.noNullStr(SubfolderCache.getInstance().getSelSd(parent_id).getSubfolder_name()), 
+				"Please enter your subfolder name here", new OnConfirmListener()
+		{
+			
+			@Override
+			public void confirmCallback(String name)
+			{
+				createSubfolder(name);
+				
+			}
+
+
+		});
+		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		
+		dialog.show();
+/*		if(addEnable)
 		{
 			addEnable=false;
-			CreateDialog dialog= new CreateDialog(this, "Add a subfolder for", "Please enter your subfolder name here", new OnConfirmListener()
+			CreateDialog dialog= new CreateDialog(this, "Add a subfolder for"+StrUtil.noNullStr(SubfolderCache.getInstance().getSelSd(parent_id).getSubfolder_name()), 
+					"Please enter your subfolder name here", new OnConfirmListener()
 			{
 				
 				@Override
@@ -325,7 +359,7 @@ public class ProjectDetailActivity extends LedBaseActivity
 		{
 			addEnable=true;
 			showToast(this, "Please select your parent subfolder");
-		}
+		}*/
 		
 	}
 	//修改project信息，包含name 和notes
@@ -463,7 +497,8 @@ public class ProjectDetailActivity extends LedBaseActivity
 			{
 				if(message.isSuccess())
 				{
-					//showMessage(message);
+					showMessage(message);
+					finish();
 				}
 				else
 				{

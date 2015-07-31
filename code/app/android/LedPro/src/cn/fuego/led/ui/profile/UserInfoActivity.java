@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import cn.fuego.common.util.validate.ValidatorRules;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.led.R;
 import cn.fuego.led.cache.AppCache;
@@ -77,7 +78,7 @@ public class UserInfoActivity extends MispInfoListActivity
 	@Override
 	public void backOnClick()
 	{
-		if(!old_img.equals(customer.getHead_img()))
+		if(!ValidatorUtil.isEmpty(old_img)&&!old_img.equals(customer.getHead_img()))
 		{
 			deleteImg(customer.getHead_img());
 		}
@@ -181,6 +182,7 @@ public class UserInfoActivity extends MispInfoListActivity
 		if(getResources().getString(EMAIL).equals(title))
 		{
 			data.setDataValue((String) item.getContent());
+			data.getRuleMap().put(ValidatorRules.isEmail(), "E-mail format invalid");
 			MispTextEditActivity.jump(this, data, IntentCodeConst.REQUEST_CODE_EDIT_TEXT);
 		}
 

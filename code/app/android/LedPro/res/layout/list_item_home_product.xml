@@ -12,17 +12,17 @@
         android:divider="@drawable/divider_h"
         android:showDividers="middle" >
 
-        <TextView
-            android:id="@+id/item_product_type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
-            android:text="TextView"
-            android:textColor="#888c90"
-            android:textSize="13dp" />
+       <TextView
+           android:id="@+id/item_product_manufacture"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginRight="5dp"
+           android:text="TextView"
+           android:textColor="#888c90"
+           android:textSize="13dp" />
 
         <TextView
-            android:id="@+id/item_product_manufacture"
+            android:id="@+id/item_product_title_m"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -55,7 +55,7 @@
             android:showDividers="middle" >
 
             <TextView
-                android:id="@+id/item_product_cert"
+                android:id="@+id/item_product_warranty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
@@ -64,7 +64,7 @@
                 android:textSize="10dp" />
 
             <TextView
-                android:id="@+id/item_product_warranty"
+                android:id="@+id/item_product_title_w"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
