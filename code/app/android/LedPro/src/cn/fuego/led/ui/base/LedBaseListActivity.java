@@ -21,6 +21,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import cn.fuego.led.R;
 import cn.fuego.led.constant.IntentCodeConst;
+import cn.fuego.led.ui.base.HostChkListener.HeightChanngeCallback;
 import cn.fuego.led.ui.filter.FilterRefineActivity;
 import cn.fuego.led.ui.widget.OrderButton;
 import cn.fuego.led.ui.widget.OrderButton.OnOrderClickCallback;
@@ -33,7 +34,7 @@ import cn.fuego.misp.ui.list.MispListActivity;
  * @date 2015-7-6 下午9:30:37 
  *  
  */
-public abstract class LedBaseListActivity<E> extends MispListActivity<E> implements OnOrderClickCallback
+public abstract class LedBaseListActivity<E> extends MispListActivity<E> implements OnOrderClickCallback, HeightChanngeCallback
 {
 
 	public Typeface ttf_cabin_bold;
@@ -63,7 +64,7 @@ public abstract class LedBaseListActivity<E> extends MispListActivity<E> impleme
 		View bottom_down = findViewById(R.id.bottom_tab_view);
 		if(bottom_up!=null&&bottom_down!=null)
 		{
-			HostChkListener.initView(this, bottom_up, bottom_down);
+			HostChkListener.initView(this, bottom_up, bottom_down,this);
 		}
 		
 		

@@ -15,6 +15,7 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import cn.fuego.led.R;
 import cn.fuego.led.ui.profile.ProfileActivity;
+import cn.fuego.led.ui.widget.OrderButton;
 
 /** 
  * @ClassName: HostChkListener 
@@ -29,17 +30,24 @@ public class HostChkListener implements OnCheckedChangeListener
 	private static View bottom_up;
 	private static View bottom_down;
 	private static Context mContext;
-	
-	public static void initView(Context context,View view_up,View view_down)
+	private static HeightChanngeCallback hCallback;
+    public interface HeightChanngeCallback
+    {
+        public void onHeightChanged(CompoundButton buttonView);
+    }
+	public static void initView(Context context,View view_up,View view_down,HeightChanngeCallback heightChangeCallBack)
 	{
 		mContext =context;
 		bottom_up = view_up;
 		bottom_down = view_down;
+		hCallback=heightChangeCallBack;
 	}
 	@Override
 	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
 	{
 
+		
+		hCallback.onHeightChanged(buttonView);
 		//get current task
 		ActivityManager activityManager=(ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);  
 		String runningActivity=activityManager.getRunningTasks(1).get(0).topActivity.getClassName();

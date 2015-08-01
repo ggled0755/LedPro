@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.RatingBar;
 import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.TextView;
@@ -141,6 +142,12 @@ public class ProEvalCreateActivity extends LedBaseListActivity<EvalTypeJson>
 
 	@Override
 	public void onOrderStateChanged(OrderButton orderBtn, Integer orderState)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void onHeightChanged(CompoundButton buttonView)
 	{
 		// TODO Auto-generated method stub
 		

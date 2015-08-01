@@ -1,5 +1,6 @@
 package cn.fuego.led.ui.home;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.codehaus.jackson.type.TypeReference;
@@ -10,11 +11,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 import cn.fuego.common.contanst.ConditionTypeEnum;
@@ -31,28 +35,77 @@ import cn.fuego.led.webservice.up.model.base.ProductJson;
 import cn.fuego.led.webservice.up.rest.WebServiceContext;
 import cn.fuego.misp.service.MemoryCache;
 import cn.fuego.misp.service.http.MispHttpMessage;
+import cn.fuego.misp.ui.model.ListViewResInfo;
 import cn.fuego.misp.ui.util.LoadImageUtil;
 import cn.fuego.misp.webservice.json.MispBaseReqJson;
 import cn.fuego.misp.webservice.json.MispBaseRspJson;
 import cn.fuego.misp.webservice.json.MispPageDataJson;
 import cn.fuego.misp.webservice.json.PageJson;
 
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
+
 public class HomeActivity extends LedBaseListActivity<ProductJson> implements OnEditorActionListener, TextWatcher
 {
 	private ProgressDialog pd;
+	private int pageIndex=1;
+	private int currentPageSize;
+	private int pageSize=10; 
+	private List<ProductJson> productCache = new ArrayList<ProductJson>();
+	private View home_bottom ;
+	private PullToRefreshListView home_list;
+	private boolean nextRefresh=false;
+	private boolean pullDown =false;
 	@Override
 	public void initRes()
 	{
-		//this.activityRes.setName(name);
 		this.activityRes.setAvtivityView(R.layout.activity_home);
 		this.listViewRes.setListView(R.id.home_list);
 		this.listViewRes.setListItemView(R.layout.list_item_home_product);
-
+		this.listViewRes.setListType(ListViewResInfo.VIEW_TYPE_PAGE_LIST);
+		
 		this.listViewRes.setClickActivityClass(ProductDetailActivity.class);
 
-		//this.setDataList(StubData.getProductList());
+	}
+	
+	@Override
+	protected void OnPullToRefresh(PullToRefreshBase<ListView> refreshView)
+	{
+		pageIndex=1;
+		pullDown=true;
+		if(!ValidatorUtil.isEmpty(productCache))
+		{
+			productCache.clear();
+		}
+		loadSendList();
 		
 	}
+
+	@Override
+	public void onLastItemVisible()
+	{
+		
+		if(!nextRefresh)
+		{
+			nextRefresh=true;
+			if(pageSize>currentPageSize)
+			{
+				nextRefresh=false;
+				showMessage("no more data");
+				return;
+			}
+			else
+			{
+				pageIndex+=1;
+				productCache.addAll(this.getDataList());
+				loadSendList();
+			}
+		}
+		
+		
+		
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -69,6 +122,10 @@ public class HomeActivity extends LedBaseListActivity<ProductJson> implements On
 		{
 			FilterDataCache.getInstance().getFilterList().clear();
 		}
+		home_bottom =  findViewById(R.id.home_bottom);
+		
+		home_list = (PullToRefreshListView) findViewById(R.id.home_list);
+
 		
 	}
 	public static void jump(Context context)
@@ -108,15 +165,25 @@ public class HomeActivity extends LedBaseListActivity<ProductJson> implements On
 		txt_pf.setText("PF:"+item.getProduct_score());
 		
 		ImageView img_product = (ImageView) view.findViewById(R.id.item_product_img);
+		String img_tag=(String) img_product.getTag();
 		if(!ValidatorUtil.isEmpty(item.getProduct_img()))
 		{
-			String img_tag=(String) img_product.getTag();
+			
 			if(null==img_tag||!img_tag.equals(item.getProduct_img()))
 			{
 				img_product.setTag(item.getProduct_img());
 				LoadImageUtil.getInstance().loadImage(img_product, MemoryCache.getImageUrl()+item.getProduct_img());
 			}
 
+		}
+		else
+		{
+			if(null==img_tag||!img_tag.equals(item.getProduct_code()))
+			{
+				img_product.setTag(item.getProduct_code());
+				LoadImageUtil.getInstance().loadImage(img_product, R.drawable.led1);
+			}
+			
 		}
 
 		return view;
@@ -125,12 +192,19 @@ public class HomeActivity extends LedBaseListActivity<ProductJson> implements On
 	@Override
 	public void loadSendList()
 	{
-		pd = ProgressDialog.show(this, null, getResources().getString(R.string.progress_msg_loading));
-		pd.setCancelable(true);
+		if(!pullDown)
+		{
+			pd = ProgressDialog.show(this, null, getResources().getString(R.string.progress_msg_loading));
+			pd.setCancelable(true);
+		}
+		else
+		{
+			pullDown=false;
+		}
 		MispBaseReqJson req = new MispBaseReqJson();
 		PageJson page = new PageJson();
-		page.setCurrentPage(1);
-		page.setPageSize(10);
+		page.setCurrentPage(pageIndex);
+		page.setPageSize(pageSize);
 		req.setPage(page);
 		req.setConditionList(FilterDataCache.getInstance().getFilterList());
 		WebServiceContext.getInstance().getProductRest(this).loadProduct(req);
@@ -139,11 +213,31 @@ public class HomeActivity extends LedBaseListActivity<ProductJson> implements On
 	@Override
 	public List<ProductJson> loadListRecv(Object obj)
 	{
-		pd.dismiss();
-		MispBaseRspJson rsp = (MispBaseRspJson) obj;
+		if(null!=pd&&pd.isShowing())
+		{
+			pd.dismiss();
+		}
 		
+		this.OnRefreshComplete();
+		nextRefresh=false;
+		
+		MispBaseRspJson rsp = (MispBaseRspJson) obj;		
 		MispPageDataJson<ProductJson> pageData = rsp.GetReqCommonField(new TypeReference<MispPageDataJson<ProductJson>>(){});
-		List<ProductJson> productList=pageData.getRows();
+		currentPageSize =pageData.getTotal()-(pageIndex-1)*pageSize;
+		List<ProductJson> productList = new ArrayList<ProductJson>();
+		if(!ValidatorUtil.isEmpty(productCache))
+		{
+			if(!ValidatorUtil.isEmpty(pageData.getRows()))
+			{
+				productCache.addAll(pageData.getRows());
+				return productCache;
+			}
+
+		}
+		if(!ValidatorUtil.isEmpty(pageData.getRows()))
+		{
+			productList.addAll(pageData.getRows());
+		}
 		
 		return productList;
 	}
@@ -254,6 +348,25 @@ public class HomeActivity extends LedBaseListActivity<ProductJson> implements On
         }  
         return false;  
 	}
-	
 
+	@Override
+	public void onHeightChanged(CompoundButton buttonView)
+	{
+		Log.i("home_bottom", String.valueOf(home_bottom.getHeight()));
+		home_list.setRefreshSize(false);
+		//home_list.setPadding(home_list.getPaddingLeft(),home_list.getPaddingTop(), home_list.getPaddingRight(), home_bottom.getHeight());
+		
+	}
+	
+/*    class HomeReceiver extends BroadcastReceiver
+    {
+
+		@Override
+		public void onReceive(Context context, Intent intent)
+		{
+
+			int refreshCode = intent.getIntExtra(IntentCodeConst.HOME_REFRESH, 0);
+
+		}
+	};*/
 }

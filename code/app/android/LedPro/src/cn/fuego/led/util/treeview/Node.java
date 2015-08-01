@@ -40,8 +40,10 @@ public class Node implements Serializable
 	 * 父Node
 	 */
 	private Node parent;
-
+	//是否选中
 	private boolean isSelected =false;
+	//包含产品数
+	private int num;
 	public Node()
 	{
 	}

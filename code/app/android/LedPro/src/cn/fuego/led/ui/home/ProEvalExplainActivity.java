@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import cn.fuego.common.contanst.ConditionTypeEnum;
@@ -94,6 +95,13 @@ public class ProEvalExplainActivity extends LedBaseListActivity<ViewEvalSum>
 
 	@Override
 	public void onOrderStateChanged(OrderButton orderBtn, Integer orderState)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onHeightChanged(CompoundButton buttonView)
 	{
 		// TODO Auto-generated method stub
 		

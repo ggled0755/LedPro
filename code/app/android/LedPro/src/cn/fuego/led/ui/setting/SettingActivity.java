@@ -34,8 +34,18 @@ public class SettingActivity extends LedBaseActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+		Button notify_btn = (Button) findViewById(R.id.setting_notifications_btn);
+		notify_btn.setTypeface(ttf_cabin_semibold);
+		Button privacy_btn = (Button) findViewById(R.id.setting_privacy_btn);
+		privacy_btn.setTypeface(ttf_cabin_semibold);
+		Button general_btn = (Button) findViewById(R.id.setting_general_btn);
+		general_btn.setTypeface(ttf_cabin_semibold);
+		Button about_btn = (Button) findViewById(R.id.setting_about_btn);
+		about_btn.setTypeface(ttf_cabin_semibold);
 		
 		log_btn = (Button) findViewById(R.id.setting_logout_btn);
+		log_btn.setTypeface(ttf_cabin_semibold);
+		
 		if(MemoryCache.isLogined())
 		{
 			log_btn.setText(getResources().getString(R.string.btn_logout));

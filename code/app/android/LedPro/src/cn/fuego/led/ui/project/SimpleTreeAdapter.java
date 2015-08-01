@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import cn.fuego.led.R;
+import cn.fuego.led.cache.SubfolderCache;
 import cn.fuego.led.util.treeview.Node;
 import cn.fuego.led.util.treeview.TreeListViewAdapter;
 
@@ -65,7 +66,12 @@ public class SimpleTreeAdapter<T> extends TreeListViewAdapter<T>
 		{
 			viewHolder.folder_icon.setImageResource(R.drawable.icon_folder_empty);
 		}
-		
+		if(!node.isLeaf())
+		{
+			int folderNum=node.getChildren().size();
+			
+			int sum=SubfolderCache.getInstance().getAllNum(node.getId());
+		}
 		viewHolder.label.setText(node.getName());
 		
 		return convertView;

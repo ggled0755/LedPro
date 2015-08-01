@@ -56,12 +56,7 @@ import com.nostra13.universalimageloader.utils.StorageUtils;
 
 public class ProjectDetailActivity extends LedBaseActivity
 {
-/*	//操作方式，0-编辑状态， 对subfolder操作区分
-	//0,编辑内部的产品，1-添加产品到指定文件夹
-	private int operate_type=0;
-	public final int TYPE_EDIT=0;
-	public final int TYPE_SELECT=1;*/
-	
+
 	private ListView mTree;	
 	private List<SubfolderJson> datas =new ArrayList<SubfolderJson>();
 	@SuppressWarnings("rawtypes")
@@ -111,19 +106,32 @@ public class ProjectDetailActivity extends LedBaseActivity
 		loadSubfolder();
 		txt_title = (TextView) findViewById(R.id.misp_title_name);
 		txt_notes = (TextView) findViewById(R.id.project_detail_notes);
+		txt_notes.setTypeface(ttf_cabin_regular);
 		initView();
-		
+		initTypeface();
 		
 		
 		TextView txt_products = (TextView) findViewById(R.id.project_detail_products);
 		txt_products.setText(String.valueOf(project.getTotal_catg())+"/"+String.valueOf(project.getTotal_num()));
+		txt_products.setTypeface(ttf_cabin_regular);
 		
 		TextView txt_watt = (TextView) findViewById(R.id.project_detail_watt);
 		txt_watt.setText(String.valueOf(project.getTotal_watt()));
+		txt_watt.setTypeface(ttf_cabin_regular);
 		
 		TextView txt_tco = (TextView) findViewById(R.id.project_detail_tco);
-		txt_tco.setText(String.valueOf(project.getTotal_cost()));
-		
+		txt_tco.setText("$"+String.valueOf(project.getTotal_cost()));
+		txt_tco.setTypeface(ttf_cabin_regular);
+	}
+	//初始化标题字体
+	private void initTypeface()
+	{
+		TextView title_notes= (TextView) findViewById(R.id.project_detail_title_notes);
+		title_notes.setTypeface(ttf_cabin_semibold);
+		TextView title_summary= (TextView) findViewById(R.id.project_detail_title_summary);
+		title_summary.setTypeface(ttf_cabin_semibold);
+		TextView title_sub= (TextView) findViewById(R.id.project_detail_title_subfolder);
+		title_sub.setTypeface(ttf_cabin_semibold);
 	}
 	private void initView()
 	{
@@ -335,31 +343,6 @@ public class ProjectDetailActivity extends LedBaseActivity
 		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		
 		dialog.show();
-/*		if(addEnable)
-		{
-			addEnable=false;
-			CreateDialog dialog= new CreateDialog(this, "Add a subfolder for"+StrUtil.noNullStr(SubfolderCache.getInstance().getSelSd(parent_id).getSubfolder_name()), 
-					"Please enter your subfolder name here", new OnConfirmListener()
-			{
-				
-				@Override
-				public void confirmCallback(String name)
-				{
-					createSubfolder(name);
-					
-				}
-
-
-			});
-			dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-			
-			dialog.show();
-		}
-		else
-		{
-			addEnable=true;
-			showToast(this, "Please select your parent subfolder");
-		}*/
 		
 	}
 	//修改project信息，包含name 和notes
@@ -401,7 +384,7 @@ public class ProjectDetailActivity extends LedBaseActivity
 		dialog.show();
 		
 	}
-
+	//下载pdf
 	private void downloadPDF(String webUrl,String fileName)
 	{
 

@@ -142,6 +142,11 @@ public class SubfolderCache
 		}
 		
 	}
+	public int getAllNum(int id)
+	{
+		
+		return 0;
+	}
 	
 	
 }

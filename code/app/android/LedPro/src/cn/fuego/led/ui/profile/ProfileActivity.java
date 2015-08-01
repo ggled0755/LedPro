@@ -22,6 +22,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -381,6 +382,13 @@ public class ProfileActivity extends LedBaseListActivity<ProjectJson> implements
 				}
 			}
 		}).deleteProject(req);
+		
+	}
+
+	@Override
+	public void onHeightChanged(CompoundButton buttonView)
+	{
+		// TODO Auto-generated method stub
 		
 	}
 

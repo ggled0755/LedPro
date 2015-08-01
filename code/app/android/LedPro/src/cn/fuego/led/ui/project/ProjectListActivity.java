@@ -184,5 +184,12 @@ public class ProjectListActivity extends LedBaseListActivity<ProjectJson>
 		
 	}
 
+	@Override
+	public void onHeightChanged(CompoundButton buttonView)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }
