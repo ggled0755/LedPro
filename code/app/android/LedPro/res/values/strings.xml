@@ -8,6 +8,11 @@
     <string name="gl_choose_title">请选择图片</string>
 
     <!-- led pro -->
+    <string name="font_cabin_bold">fonts/Cabin-Bold.ttf</string>
+    <string name="font_cabin_semibold">fonts/Cabin-SemiBold.ttf</string>
+    <string name="font_cabin_regular">fonts/Cabin-Regular.otf</string>
+    <string name="font_helvetica_neue">fonts/Helvetica-Neue.ttf</string>
+    
     <string name="search_hint">Search</string>
     <string name="title_activity_led_base_list">LedBaseListActivity</string>
     <string name="title_activity_home">PRODUCT FACT</string>
@@ -16,6 +21,7 @@
     <string name="title_activity_project_detail">ProjectDetail</string>
     <string name="title_activity_subfolder_detail">SubfolderDetail</string>
     <string name="title_activity_setting">Settings</string>
+    
     <!-- text -->
     <string name="text_summary_product">Products</string>
     <string name="text_summary_watt">Watt/Month</string>

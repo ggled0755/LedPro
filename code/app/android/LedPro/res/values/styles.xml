@@ -11,10 +11,23 @@
             backward-compatibility can go here.
         -->
     </style>
-
+	<style name="CabinBoldStyle">
+	    <item name="font">@string/font_cabin_bold</item>
+	</style>
+	<style name="CabinSemiBoldStyle">
+		<item name="font">@string/font_cabin_semibold</item>
+	</style>
+	<style name="CabinRegularStyle">
+	    <item name="font">@string/font_cabin_regular</item>
+	</style>
+	<style name="HelNeueStyle">
+	    <item name="font">@string/font_helvetica_neue</item>
+	</style>	
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+                <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+        <item name="fontifyStyle">@style/CabinRegularStyle</item>
     </style>
     <style name="tab_button_bottom">
        <item name="android:textSize">@dimen/content_font_size_sm</item>

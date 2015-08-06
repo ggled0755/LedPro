@@ -173,7 +173,7 @@ public class Node implements Serializable
 	 */
 	public void setExpand(boolean isExpand)
 	{
-		this.isExpand = isExpand;
+		
 		if (!isExpand)
 		{
 
@@ -182,6 +182,7 @@ public class Node implements Serializable
 				node.setExpand(isExpand);
 			}
 		}
+		this.isExpand = isExpand;
 	}
 
 	public boolean isSelected()

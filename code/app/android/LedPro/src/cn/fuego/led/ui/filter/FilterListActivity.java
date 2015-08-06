@@ -9,15 +9,13 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.ViewGroup.LayoutParams;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.TextView;
 import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.led.R;
-import cn.fuego.led.R.id;
-import cn.fuego.led.R.layout;
 import cn.fuego.led.constant.IntentCodeConst;
 import cn.fuego.led.webservice.up.model.base.EnumJson;
 import cn.fuego.led.webservice.up.rest.WebServiceContext;
@@ -25,11 +23,12 @@ import cn.fuego.misp.ui.list.MispListActivity;
 import cn.fuego.misp.ui.model.ListViewResInfo;
 import cn.fuego.misp.webservice.json.MispBaseReqJson;
 import cn.fuego.misp.webservice.json.MispBaseRspJson;
+import cn.fuego.misp.webservice.up.model.base.TableMetaJson;
 
 public class FilterListActivity extends MispListActivity<EnumJson>
 {
 
-	private FilterItemMeta selectItem;
+	private TableMetaJson selectItem;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -49,10 +48,10 @@ public class FilterListActivity extends MispListActivity<EnumJson>
 		this.listViewRes.setListView(R.id.filter_list_content);
 		this.listViewRes.setListItemView(R.layout.list_item_result);
 		
-		selectItem = (FilterItemMeta) this.getIntent().getSerializableExtra(ListViewResInfo.SELECT_ITEM);
+		selectItem = (TableMetaJson) this.getIntent().getSerializableExtra(ListViewResInfo.SELECT_ITEM);
 		if(selectItem!=null)
 		{
-			this.activityRes.setName(selectItem.getTitle());
+			this.activityRes.setName(selectItem.getLabel_name());
 		}
 	}
 	@Override
@@ -69,7 +68,7 @@ public class FilterListActivity extends MispListActivity<EnumJson>
 	{
 		MispBaseReqJson req = new MispBaseReqJson();
 		List<QueryCondition> conditionList =  new ArrayList<QueryCondition>();
-		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "field_name", selectItem.getFieldName()));
+		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "field_name", selectItem.getField_name()));
 		req.setConditionList(conditionList);
 
 		WebServiceContext.getInstance().getEnumRest(this).loadList(req);

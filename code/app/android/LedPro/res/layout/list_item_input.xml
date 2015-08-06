@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <com.danh32.fontify.EditText
+        android:id="@+id/item_input_text"
+        style="@style/CabinRegularStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:padding="10dp"
+        android:text="EditText"
+        android:textColor="@color/black"
+        android:textSize="@dimen/content_font_size" >
+
+    </com.danh32.fontify.EditText>
+
+</LinearLayout>

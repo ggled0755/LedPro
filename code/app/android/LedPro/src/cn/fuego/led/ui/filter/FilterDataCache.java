@@ -11,12 +11,11 @@ package cn.fuego.led.ui.filter;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.content.Context;
 import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.util.validate.ValidatorUtil;
-import cn.fuego.led.R;
-import cn.fuego.led.ui.widget.RangeSeekBar;
+import cn.fuego.led.constant.FilterTypeEnum;
+import cn.fuego.misp.webservice.up.model.base.TableMetaJson;
 
 /** 
  * @ClassName: FilterDataCache 
@@ -32,9 +31,15 @@ public class FilterDataCache
 	//private Map<String,Map<String,Object>> minMaxMap = new HashMap<String, Map<String,Object>>();
 	private List<QueryCondition> filterList = new ArrayList<QueryCondition>();
 
-	private List<FilterItemMeta> data = new ArrayList<FilterItemMeta>();
+	private List<TableMetaJson> data = new ArrayList<TableMetaJson>();
 	
 	private static FilterDataCache instance;
+/*	private  FilterDataCache()
+	{
+		loadFilter();
+	}*/
+	
+
 	public synchronized static FilterDataCache getInstance()
 	{
 		if(null == instance)
@@ -45,7 +50,7 @@ public class FilterDataCache
 		
 	}
 	
-	//初始化数据
+/*	//初始化数据
 	public void initData(Context context)
 	{
 
@@ -98,31 +103,39 @@ public class FilterDataCache
 		m7.setMaxValue("100");
 		m7.setTheme(RangeSeekBar.THEME_ORANGE);
 		data.add(m7);
-	}
+	}*/
 	public List<QueryCondition> getFilterList()
 	{
 
 		if(!ValidatorUtil.isEmpty(data))
 		{
-			for(FilterItemMeta meta:data)
+			for(TableMetaJson meta:data)
 			{
-				if(meta.getItemType()==0)
+				if(meta.getField_type()==FilterTypeEnum.INTUT.getIntValue())
 				{
-					if(!ValidatorUtil.isEmpty(meta.getContent()))
+					if(!ValidatorUtil.isEmpty(meta.getField_value()))
 					{
-						filterList.add(new QueryCondition(ConditionTypeEnum.EQUAL, meta.getFieldName(), meta.getContent()));
+						filterList.add(new QueryCondition(ConditionTypeEnum.INCLUDLE, meta.getField_name(), meta.getField_value()));
 					}
 					
 				}
-				if(meta.getItemType()==1)
+				else if(meta.getField_type()==FilterTypeEnum.SELECT.getIntValue())
 				{
-					if(!ValidatorUtil.isEmpty(meta.getMinValue()))
+					if(!ValidatorUtil.isEmpty(meta.getField_value()))
 					{
-						filterList.add(new QueryCondition(ConditionTypeEnum.BIGGER_EQ, meta.getFieldName(),meta.getMinValue()));
+						filterList.add(new QueryCondition(ConditionTypeEnum.EQUAL, meta.getField_name(), meta.getField_value()));
 					}
-					if(!ValidatorUtil.isEmpty(meta.getMaxValue()))
+					
+				}
+				else if(meta.getField_type()==FilterTypeEnum.SEEK.getIntValue())
+				{
+					if(!ValidatorUtil.isEmpty(meta.getMin_value()))
 					{
-						filterList.add(new QueryCondition(ConditionTypeEnum.LOWER_EQ, meta.getFieldName(), meta.getMaxValue()));
+						filterList.add(new QueryCondition(ConditionTypeEnum.BIGGER_EQ, meta.getField_name(), meta.getMin_value()));
+					}
+					if(!ValidatorUtil.isEmpty(meta.getMax_value()))
+					{
+						filterList.add(new QueryCondition(ConditionTypeEnum.LOWER_EQ,meta.getField_name(), meta.getMax_value()));
 					}
 					
 				}
@@ -133,24 +146,24 @@ public class FilterDataCache
 
 
 
-	public List<FilterItemMeta> getData()
+	public List<TableMetaJson> getData()
 	{
 		return data;
 	}
 
 
-	public void setData(List<FilterItemMeta> data)
+	public void setData(List<TableMetaJson> data)
 	{
 		this.data = data;
 	}
 
 	public void update(String field_name, String enum_value)
 	{
-		for(FilterItemMeta m :data)
+		for(TableMetaJson m :data)
 		{
-			if(m.getFieldName().equals(field_name))
+			if(m.getField_name().equals(field_name))
 			{
-				m.setContent(enum_value);
+				m.setField_value(enum_value);
 				break;
 			}
 		}
@@ -182,6 +195,20 @@ public class FilterDataCache
 			filterList.add(new QueryCondition(orderMethod, fieldName));
 		}
 		
+	}
+
+	public void update(TableMetaJson meta)
+	{
+		for(int i=0;i<data.size();i++)
+		{
+			if(data.get(i).getMeta_id()==meta.getMeta_id())
+			{
+				data.set(i, meta);
+				//data.add(meta);
+				break;
+			}
+		}
+
 	}
 
 	

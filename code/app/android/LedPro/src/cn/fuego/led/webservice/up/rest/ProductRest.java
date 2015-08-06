@@ -59,6 +59,10 @@ public interface ProductRest
 	@POST
 	@Path("/EvalType/LoadAll")
 	MispBaseRspJson loadEvalType(MispBaseReqJson req);
-	
+
+	//产品过滤条件加载
+	@POST
+	@Path("/Product/GetFilterMeta")
+	MispBaseRspJson loadFilter(MispBaseReqJson req);
 
 }

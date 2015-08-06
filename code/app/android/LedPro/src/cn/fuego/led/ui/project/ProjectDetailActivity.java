@@ -262,7 +262,7 @@ public class ProjectDetailActivity extends LedBaseActivity
 					SubfolderCache.getInstance().setTargetID(node.getId());
 					if(!addEnable)
 					{
-						if(node.isLeaf()||node.isExpand())
+						if(node.isLeaf()||!node.isExpand())
 						{						
 							if(product!=null)
 							{
