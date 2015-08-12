@@ -18,10 +18,14 @@ import android.widget.TextView;
 import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.led.R;
+import cn.fuego.led.cache.ProjectCache;
 import cn.fuego.led.cache.SubfolderCache;
+import cn.fuego.led.constant.IntentCodeConst;
 import cn.fuego.led.ui.base.LedBaseActivity;
 import cn.fuego.led.ui.base.ModifyDialog;
 import cn.fuego.led.ui.base.ModifyDialog.OnModifyConfirmListener;
+import cn.fuego.led.util.treeview.Node;
+import cn.fuego.led.webservice.up.model.base.ProjectJson;
 import cn.fuego.led.webservice.up.model.base.SubfolderJson;
 import cn.fuego.led.webservice.up.model.base.ViewSubfolderJson;
 import cn.fuego.led.webservice.up.rest.WebServiceContext;
@@ -39,6 +43,7 @@ public class SubfolderDetailActivity extends LedBaseActivity
 	private SubfolderJson detail;
 	private ExpandableListView exListView;
 	private TextView txt_notes,txt_title;
+	private Node node;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -66,6 +71,8 @@ public class SubfolderDetailActivity extends LedBaseActivity
 	{
 		this.activityRes.setAvtivityView(R.layout.activity_subfolder_detail);
 		detail = (SubfolderJson) this.getIntent().getSerializableExtra(ListViewResInfo.SELECT_ITEM);
+		node=(Node) this.getIntent().getSerializableExtra(IntentCodeConst.JUMP_DATA);
+
 		if(detail!=null)
 		{
 			this.activityRes.setName(detail.getSubfolder_name());
@@ -73,10 +80,11 @@ public class SubfolderDetailActivity extends LedBaseActivity
 		this.activityRes.getButtonIDList().add(R.id.subfolder_detail_title);
 	}
 	
-	public static void jump(Context context,SubfolderJson sd)
+	public static void jump(Context context,SubfolderJson sd, Node node)
 	{
 		Intent intent = new Intent(context,SubfolderDetailActivity.class);
-		intent.putExtra(ListViewResInfo.SELECT_ITEM, sd);		
+		intent.putExtra(ListViewResInfo.SELECT_ITEM, sd);	
+		intent.putExtra(IntentCodeConst.JUMP_DATA, node);
 		context.startActivity(intent);
 
 	}
@@ -84,7 +92,12 @@ public class SubfolderDetailActivity extends LedBaseActivity
 	@Override
 	public void saveOnClick(View v)
 	{
-		 Dialog alertDialog = new AlertDialog.Builder(this). 
+		if(!node.isLeaf())
+		{
+			showMessage("delete child subfolder first");
+			return;
+		}
+		Dialog alertDialog = new AlertDialog.Builder(this). 
 	                setTitle("Info."). 
 	                setMessage("Are you sure to delete this subfolder?"). 
 	                setPositiveButton("Confirm", new DialogInterface.OnClickListener() { 
@@ -118,8 +131,17 @@ public class SubfolderDetailActivity extends LedBaseActivity
 				if(message.isSuccess())
 				{
 					showMessage(message);
+					MispBaseRspJson rsp = (MispBaseRspJson) message.getMessage().obj;
+					ProjectJson project = rsp.GetReqCommonField(ProjectJson.class);
+					if(null!=project)
+					{
+						ProjectCache.getInstance().updatePro(project);
+						ProjectCache.getInstance().setChanged(true);
+					}
 					SubfolderCache.getInstance().deleteSf(detail);
 					SubfolderCache.getInstance().setChange(true);
+					//ProjectCache.getInstance().setChanged(true);
+					//ProjectCache.getInstance().removeDetail(detail);
 					finish();
 				}
 				else

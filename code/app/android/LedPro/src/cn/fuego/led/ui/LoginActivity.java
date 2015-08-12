@@ -177,10 +177,16 @@ public class LoginActivity extends LedBaseActivity
 				{
 					MispBaseRspJson rsp = (MispBaseRspJson) message.getMessage().obj;
 					CustomerJson customer = rsp.GetReqCommonField(CustomerJson.class);
-
-					loginSuccess(MemoryCache.getToken(),user,customer);
-					
-					finish();
+					if(customer!=null)
+					{
+						loginSuccess(MemoryCache.getToken(),user,customer);
+						
+						finish();
+					}
+					else
+					{
+						showMessage(MispErrorCode.ERROR_USER_NOT_EXISTED);
+					}
 					
 				}
 				else

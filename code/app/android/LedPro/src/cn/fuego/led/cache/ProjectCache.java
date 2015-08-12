@@ -15,6 +15,7 @@ import java.util.Map;
 
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.led.webservice.up.model.base.ProjectJson;
+import cn.fuego.led.webservice.up.model.base.SubfolderJson;
 
 /** 
  * @ClassName: ProjectCache 
@@ -102,8 +103,7 @@ public class ProjectCache
 	{
 		this.isChanged = isChanged;
 	}
-
-			
+		
 			
 			
 }

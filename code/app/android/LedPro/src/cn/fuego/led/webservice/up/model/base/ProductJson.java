@@ -20,11 +20,16 @@ import java.io.Serializable;
 public class ProductJson implements Serializable
 {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int product_id;
 	private String product_name;
 	private String product_code;
 	private String product_desp;
-	private float product_score;  
+	private float product_score; 
+	private float platform_score;
 	private float product_price;
 	private String prodcut_catg; 
 	private String use_location;     
@@ -35,7 +40,7 @@ public class ProductJson implements Serializable
 	private String input_watt;
 	
 	private String manufacture;
-	private String warranty;
+	private String rated_warranty;
 	private String certification;
 	private String product_img;
 	private String product_img_sm1;
@@ -46,6 +51,8 @@ public class ProductJson implements Serializable
 	private String create_time;
 	private int create_user_id;
 	private String related_product_ids;
+	
+
 	public int getProduct_id()
 	{
 		return product_id;
@@ -150,13 +157,15 @@ public class ProductJson implements Serializable
 	{
 		this.manufacture = manufacture;
 	}
-	public String getWarranty()
+
+	
+	public String getRated_warranty()
 	{
-		return warranty;
+		return rated_warranty;
 	}
-	public void setWarranty(String warranty)
+	public void setRated_warranty(String rated_warranty)
 	{
-		this.warranty = warranty;
+		this.rated_warranty = rated_warranty;
 	}
 	public String getCertification()
 	{
@@ -245,6 +254,14 @@ public class ProductJson implements Serializable
 	public void setProduct_price(float product_price)
 	{
 		this.product_price = product_price;
+	}
+	public float getPlatform_score()
+	{
+		return platform_score;
+	}
+	public void setPlatform_score(float platform_score)
+	{
+		this.platform_score = platform_score;
 	}
 	
 	

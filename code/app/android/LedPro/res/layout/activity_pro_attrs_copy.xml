@@ -19,7 +19,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical" >
 
             <TextView
@@ -75,8 +75,7 @@
                     android:layout_height="wrap_content"
                     android:divider="@drawable/divider_h"
                     android:dividerPadding="5dp"
-                    android:showDividers="middle"
-                    android:visibility="gone" >
+                    android:showDividers="middle" >
 
                     <TextView
                         android:id="@+id/pro_attrs_sub_catg"
@@ -106,11 +105,103 @@
 
             </LinearLayout>
 
-            <ExpandableListView
-                android:id="@+id/pro_attrs_exlist"
+            <TextView
+                android:id="@+id/TextView03"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
-            </ExpandableListView>
+                android:layout_height="wrap_content"
+                android:background="@drawable/rectangle_nocorner"
+                android:padding="10dp"
+                android:text="@string/title_attr_pro_manufacture"
+                android:textColor="@color/black"
+                android:textSize="@dimen/content_font_size" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/pro_attrs_manufature"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/content_font_size" />
+
+                <TextView
+                    android:id="@+id/pro_attrs_warranty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textColor="@color/blue"
+                    android:textSize="@dimen/content_font_size" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/TextView02"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rectangle_nocorner"
+                android:padding="10dp"
+                android:text="@string/title_attr_pro_perf"
+                android:textColor="@color/black"
+                android:textSize="@dimen/content_font_size" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/pro_attrs_lumen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/content_font_size" />
+
+                <TextView
+                    android:id="@+id/pro_attrs_input_watt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/content_font_size" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/TextView01"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rectangle_nocorner"
+                android:padding="10dp"
+                android:text="@string/title_attr_pro_function"
+                android:textColor="@color/black"
+                android:textSize="@dimen/content_font_size" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/pro_attrs_use_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/content_font_size" />
+
+                <TextView
+                    android:id="@+id/pro_attrs_mounting_base"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/content_font_size" />
+            </LinearLayout>
 
         </LinearLayout>
 

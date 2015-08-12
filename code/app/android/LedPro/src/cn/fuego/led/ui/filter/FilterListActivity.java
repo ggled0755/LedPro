@@ -17,12 +17,12 @@ import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.led.R;
 import cn.fuego.led.constant.IntentCodeConst;
-import cn.fuego.led.webservice.up.model.base.EnumJson;
 import cn.fuego.led.webservice.up.rest.WebServiceContext;
 import cn.fuego.misp.ui.list.MispListActivity;
 import cn.fuego.misp.ui.model.ListViewResInfo;
 import cn.fuego.misp.webservice.json.MispBaseReqJson;
 import cn.fuego.misp.webservice.json.MispBaseRspJson;
+import cn.fuego.misp.webservice.up.model.base.EnumJson;
 import cn.fuego.misp.webservice.up.model.base.TableMetaJson;
 
 public class FilterListActivity extends MispListActivity<EnumJson>
@@ -71,7 +71,7 @@ public class FilterListActivity extends MispListActivity<EnumJson>
 		conditionList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "field_name", selectItem.getField_name()));
 		req.setConditionList(conditionList);
 
-		WebServiceContext.getInstance().getEnumRest(this).loadList(req);
+		WebServiceContext.getInstance().getProductRest(this).loadEnum(req);
 		
 	}
 
@@ -85,7 +85,7 @@ public class FilterListActivity extends MispListActivity<EnumJson>
 	@Override
 	public void onItemListClick(AdapterView<?> parent, View view, long id,	EnumJson item)
 	{
-		FilterDataCache.getInstance().update(item.getField_name(),item.getEnum_value());
+		FilterDataCache.getInstance().update(item.getField_name(),item);
 		setResult(IntentCodeConst.RESULT_CODE_ITEM_CONFIRM);
 		this.finish();
 	}

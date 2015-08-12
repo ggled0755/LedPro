@@ -128,7 +128,7 @@
                             android:layout_toLeftOf="@+id/product_detail_score_view"
                             android:text="TextView"
                             android:textColor="#0a0d17"
-                            android:textSize="25dp" />
+                            android:textSize="@dimen/content_font_size" />
 
                         <LinearLayout
                             android:id="@+id/product_detail_score_view"

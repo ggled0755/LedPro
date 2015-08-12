@@ -18,20 +18,22 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1" >
 
             <cn.fuego.led.ui.widget.OrderButton
                 android:id="@+id/order_pf_btn"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true" >
+
             </cn.fuego.led.ui.widget.OrderButton>
 
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1" >
 
             <cn.fuego.led.ui.widget.OrderButton
@@ -46,7 +48,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1" >
 
             <cn.fuego.led.ui.widget.OrderButton
@@ -66,13 +68,12 @@
 
             <Button
                 android:id="@+id/sort_filter_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_weight="1"
-                android:background="@null"
-                android:drawableLeft="@drawable/icon_filter_normal"
+                android:background="@drawable/icon_filter_normal"
                 android:minHeight="24dp"
                 android:minWidth="24dp" />
 

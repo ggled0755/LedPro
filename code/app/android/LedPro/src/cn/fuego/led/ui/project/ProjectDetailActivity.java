@@ -63,7 +63,7 @@ public class ProjectDetailActivity extends LedBaseActivity
 	private TreeListViewAdapter mAdapter;
 	
 	private ProjectJson project;
-	private TextView txt_notes,txt_title;
+	private TextView txt_notes,txt_title,txt_products,txt_watt,txt_tco;
 	
 	private ProductJson product;
 	private int parent_id=0;
@@ -107,21 +107,12 @@ public class ProjectDetailActivity extends LedBaseActivity
 		txt_title = (TextView) findViewById(R.id.misp_title_name);
 		txt_notes = (TextView) findViewById(R.id.project_detail_notes);
 		txt_notes.setTypeface(ttf_cabin_regular);
+		txt_products = (TextView) findViewById(R.id.project_detail_products);
+		txt_watt = (TextView) findViewById(R.id.project_detail_watt);
+		txt_tco = (TextView) findViewById(R.id.project_detail_tco);
 		initView();
 		initTypeface();
 		
-		
-		TextView txt_products = (TextView) findViewById(R.id.project_detail_products);
-		txt_products.setText(String.valueOf(project.getTotal_catg())+"/"+String.valueOf(project.getTotal_num()));
-		txt_products.setTypeface(ttf_cabin_regular);
-		
-		TextView txt_watt = (TextView) findViewById(R.id.project_detail_watt);
-		txt_watt.setText(String.valueOf(project.getTotal_watt()));
-		txt_watt.setTypeface(ttf_cabin_regular);
-		
-		TextView txt_tco = (TextView) findViewById(R.id.project_detail_tco);
-		txt_tco.setText("$"+String.valueOf(project.getTotal_cost()));
-		txt_tco.setTypeface(ttf_cabin_regular);
 	}
 	//初始化标题字体
 	private void initTypeface()
@@ -132,12 +123,18 @@ public class ProjectDetailActivity extends LedBaseActivity
 		title_summary.setTypeface(ttf_cabin_semibold);
 		TextView title_sub= (TextView) findViewById(R.id.project_detail_title_subfolder);
 		title_sub.setTypeface(ttf_cabin_semibold);
+		
+		txt_products.setTypeface(ttf_cabin_regular);
+		txt_watt.setTypeface(ttf_cabin_regular);
+		txt_tco.setTypeface(ttf_cabin_regular);
 	}
 	private void initView()
 	{
 		txt_title.setText(project.getProject_name());
 		txt_notes.setText(StrUtil.noNullStr(project.getProject_note()));
-		
+		txt_products.setText(String.valueOf(project.getTotal_catg())+"/"+String.valueOf(project.getTotal_num()));
+		txt_watt.setText(String.valueOf(project.getTotal_watt()));
+		txt_tco.setText("$"+String.valueOf(project.getTotal_cost()));
 	}
 	@Override
 	public void saveOnClick(View v)
@@ -271,7 +268,7 @@ public class ProjectDetailActivity extends LedBaseActivity
 							else
 							{
 								SubfolderDetailActivity.jump(ProjectDetailActivity.this,
-										SubfolderCache.getInstance().getSelSd(node.getId()));
+										SubfolderCache.getInstance().getSelSd(node.getId()),node);
 								
 							}
 						}
@@ -502,6 +499,11 @@ public class ProjectDetailActivity extends LedBaseActivity
 			SubfolderCache.getInstance().setChange(false);
 			datas =SubfolderCache.getInstance().getSubfolderList();
 			initSubfolderTree();
+		}
+		if(ProjectCache.getInstance().isChanged())
+		{
+			project = ProjectCache.getInstance().getProjectMap().get(project.getProject_id());
+			initView();
 		}
 	}
 	

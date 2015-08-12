@@ -29,14 +29,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.led.R;
+import cn.fuego.led.cache.ProjectCache;
 import cn.fuego.led.ui.widget.RecAddAndSubView;
 import cn.fuego.led.ui.widget.RecAddAndSubView.OnNumChangeListener;
+import cn.fuego.led.webservice.up.model.base.ProjectJson;
 import cn.fuego.led.webservice.up.model.base.ViewSubfolderJson;
 import cn.fuego.led.webservice.up.rest.WebServiceContext;
 import cn.fuego.misp.constant.MispErrorCode;
 import cn.fuego.misp.service.http.MispHttpHandler;
 import cn.fuego.misp.service.http.MispHttpMessage;
 import cn.fuego.misp.webservice.json.MispBaseReqJson;
+import cn.fuego.misp.webservice.json.MispBaseRspJson;
 
 /** 
  * @ClassName: SdGroupAdapter 
@@ -57,8 +60,8 @@ public class SdGroupAdapter extends BaseExpandableListAdapter
 
 	private ProgressDialog pd;
 	//存储选中项目
-	private Map<Integer,List<Integer>> selMap = new HashMap<Integer, List<Integer>>();
-	private List<Integer> idList;
+	private Map<Integer,List<String>> selMap = new HashMap<Integer, List<String>>();
+	private List<String> idList;
 	public SdGroupAdapter(Context context)
 	{
 		this.mContext = context;
@@ -145,19 +148,23 @@ public class SdGroupAdapter extends BaseExpandableListAdapter
 				{
 					if(null!=selMap.get(groupPosition)&&!ValidatorUtil.isEmpty(selMap.get(groupPosition)))
 					{
-						selMap.get(groupPosition).add(detail.getSubfolder_detail_id());
+						selMap.get(groupPosition).add(String.valueOf(detail.getSubfolder_detail_id()));
 					}
 					else
 					{
-						List<Integer> temp = new ArrayList<Integer>();
-						temp.add(detail.getSubfolder_detail_id());
+						List<String> temp = new ArrayList<String>();
+						temp.add(String.valueOf(detail.getSubfolder_detail_id()));
 						selMap.put(groupPosition, temp);
 					}
 					
 				}
 				else
 				{
-					selMap.get(groupPosition).remove(detail.getSubfolder_detail_id());
+					if(selMap.get(groupPosition).contains(String.valueOf(detail.getSubfolder_detail_id())))
+					{
+						selMap.get(groupPosition).remove(String.valueOf(detail.getSubfolder_detail_id()));
+					}
+					
 
 				}
 				
@@ -196,6 +203,13 @@ public class SdGroupAdapter extends BaseExpandableListAdapter
 				pd.dismiss();
 				if(message.isSuccess())
 				{
+					MispBaseRspJson rsp = (MispBaseRspJson) message.getMessage().obj;
+					ProjectJson project = rsp.GetReqCommonField(ProjectJson.class);
+					if(null!=project)
+					{
+						ProjectCache.getInstance().updatePro(project);
+						ProjectCache.getInstance().setChanged(true);
+					}
 					itemList.get(groupPosition).get(childPosition).setProduct_num(detail.getProduct_num());
 				}
 				else
@@ -261,7 +275,7 @@ public class SdGroupAdapter extends BaseExpandableListAdapter
 		else
 		{
 			pd = ProgressDialog.show(mContext, null, "Processing……");
-			idList = new ArrayList<Integer>();
+			idList = new ArrayList<String>();
 			idList =selMap.get(groupPosition);
 
 			
@@ -275,13 +289,21 @@ public class SdGroupAdapter extends BaseExpandableListAdapter
 					pd.dismiss();
 					if(message.isSuccess())
 					{
+						
+						MispBaseRspJson rsp = (MispBaseRspJson) message.getMessage().obj;
+						ProjectJson project = rsp.GetReqCommonField(ProjectJson.class);
+						if(null!=project)
+						{
+							ProjectCache.getInstance().updatePro(project);
+							ProjectCache.getInstance().setChanged(true);
+						}
 						//删除代码较为复杂，建议改善，注意grouplist 的remove
 						for(int i=0;i<itemList.size();i++)
 						{
 							int count =itemList.get(i).size();
 							for(int j=0;j<itemList.get(i).size();j++)
 							{
-								if(idList.contains(itemList.get(i).get(j).getSubfolder_detail_id()))
+								if(idList.contains(String.valueOf(itemList.get(i).get(j).getSubfolder_detail_id())))
 								{
 									itemList.get(i).remove(j);
 									j--;
@@ -299,8 +321,6 @@ public class SdGroupAdapter extends BaseExpandableListAdapter
 							
 						}
 						notifyDataSetChanged();
-
-
 					}
 					else
 					{

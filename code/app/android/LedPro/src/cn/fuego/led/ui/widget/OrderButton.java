@@ -62,6 +62,8 @@ public class OrderButton extends LinearLayout implements OnClickListener
 		btn.setOnClickListener(this);
 		img_left = new ImageView(mContext);
 		img_left.setImageDrawable(getResources().getDrawable(imgRes));
+		LayoutParams mParams = new LayoutParams(50, 50);
+		img_left.setLayoutParams(mParams);
 		
 		img_right = new ImageView(mContext);
 		img_right.setImageDrawable(getResources().getDrawable(dir_list[order_state]));

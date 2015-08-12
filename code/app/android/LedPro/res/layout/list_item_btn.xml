@@ -11,27 +11,34 @@
         android:background="@drawable/item_backgroud"
         android:padding="18dp" >
 
-        <TextView
-            android:id="@+id/item_btn_title"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/item_btn_value"
-            android:text="@string/btn_filter_categories"
-            android:textColor="#434343"
-            android:textSize="@dimen/content_font_size" />
+            android:layout_toLeftOf="@+id/forward_sm" >
 
-        <TextView
-            android:id="@+id/item_btn_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@+id/forward_sm"
-            android:text="All"
-            android:textColor="#888c90"
-            android:textSize="@dimen/content_font_size" />
+            <TextView
+                android:id="@+id/item_btn_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/btn_filter_categories"
+                android:textColor="#434343"
+                android:textSize="@dimen/content_font_size" />
+
+            <TextView
+                android:id="@+id/item_btn_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="10dp"
+                android:layout_weight="2"
+                android:gravity="right"
+                android:text="All"
+                android:textColor="#888c90"
+                android:textSize="@dimen/content_font_size" />
+
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/forward_sm"

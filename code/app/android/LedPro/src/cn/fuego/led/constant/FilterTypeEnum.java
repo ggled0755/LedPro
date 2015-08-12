@@ -20,7 +20,7 @@ public enum FilterTypeEnum
 
 	INTUT("include",0),  
 	SELECT("equal",1),
-	IN("in",2),
+	GROUP("in",2),
 	SEEK("between",3);
 	private String strValue;
 	private int intValue;

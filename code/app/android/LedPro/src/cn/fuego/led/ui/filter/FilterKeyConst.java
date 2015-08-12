@@ -28,6 +28,7 @@ public class FilterKeyConst
 	public static final String min="min";
 	public static final String max="max";
 	
-	public static final String pf="product_score";
+	public static final String pf="platform_score";
 	public static final String price="product_price";
+	public static final String like="product_score";
 }

@@ -36,7 +36,7 @@ public class StubData
 		p1.setProduct_name("LED METAL pendant");
 		p1.setProduct_desp("LED light in colored stones with orchids");
 		p1.setCertification("product factory cert");
-		p1.setWarranty("3 months");
+		p1.setRated_warranty("3 months");
 		p1.setProduct_score((float) 4.0);
 		proList.add(p1);
 		
@@ -47,7 +47,7 @@ public class StubData
 		p2.setProduct_name("LED METAL pendant");
 		p2.setProduct_desp("LED light in colored stones with orchids");
 		p2.setCertification("product factory cert");
-		p2.setWarranty("6 months");
+		p2.setRated_warranty("6 months");
 		p2.setProduct_score((float) 4.5);
 		proList.add(p2);
 		
@@ -58,7 +58,7 @@ public class StubData
 		p3.setProduct_name("LED METAL pendant");
 		p3.setProduct_desp("LED light in colored stones with orchids");
 		p3.setCertification("product factory cert");
-		p3.setWarranty("1 year");
+		p3.setRated_warranty("1 year");
 		p3.setProduct_score((float) 5.0);
 		proList.add(p3);
 		

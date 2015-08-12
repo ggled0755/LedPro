@@ -13,7 +13,6 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ListView;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.led.R;
 import cn.fuego.led.constant.FilterTypeEnum;
@@ -26,6 +25,7 @@ import cn.fuego.misp.ui.base.MispListViewAdaptScroll;
 import cn.fuego.misp.ui.model.ListViewResInfo;
 import cn.fuego.misp.webservice.json.MispBaseReqJson;
 import cn.fuego.misp.webservice.json.MispBaseRspJson;
+import cn.fuego.misp.webservice.up.model.base.EnumJson;
 import cn.fuego.misp.webservice.up.model.base.TableMetaJson;
 
 public class FilterRefineActivity extends LedBaseActivity implements OnItemClickListener
@@ -33,6 +33,7 @@ public class FilterRefineActivity extends LedBaseActivity implements OnItemClick
 
 	private MispListViewAdaptScroll listview;
 	private DistinctAdapter mAdapter ;
+	private TableMetaJson selItem;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -45,14 +46,16 @@ public class FilterRefineActivity extends LedBaseActivity implements OnItemClick
 		getWindow().setAttributes(params);
 		
 		listview= (MispListViewAdaptScroll) findViewById(R.id.filter_refine_list);
-
+		mAdapter = new DistinctAdapter(this);
 		if(FilterDataCache.getInstance().getData().size()==0)
 		{
-			//FilterDataCache.getInstance().initData(this);
 			loadFilter();
 		}
+		else
+		{
+			mAdapter.setDatasource(FilterDataCache.getInstance().getData());
+		}
 		
-		mAdapter = new DistinctAdapter(FilterRefineActivity.this, FilterDataCache.getInstance().getData());
 		listview.setAdapter(mAdapter);
 		listview.setOnItemClickListener(this);
 
@@ -66,6 +69,22 @@ public class FilterRefineActivity extends LedBaseActivity implements OnItemClick
 		this.activityRes.setAvtivityView(R.layout.activity_filter_refine);
 		this.activityRes.setName(getResources().getString(R.string.title_activity_filter_refine));
 
+		this.activityRes.getButtonIDList().add(R.id.filter_refine_reset_btn);
+	}
+
+
+	@Override
+	public void onClick(View v)
+	{
+		// TODO Auto-generated method stub
+		super.onClick(v);
+		if(v.getId()==R.id.filter_refine_reset_btn)
+		{
+			showMessage("Reset conditions");
+			FilterDataCache.getInstance().resetData();
+			mAdapter.notifyDataSetChanged();
+
+		}
 	}
 
 
@@ -92,9 +111,9 @@ public class FilterRefineActivity extends LedBaseActivity implements OnItemClick
 					if(!ValidatorUtil.isEmpty(filterList))
 					{
 						FilterDataCache.getInstance().setData(filterList);
-						//mAdapter = new DistinctAdapter(FilterRefineActivity.this, FilterDataCache.getInstance().getData());
-						mAdapter.setDataList(filterList);
-						mAdapter.notifyDataSetChanged();
+						FilterDataCache.getInstance().updateDefaultMata(rsp.GetReqCommonField(new TypeReference<List<TableMetaJson>>(){}));						
+						mAdapter.setDatasource(FilterDataCache.getInstance().getData());
+
 					}
 
 				}
@@ -106,7 +125,7 @@ public class FilterRefineActivity extends LedBaseActivity implements OnItemClick
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id)
 	{
-		TableMetaJson selItem=(TableMetaJson) parent.getAdapter().getItem(position);
+		selItem=(TableMetaJson) parent.getAdapter().getItem(position);
 		if(selItem!=null)
 		{
 			if(selItem.getField_type()==FilterTypeEnum.SELECT.getIntValue())
@@ -117,6 +136,13 @@ public class FilterRefineActivity extends LedBaseActivity implements OnItemClick
 				startActivityForResult(i, IntentCodeConst.REQUEST_CODE);
 			}
 
+			if(selItem.getField_type()==FilterTypeEnum.GROUP.getIntValue())
+			{
+				Intent i = new Intent();
+				i.setClass(this, FilterGroupActivity.class);
+				i.putExtra(ListViewResInfo.SELECT_ITEM, selItem);
+				startActivityForResult(i, IntentCodeConst.REQUEST_CODE);
+			}
 		}
 
 		
@@ -128,13 +154,24 @@ public class FilterRefineActivity extends LedBaseActivity implements OnItemClick
 	{
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
+		
 		if(resultCode==IntentCodeConst.RESULT_CODE_ITEM_CONFIRM)
-		{
-			
-			//List<FilterItemMeta> meta = FilterDataCache.getInstance().getData();
-
-			mAdapter.notifyDataSetChanged();
+		{			
+			mAdapter.setDatasource(FilterDataCache.getInstance().getData());
 		}
+		else if(resultCode==IntentCodeConst.RESULT_CODE_GROUP)
+		{
+			if(null!=data)
+			{
+				EnumJson p= (EnumJson) data.getSerializableExtra(IntentCodeConst.DATA_PARENT);
+				EnumJson c= (EnumJson) data.getSerializableExtra(IntentCodeConst.DATA_CHILD);
+				selItem.setField_value(p.getEnum_value()+FilterDataCache.GROUP_SEPRATOR+c.getEnum_value());
+				selItem.setField_enum_key(c.getEnum_key());
+				FilterDataCache.getInstance().update(selItem);
+				mAdapter.setDatasource(FilterDataCache.getInstance().getData());
+			}
+		}
+		
 	}
 
 }

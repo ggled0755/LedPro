@@ -20,7 +20,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.TextView;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.led.R;
@@ -30,6 +29,8 @@ import cn.fuego.led.ui.widget.RangeSeekBar;
 import cn.fuego.led.ui.widget.RangeSeekBar.OnRangeSeekBarChangeListener;
 import cn.fuego.misp.ui.util.StrUtil;
 import cn.fuego.misp.webservice.up.model.base.TableMetaJson;
+
+import com.third.letterSort.ClearEditText;
 
 /** 
  * @ClassName: DistinctAdapter 
@@ -55,7 +56,22 @@ public class DistinctAdapter extends BaseAdapter
 		ttf_cabin_semibold = Typeface.createFromAsset(context.getAssets(), "fonts/Cabin-SemiBold.ttf");
 		ttf_cabin_regular = Typeface.createFromAsset(context.getAssets(), "fonts/Cabin-Regular.otf");
 	}
-	
+	public DistinctAdapter(Context context)
+	{
+		mContext=context;
+		layout = LayoutInflater.from(context);
+		ttf_cabin_semibold = Typeface.createFromAsset(context.getAssets(), "fonts/Cabin-SemiBold.ttf");
+		ttf_cabin_regular = Typeface.createFromAsset(context.getAssets(), "fonts/Cabin-Regular.otf");
+	}
+	public void setDatasource(List<TableMetaJson> dataSource)
+	{
+		if(!ValidatorUtil.isEmpty(this.dataList))
+		{
+			this.dataList.clear();
+		}
+		this.dataList.addAll(dataSource);
+		this.notifyDataSetChanged();
+	}
 	@Override
 	public int getItemViewType(int position)
 	{
@@ -97,6 +113,8 @@ public class DistinctAdapter extends BaseAdapter
 		BtnViewHolder vh_btn=null;
 		SeekbarViewHolder vh_seek =null;
 		InputViewHolder vh_input =null;
+
+
 		int type=getItemViewType(position);
 		
 		if(convertView==null)
@@ -106,10 +124,11 @@ public class DistinctAdapter extends BaseAdapter
 			case INTUT:
 				vh_input = new InputViewHolder();
 				convertView = layout.inflate(R.layout.list_item_input, null);
-				vh_input.title=(EditText) convertView.findViewById(R.id.item_input_text);
+				vh_input.title=(ClearEditText) convertView.findViewById(R.id.item_input_text);
 				convertView.setTag(vh_input);
 				break;
 			case SELECT:
+			case GROUP:
 				vh_btn = new BtnViewHolder();
 				convertView = layout.inflate(R.layout.list_item_btn, null);
 				vh_btn.title = (TextView) convertView.findViewById(R.id.item_btn_title);
@@ -117,14 +136,27 @@ public class DistinctAdapter extends BaseAdapter
 				convertView.setTag(vh_btn);				
 				break;
 			case SEEK:
+			{
+				TableMetaJson dm= FilterDataCache.getInstance().getDefaultMeta().get(dataList.get(position).getMeta_id());
+				int theme = SeekColorEnum.getEnumByStr(dm.getStyle_color()).getIntValue();
+				float def_min = Float.valueOf(dm.getMin_value());
+				float def_max = Float.valueOf(dm.getMax_value());
+//				def_min=(float)(Math.round(def_min*100)/100);
+//				def_max = (float)(Math.round(def_max*100)/100);
+				BigDecimal   b1 = new  BigDecimal(def_min);
+				float   f1   =   b1.setScale(2, BigDecimal.ROUND_HALF_UP).floatValue();
+				BigDecimal   b2 = new  BigDecimal(def_max);
+				float   f2   =   b2.setScale(2, BigDecimal.ROUND_HALF_UP).floatValue();
 				vh_seek = new SeekbarViewHolder();
 				convertView = layout.inflate(R.layout.list_item_seekbar, null);
 				vh_seek.title =(TextView) convertView.findViewById(R.id.item_seekbar_title);
 				vh_seek.minValue = (TextView) convertView.findViewById(R.id.item_seekbar_minvalue);
 				vh_seek.maxValue = (TextView) convertView.findViewById(R.id.item_seekbar_maxvalue);
 				vh_seek.seekRoot = (ViewGroup) convertView.findViewById(R.id.item_seekbar_root);
-				
+				vh_seek.seekbar = new RangeSeekBar<Float>(f1,f2, mContext, theme);
+				vh_seek.seekRoot.addView(vh_seek.seekbar);
 				convertView.setTag(vh_seek);
+			}
 				break;
 			default:
 				break;
@@ -138,6 +170,7 @@ public class DistinctAdapter extends BaseAdapter
 				vh_input = (InputViewHolder) convertView.getTag();
 				break;
 			case SELECT:
+			case GROUP:
 				vh_btn = (BtnViewHolder) convertView.getTag();			
 				break;
 			case SEEK:
@@ -163,6 +196,11 @@ public class DistinctAdapter extends BaseAdapter
 						dataList.get(position).setField_value(s.toString());
 						FilterDataCache.getInstance().update(dataList.get(position));
 					}
+					else
+					{
+						dataList.get(position).setField_value("");
+						FilterDataCache.getInstance().update(dataList.get(position));
+					}
 					
 				}
 				
@@ -183,6 +221,7 @@ public class DistinctAdapter extends BaseAdapter
 			});
 			break;
 		case SELECT:
+		case GROUP:
 			vh_btn.title.setText(dataList.get(position).getLabel_name());
 			vh_btn.title.setTypeface(ttf_cabin_regular);
 			vh_btn.content.setTypeface(ttf_cabin_regular);
@@ -197,31 +236,32 @@ public class DistinctAdapter extends BaseAdapter
 			}
 			break;
 		case SEEK:
-			vh_seek.title.setText(dataList.get(position).getLabel_name());
+			StringBuffer sb = new StringBuffer();
+			sb.append(dataList.get(position).getLabel_name());
+			if(!ValidatorUtil.isEmpty(dataList.get(position).getUnit_label()))
+			{
+				sb.append("(");
+				sb.append(dataList.get(position).getUnit_label());
+				sb.append(")");
+			}
+			sb.append("\n");
+			sb.append(dataList.get(position).getGroup_name());
+			vh_seek.title.setText(sb.toString());
 			vh_seek.title.setTypeface(ttf_cabin_regular);
 
-			int theme = SeekColorEnum.getEnumByStr(dataList.get(position).getStyle_color()).getIntValue();
 			float def_min = Float.valueOf(dataList.get(position).getMin_value());
 			float def_max = Float.valueOf(dataList.get(position).getMax_value());
-//			def_min=(float)(Math.round(def_min*100)/100);
-//			def_max = (float)(Math.round(def_max*100)/100);
+
 			BigDecimal   b1 = new  BigDecimal(def_min);
 			float   f1   =   b1.setScale(2, BigDecimal.ROUND_HALF_UP).floatValue();
 			BigDecimal   b2 = new  BigDecimal(def_max);
 			float   f2   =   b2.setScale(2, BigDecimal.ROUND_HALF_UP).floatValue();
-			
-			if(null==vh_seek.seekbar)
-			{
-				vh_seek.seekbar = new RangeSeekBar<Float>(f1,f2, mContext, theme);				
-				vh_seek.seekRoot.addView(vh_seek.seekbar);
-			}
+
 			vh_seek.minValue.setText(String.valueOf(f1));
 			vh_seek.maxValue.setText(String.valueOf(f2));
 			vh_seek.seekbar.setSelectedMinValue(f1);
 			vh_seek.seekbar.setSelectedMaxValue(f2);
 
-			//vh_seek.seekRoot.removeAllViews();
-			//vh_seek.seekRoot.addView(seekbar);
 			vh_seek.seekbar.setOnRangeSeekBarChangeListener(new OnRangeSeekBarChangeListener<Float>()
 			{
 
@@ -230,7 +270,6 @@ public class DistinctAdapter extends BaseAdapter
 				public void onRangeSeekBarValuesChanged(RangeSeekBar<?> bar,
 						Float minValue, Float maxValue)
 				{
-
 					dataList.get(position).setMin_value(String.valueOf(minValue));
 					dataList.get(position).setMax_value(String.valueOf(maxValue));
 					FilterDataCache.getInstance().update(dataList.get(position));
@@ -259,7 +298,7 @@ public class DistinctAdapter extends BaseAdapter
 	}
 
 	static class InputViewHolder{
-		EditText title;
+		ClearEditText title;
 
 	}
 
@@ -271,6 +310,13 @@ public class DistinctAdapter extends BaseAdapter
 	public void setDataList(List<TableMetaJson> dataList)
 	{
 		this.dataList = dataList;
+	}
+
+	public void refreshData(List<TableMetaJson> rawData)
+	{
+		this.dataList.clear();
+		this.dataList.addAll(rawData);
+		notifyDataSetChanged();
 	}	
 
 }

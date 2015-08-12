@@ -9,12 +9,15 @@
 package cn.fuego.led.ui.filter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import cn.fuego.common.contanst.ConditionTypeEnum;
 import cn.fuego.common.dao.QueryCondition;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.led.constant.FilterTypeEnum;
+import cn.fuego.misp.webservice.up.model.base.EnumJson;
 import cn.fuego.misp.webservice.up.model.base.TableMetaJson;
 
 /** 
@@ -26,20 +29,16 @@ import cn.fuego.misp.webservice.up.model.base.TableMetaJson;
  */
 public class FilterDataCache
 {
-	//private Map<String,Object> filterMap =new HashMap<String, Object>();
-	
-	//private Map<String,Map<String,Object>> minMaxMap = new HashMap<String, Map<String,Object>>();
+
 	private List<QueryCondition> filterList = new ArrayList<QueryCondition>();
 
+	//当前使用数据
 	private List<TableMetaJson> data = new ArrayList<TableMetaJson>();
+	private Map<Integer,TableMetaJson> defaultMeta = new HashMap<Integer, TableMetaJson>();
 	
 	private static FilterDataCache instance;
-/*	private  FilterDataCache()
-	{
-		loadFilter();
-	}*/
-	
 
+	public static final String GROUP_SEPRATOR="-";
 	public synchronized static FilterDataCache getInstance()
 	{
 		if(null == instance)
@@ -109,6 +108,10 @@ public class FilterDataCache
 
 		if(!ValidatorUtil.isEmpty(data))
 		{
+/*			if(!ValidatorUtil.isEmpty(filterList))
+			{
+				filterList.clear();
+			}*/
 			for(TableMetaJson meta:data)
 			{
 				if(meta.getField_type()==FilterTypeEnum.INTUT.getIntValue())
@@ -123,9 +126,23 @@ public class FilterDataCache
 				{
 					if(!ValidatorUtil.isEmpty(meta.getField_value()))
 					{
-						filterList.add(new QueryCondition(ConditionTypeEnum.EQUAL, meta.getField_name(), meta.getField_value()));
+						filterList.add(new QueryCondition(ConditionTypeEnum.EQUAL, meta.getField_name(), meta.getField_enum_key()));
 					}
 					
+				}
+				else if(meta.getField_type()==FilterTypeEnum.GROUP.getIntValue())
+				{
+					if(!ValidatorUtil.isEmpty(meta.getField_value()))
+					{
+//						//特殊化处理
+//						String[] values = meta.getField_value().split(GROUP_SEPRATOR);
+//						if(values.length==2)
+//						{
+//							filterList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "product_catg", values[0]));
+//							filterList.add(new QueryCondition(ConditionTypeEnum.EQUAL, "sub_catg", values[1]));
+//						}
+						filterList.add(new QueryCondition(ConditionTypeEnum.EQUAL, meta.getField_name(), meta.getField_enum_key()));
+					}
 				}
 				else if(meta.getField_type()==FilterTypeEnum.SEEK.getIntValue())
 				{
@@ -154,16 +171,21 @@ public class FilterDataCache
 
 	public void setData(List<TableMetaJson> data)
 	{
-		this.data = data;
+		if(!ValidatorUtil.isEmpty(this.data))
+		{
+			this.data.clear();
+		}
+		this.data.addAll(data);
 	}
 
-	public void update(String field_name, String enum_value)
+	public void update(String field_name, EnumJson item)
 	{
 		for(TableMetaJson m :data)
 		{
 			if(m.getField_name().equals(field_name))
 			{
-				m.setField_value(enum_value);
+				m.setField_value(item.getEnum_value());
+				m.setField_enum_key(item.getEnum_key());
 				break;
 			}
 		}
@@ -203,7 +225,10 @@ public class FilterDataCache
 		{
 			if(data.get(i).getMeta_id()==meta.getMeta_id())
 			{
-				data.set(i, meta);
+				data.get(i).setMax_value(meta.getMax_value());
+				data.get(i).setMin_value(meta.getMin_value());
+				data.get(i).setField_enum_key(meta.getField_enum_key());
+				data.get(i).setField_value(meta.getField_value());
 				//data.add(meta);
 				break;
 			}
@@ -211,6 +236,43 @@ public class FilterDataCache
 
 	}
 
+	public void updateDefaultMata(List<TableMetaJson> rdata)
+	{
+		if(this.defaultMeta.size()>0)
+		{
+			this.defaultMeta.clear();
+		}
+		for(TableMetaJson m:rdata)
+		{
+			defaultMeta.put(m.getMeta_id(), m);
+		}
+	}
+	public Map<Integer, TableMetaJson> getDefaultMeta()
+	{
+		return defaultMeta;
+	}
+
+	public void setDefaultMeta(Map<Integer, TableMetaJson> defaultMeta)
+	{
+		this.defaultMeta = defaultMeta;
+	}
+
+	public void resetData()
+	{
+		if(!ValidatorUtil.isEmpty(filterList))
+		{
+			filterList.clear();
+		}
+		for(TableMetaJson m :data)
+		{
+			TableMetaJson r = defaultMeta.get(m.getMeta_id());
+			m.setMax_value(r.getMax_value());
+			m.setMin_value(r.getMin_value());
+			m.setField_enum_key(r.getField_enum_key());
+			m.setField_value(r.getField_value());
+		}
 	
+	}
+
 	
 }

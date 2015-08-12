@@ -57,7 +57,7 @@ public class ProfileActivity extends LedBaseListActivity<ProjectJson> implements
 	private TextView txt_company;
 
 	private RoundImageView round_head;
-	private View default_head;
+	private View default_head,head_view;
 	private List<QueryCondition> conditionList = new ArrayList<QueryCondition>();
 	private ProgressDialog pd;
 
@@ -68,6 +68,7 @@ public class ProfileActivity extends LedBaseListActivity<ProjectJson> implements
 		txt_name = (TextView) findViewById(R.id.profile_username);	
 		txt_company = (TextView) findViewById(R.id.profile_company_name);
 		default_head = findViewById(R.id.profile_head_to_edit);
+		head_view  =findViewById(R.id.profile_head_view);
 		round_head = (RoundImageView) findViewById(R.id.profile_head);		
 
 		initUserInfo();
@@ -84,9 +85,13 @@ public class ProfileActivity extends LedBaseListActivity<ProjectJson> implements
 		{
 			round_head.setVisibility(View.GONE);
 			default_head.setVisibility(View.VISIBLE);
+			head_view.setVisibility(View.GONE);
 		}
 		else
 		{
+			default_head.setVisibility(View.GONE);
+			round_head.setVisibility(View.VISIBLE);
+			head_view.setVisibility(View.VISIBLE);
 			LoadImageUtil.getInstance().loadImage(round_head, MemoryCache.getImageUrl()+AppCache.getInstance().getCustomer().getHead_img());
 		}
 		txt_name.setText(AppCache.getInstance().getCustomer().getReal_name());
@@ -280,6 +285,7 @@ public class ProfileActivity extends LedBaseListActivity<ProjectJson> implements
 			ProjectCache.getInstance().setChanged(false);
 			refreshList(ProjectCache.getInstance().getProjectList());
 		}
+
 	}
 
 	@Override

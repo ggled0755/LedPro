@@ -14,6 +14,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.CompoundButton;
@@ -56,6 +57,8 @@ public class HomeActivity extends LedBaseListActivity<ProductJson> implements On
 	private PullToRefreshListView home_list;
 	private boolean nextRefresh=false;
 	private boolean pullDown =false;
+	
+	private int maxWidth=0;
 	@Override
 	public void initRes()
 	{
@@ -97,7 +100,7 @@ public class HomeActivity extends LedBaseListActivity<ProductJson> implements On
 			else
 			{
 				pageIndex+=1;
-				productCache.addAll(this.getDataList());
+				//productCache.addAll(this.getDataList());
 				loadSendList();
 			}
 		}
@@ -111,8 +114,10 @@ public class HomeActivity extends LedBaseListActivity<ProductJson> implements On
 	{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);;
+		maxWidth=(int) (wm.getDefaultDisplay().getWidth()*0.6);
+		
 		TextView txt_title = (TextView) findViewById(R.id.home_title_txt);
-
         //应用字体
         txt_title.setTypeface(ttf_cabin_bold);
         txt_title.setText(getResources().getString(R.string.title_activity_home));
@@ -145,6 +150,7 @@ public class HomeActivity extends LedBaseListActivity<ProductJson> implements On
 		title_manufacture.setText("Manufacture");
 				
 		TextView txt_manufacture = (TextView) view.findViewById(R.id.item_product_manufacture);
+		txt_manufacture.setMaxWidth(maxWidth);
 		txt_manufacture.setTypeface(ttf_cabin_regular);
 		txt_manufacture.setText(item.getManufacture());
 		
@@ -158,11 +164,11 @@ public class HomeActivity extends LedBaseListActivity<ProductJson> implements On
 
 		TextView txt_warranty = (TextView) view.findViewById(R.id.item_product_warranty);
 		txt_warranty.setTypeface(ttf_cabin_regular);
-		txt_warranty.setText(item.getWarranty());
+		txt_warranty.setText(item.getRated_warranty());
 		
 		TextView txt_pf= (TextView) view.findViewById(R.id.item_product_pf);
 		txt_pf.setTypeface(ttf_cabin_regular);
-		txt_pf.setText("PF:"+item.getProduct_score());
+		txt_pf.setText("PF:"+String.valueOf(item.getPlatform_score()));
 		
 		ImageView img_product = (ImageView) view.findViewById(R.id.item_product_img);
 		String img_tag=(String) img_product.getTag();
@@ -219,27 +225,32 @@ public class HomeActivity extends LedBaseListActivity<ProductJson> implements On
 		}
 		
 		this.OnRefreshComplete();
-		nextRefresh=false;
-		
+
 		MispBaseRspJson rsp = (MispBaseRspJson) obj;		
 		MispPageDataJson<ProductJson> pageData = rsp.GetReqCommonField(new TypeReference<MispPageDataJson<ProductJson>>(){});
 		currentPageSize =pageData.getTotal()-(pageIndex-1)*pageSize;
 		List<ProductJson> productList = new ArrayList<ProductJson>();
-		if(!ValidatorUtil.isEmpty(productCache))
+		//if(nextRefresh)
 		{
-			if(!ValidatorUtil.isEmpty(pageData.getRows()))
+			nextRefresh=false;
+			//if(!ValidatorUtil.isEmpty(productCache))
 			{
-				productCache.addAll(pageData.getRows());
-				return productCache;
-			}
+				if(!ValidatorUtil.isEmpty(pageData.getRows()))
+				{
+					productCache.addAll(pageData.getRows());
+					
+				}
+				//return productCache;
 
+			}
 		}
-		if(!ValidatorUtil.isEmpty(pageData.getRows()))
-		{
-			productList.addAll(pageData.getRows());
-		}
+
+//		if(!ValidatorUtil.isEmpty(pageData.getRows()))
+//		{
+//			productList.addAll(pageData.getRows());
+//		}
 		
-		return productList;
+		return productCache;
 	}
 	
 	@Override
@@ -265,12 +276,17 @@ public class HomeActivity extends LedBaseListActivity<ProductJson> implements On
 			
 			break;
 		case R.id.order_like_btn:
+			FilterDataCache.getInstance().updateOrderCondition(FilterKeyConst.like,ConditionTypeEnum.getEnumByStr(conditionType));
 			break;
 		case R.id.order_price_btn:
 			FilterDataCache.getInstance().updateOrderCondition(FilterKeyConst.price,ConditionTypeEnum.getEnumByStr(conditionType));
 			break;
 		default:
 			break;
+		}
+		if(!ValidatorUtil.isEmpty(productCache))
+		{
+			productCache.clear();
 		}
 		loadSendList();
 		
@@ -296,6 +312,15 @@ public class HomeActivity extends LedBaseListActivity<ProductJson> implements On
 		if(resultCode==IntentCodeConst.RESULT_CODE_FILTER_SERACH)
 		{
 			//showMessage("开始筛选");
+			if(!ValidatorUtil.isEmpty(FilterDataCache.getInstance().getFilterList()))
+			{
+				FilterDataCache.getInstance().getFilterList().clear();
+			}
+			pageIndex=1;
+			if(!ValidatorUtil.isEmpty(productCache))
+			{
+				productCache.clear();
+			}
 			loadSendList();
 		}
 	}
@@ -321,7 +346,13 @@ public class HomeActivity extends LedBaseListActivity<ProductJson> implements On
         } 
         else
         {  
-        	search_clear_btn.setVisibility(View.GONE);  
+        	search_clear_btn.setVisibility(View.GONE); 
+        	FilterDataCache.getInstance().getFilterList().clear();
+    		if(!ValidatorUtil.isEmpty(productCache))
+    		{
+    			productCache.clear();
+    		}
+        	loadSendList();
         }  
 		
 	}
@@ -342,6 +373,10 @@ public class HomeActivity extends LedBaseListActivity<ProductJson> implements On
             }  
     		FilterDataCache.getInstance().getFilterList().clear();
         	FilterDataCache.getInstance().getFilterList().add(new QueryCondition(ConditionTypeEnum.INCLUDLE, "product_name", keyword));
+    		if(!ValidatorUtil.isEmpty(productCache))
+    		{
+    			productCache.clear();
+    		}
         	loadSendList();
               
             return true;  
@@ -354,19 +389,16 @@ public class HomeActivity extends LedBaseListActivity<ProductJson> implements On
 	{
 		Log.i("home_bottom", String.valueOf(home_bottom.getHeight()));
 		home_list.setRefreshSize(false);
-		//home_list.setPadding(home_list.getPaddingLeft(),home_list.getPaddingTop(), home_list.getPaddingRight(), home_bottom.getHeight());
 		
+		//home_list.setPadding(home_list.getPaddingLeft(),home_list.getPaddingTop(), home_list.getPaddingRight(), home_bottom.getHeight());
+/*		this.runOnUiThread(new Runnable()    
+        {    
+            public void run()    
+            {    
+            	home_list.refreshDrawableState();
+            }    
+    
+        }); */  
 	}
-	
-/*    class HomeReceiver extends BroadcastReceiver
-    {
 
-		@Override
-		public void onReceive(Context context, Intent intent)
-		{
-
-			int refreshCode = intent.getIntExtra(IntentCodeConst.HOME_REFRESH, 0);
-
-		}
-	};*/
 }

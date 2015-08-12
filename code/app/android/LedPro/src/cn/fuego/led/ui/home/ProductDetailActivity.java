@@ -134,7 +134,7 @@ public class ProductDetailActivity extends LedBaseActivity
 		txt_name.setText(product.getProduct_name());
 		
 		RatingBar rat_rat = (RatingBar) findViewById(R.id.product_detail_rating);
-		rat_rat.setRating(product.getProduct_score());
+		rat_rat.setRating(product.getPlatform_score());
 		
 		TextView txt_desp = (TextView) findViewById(R.id.product_detail_desp);
 		txt_desp.setTypeface(ttf_Helvetica_Neue);
@@ -162,6 +162,10 @@ public class ProductDetailActivity extends LedBaseActivity
 	private void loadRelatedItems()
 	{
 		String ids=product.getRelated_product_ids();
+		if(ValidatorUtil.isEmpty(ids))
+		{
+			return;
+		}
 		List<String> relate_list=JsonConvert.jsonToObject(ids, new TypeReference<List<String>>(){});
 		if(!ValidatorUtil.isEmpty(relate_list))
 		{

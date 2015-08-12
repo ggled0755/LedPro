@@ -13,8 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.ws.rs.core.NewCookie;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,8 +22,7 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 import cn.fuego.common.util.validate.ValidatorUtil;
 import cn.fuego.led.R;
-import cn.fuego.led.webservice.up.model.base.ProductJson;
-import cn.fuego.led.webservice.up.model.base.ViewSubfolderJson;
+import cn.fuego.misp.webservice.up.model.base.TableMetaJson;
 
 /** 
  * @ClassName: AttrGroupAdapter 
@@ -40,10 +37,15 @@ public class AttrGroupAdapter extends BaseExpandableListAdapter
 	private Context mContext = null;
 
 	private List<String> groupList = new ArrayList<String>();
-	private List<List<ChildModel>> itemList = new ArrayList<List<ChildModel>>();
-	//private Map<String,ChildModel> dataSource = new HashMap<String, ChildModel>();
-	private ProductJson dataSource;
-	public void setDatasource(ProductJson dataSource)
+	private List<List<TableMetaJson>> itemList = new ArrayList<List<TableMetaJson>>();
+
+	private List<TableMetaJson> dataSource = new ArrayList<TableMetaJson>();
+	
+	public AttrGroupAdapter(Context context)
+	{
+		this.mContext = context;
+	}
+	public void setDatasource(List<TableMetaJson> dataSource)
 	{
 		this.dataSource = dataSource;
 		initData();
@@ -52,7 +54,33 @@ public class AttrGroupAdapter extends BaseExpandableListAdapter
 	
 	private void initData()
 	{
+		Map<String, List<TableMetaJson>> detailMap = new HashMap<String, List<TableMetaJson>>();
+		itemList.clear();
+		if(!ValidatorUtil.isEmpty(dataSource))
+		{
+			for(TableMetaJson json : dataSource)
+			{
+				List<TableMetaJson> detailList = detailMap.get(json.getGroup_name());
+				if(null == detailList)
+				{
+					detailList = new ArrayList<TableMetaJson>();
+					detailList.add(json);
+					detailMap.put(json.getGroup_name(), detailList);
+				}
+				else
+				{
+					detailList.add(json);
+				}
+				 
+			}
+			
+			groupList = new ArrayList<String>(detailMap.keySet());
 
+	    		for(String group : groupList)
+	    		{
+	     			itemList.add(detailMap.get(group));
+	    		}
+		}
 		
 	}
 
@@ -74,22 +102,44 @@ public class AttrGroupAdapter extends BaseExpandableListAdapter
 	public View getChildView(int groupPosition, int childPosition,
 			boolean isLastChild, View convertView, ViewGroup parent)
 	{
-		ChildModel child = itemList.get(groupPosition).get(childPosition);
+		TableMetaJson child = itemList.get(groupPosition).get(childPosition);
+		ChildHolder ch=null;
 		//自定义样式
-		LayoutInflater inflater = LayoutInflater.from(mContext);
-	    View layout = inflater.inflate(R.layout.list_item_btn,null);
-	    AbsListView.LayoutParams lp = new AbsListView.LayoutParams(
-				ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        if(convertView == null)
+        {
+    		LayoutInflater inflater = LayoutInflater.from(mContext);
+    		convertView = inflater.inflate(R.layout.list_item_content, null);
+    	   // View layout = inflater.inflate(R.layout.list_item_content,null);
+    	    AbsListView.LayoutParams lp = new AbsListView.LayoutParams(
+    				ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-	    layout.setLayoutParams(lp);
-	    
-	    TextView txt_title = (TextView) layout.findViewById(R.id.item_btn_title);
-	    txt_title.setText(child.getName());
+    	    convertView.setLayoutParams(lp);
+    	    ch = new ChildHolder();
+    	    ch.txt_name=(TextView) convertView.findViewById(R.id.item_content_title);
+    	    ch.txt_value =(TextView) convertView.findViewById(R.id.item_content_value);
+    	    convertView.setTag(ch);
+        }
+        else
+        {
+        	ch =(ChildHolder) convertView.getTag();
+        }
 
-	    TextView txt_value = (TextView) layout.findViewById(R.id.item_btn_title);
-	    txt_value.setText(child.getValue());
-	    
-		return layout;
+	    StringBuffer sb = new StringBuffer();
+	    sb.append(child.getLabel_name());
+	    if(!ValidatorUtil.isEmpty(child.getUnit_label()))
+	    {
+	    	sb.append("(");
+	    	sb.append(child.getUnit_label());
+	    	sb.append(")");
+	    	
+	    }
+	    sb.append(":");
+	    ch.txt_name.setText(sb.toString());
+
+	   // TextView txt_value = (TextView) convertView.findViewById(R.id.item_content_value);
+	    ch.txt_value.setText(child.getField_value());
+	   // Log.i("getHeight", "groupPosition"+groupPosition+"childPosition"+childPosition+"Height---"+layout.getHeight()); 
+		return convertView;
 	}
 
 	@Override
@@ -125,14 +175,25 @@ public class AttrGroupAdapter extends BaseExpandableListAdapter
 			View convertView, ViewGroup parent)
 	{
 		String name = groupList.get(groupPosition);
-		LayoutInflater inflater = LayoutInflater.from(mContext);
-	    View layout = inflater.inflate(R.layout.list_item_father_attrs,null);
+		ParentHolder ph =null;
+		if(convertView==null)
+		{
+			LayoutInflater inflater = LayoutInflater.from(mContext);
+			convertView = inflater.inflate(R.layout.list_item_father_attrs,null);
+		    ph = new ParentHolder();
+		    ph.txt_title = (TextView) convertView.findViewById(R.id.item_father_attrs_name);
+		    convertView.setTag(ph);
+		}
+		else
+		{
+			ph = (ParentHolder) convertView.getTag();
+		}
 
-	    TextView txt_title = (TextView) layout.findViewById(R.id.item_father_attrs_name);
-	    txt_title.setText(name);
+	   /// TextView txt_title = (TextView) layout.findViewById(R.id.item_father_attrs_name);
+		ph.txt_title.setText(name);
 	    
 
-		return layout;
+		return convertView;
 	}
 
 	@Override
@@ -149,4 +210,13 @@ public class AttrGroupAdapter extends BaseExpandableListAdapter
 		return false;
 	}
 
+	class ParentHolder
+	{
+		TextView txt_title;
+	}
+	class ChildHolder
+	{
+		TextView txt_name;
+		TextView txt_value;
+	}
 }

@@ -86,7 +86,7 @@ public class UserRegisterActivity extends LedBaseActivity
 		passwordView = (TextView) findViewById(R.id.user_register_txt_password);
 		
 		txt_country =(EditText) findViewById(R.id.user_register_country);
-		txt_country.setText("86");
+		txt_country.setText("1");
 		//Mob SMS
 		EventHandler eh=new EventHandler(){
 
@@ -137,11 +137,11 @@ public class UserRegisterActivity extends LedBaseActivity
 			return;
 		}
 		String phoneNum = phoneNumView.getText().toString().trim();
-		if(!ValidatorUtil.isMobile(phoneNum))
-		{
-			this.showMessage(MispErrorCode.ERROR_PHONE_INVALID);
-			return;
-		}
+//		if(!ValidatorUtil.isMobile(phoneNum))
+//		{
+//			this.showMessage(MispErrorCode.ERROR_PHONE_INVALID);
+//			return;
+//		}
 
 		String code = verifyCodeView.getText().toString().trim();
 		if(!isVerifyCodeValid(code))
@@ -237,11 +237,11 @@ public class UserRegisterActivity extends LedBaseActivity
 		}
 		String phoneNum = phoneNumView.getText().toString().trim();
 		
-		if(!ValidatorUtil.isMobile(phoneNum))
-		{
-			this.showMessage(MispErrorCode.ERROR_PHONE_INVALID);
-			return;
-		}
+//		if(!ValidatorUtil.isMobile(phoneNum))
+//		{
+//			this.showMessage(MispErrorCode.ERROR_PHONE_INVALID);
+//			return;
+//		}
 		sendPhoneNum=phoneNum;
 		pd = ProgressDialog.show(this, null, getResources().getString(R.string.progress_msg_processing));
 		//Mob get code
@@ -318,6 +318,10 @@ public class UserRegisterActivity extends LedBaseActivity
 		@Override
 		public void handleMessage(Message msg) {
 			// TODO Auto-generated method stub
+			if(pd!=null&&pd.isShowing())
+			{
+				pd.dismiss();
+			}
 			super.handleMessage(msg);
 			int event = msg.arg1;
 			int result = msg.arg2;
@@ -329,10 +333,7 @@ public class UserRegisterActivity extends LedBaseActivity
 					//Toast.makeText(getApplicationContext(), "提交验证码成功", Toast.LENGTH_SHORT).show();
 
 				} else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE){//验证码已经发送
-					if(pd!=null&&pd.isShowing())
-					{
-						pd.dismiss();
-					}
+
 					showMessage(getResources().getString(R.string.msg_send_code_success));
 				
 					
@@ -343,8 +344,11 @@ public class UserRegisterActivity extends LedBaseActivity
 				}
 			} else {
 				((Throwable) data).printStackTrace();
+				if (timer != null)
+					timer.cancel();
+				
 				int resId = getStringRes(UserRegisterActivity.this, "smssdk_network_error");
-				Toast.makeText(UserRegisterActivity.this, "验证码错误", Toast.LENGTH_SHORT).show();
+				Toast.makeText(UserRegisterActivity.this, "error", Toast.LENGTH_SHORT).show();
 				if (resId > 0) {
 					Toast.makeText(UserRegisterActivity.this, resId, Toast.LENGTH_SHORT).show();
 				}

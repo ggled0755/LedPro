@@ -65,4 +65,13 @@ public interface ProductRest
 	@Path("/Product/GetFilterMeta")
 	MispBaseRspJson loadFilter(MispBaseReqJson req);
 
+	//产品过滤条件详细参数加载
+	@POST
+	@Path("/Product/GetEnumList")
+	MispBaseRspJson loadEnum(MispBaseReqJson req);
+	
+	//产品详细参数加载
+	@POST
+	@Path("/Product/MetaShow")
+	MispBaseRspJson loadMeta(MispBaseReqJson req);
 }
